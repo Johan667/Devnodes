@@ -1,0 +1,91 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* --- TYPOGRAPHIE --- */
+
+/*
+Blanc : #EFF5F5
+Bleu : #479F9F
+Gris : #D6E4E5
+Orange : #EB6440
+
+Typo1 : font-family: 'JetBrains Mono', monospace;
+Typo2 : font-family: 'Raleway', sans-serif;
+
+ */
+
+/* --- NAVBAR --- */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    color : #f5f2ef;
+    align-items: center;
+    padding: 25px;
+}
+
+nav a:hover {
+    color: #f5f2ef;
+    text-decoration: none;
+}
+
+nav .login_register ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.btn1 {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #479F9F;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    border-radius: 1px;
+}
+
+.btn1:hover{
+    background-color: rgba(71, 159, 159, 0.8);
+}
+
+.btn2 {
+    color: #1e1e1e;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #ff0000;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    border-radius: 1px;
+}
+
+.btn2:hover{
+    background-color: rgba(245, 242, 239, 0.94);
+    color: #1e1e1e;
+}
+
+.btn3 {
+    color: #1e1e1e;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #EB6440;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    border-radius: 1px;
+}
+
+.btn2:hover{
+    background-color: rgba(235, 100, 64, 0.85);
+    color: #1e1e1e;
+}
+
+/* --- FIN NAVBAR --- */
+
+/* --- HEADER HOME --- */
+
+
+
+/* --- FIN HEADER HOME --- */

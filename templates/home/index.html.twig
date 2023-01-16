@@ -1,20 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Devnodes | Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="section-1">
+    <h1>Vous êtes a la recherche d'un <div class="freelance">Freelance ?</div></h1>
+        <p>Embauchez d'exellents freelances, rapidement.</p>
+        <p>Devnodes vous facilitera votre recherche !</p>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input class="btntrouverunfreelance" type="text" name="" id="" placeholder="Trouver un freelance">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="" id="" placeholder="Lieu de la mission">
+        <button class="trouverunfreelance">Trouver un freelance</button>
+        <img src="img/header.png" alt="homepage">
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/CDA22/laragon/www/Devnodes/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/CDA22/laragon/www/Devnodes/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
