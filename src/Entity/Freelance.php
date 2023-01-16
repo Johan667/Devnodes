@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FreelanceRepository::class)]
-class Freelance
+class Freelance extends User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -57,8 +57,6 @@ class Freelance
     #[ORM\ManyToMany(targetEntity: SpokenLanguage::class, mappedBy: 'freelanceSpokenLanguage')]
     private Collection $spokenLanguages;
 
-    #[ORM\ManyToMany(targetEntity: Database::class, mappedBy: 'freelanceDatabase')]
-    private Collection $databases;
 
     #[ORM\ManyToMany(targetEntity: Platform::class, mappedBy: 'freelancePlatform')]
     private Collection $platforms;
@@ -78,6 +76,9 @@ class Freelance
     #[ORM\OneToMany(mappedBy: 'receiveMission', targetEntity: Mission::class)]
     private Collection $missions;
 
+    #[ORM\ManyToMany(targetEntity: Db::class, mappedBy: 'freelanceDb')]
+    private Collection $dbs;
+
 
     public function __construct()
     {
@@ -86,13 +87,13 @@ class Freelance
         $this->freelanceCategory = new ArrayCollection();
         $this->workCategories = new ArrayCollection();
         $this->spokenLanguages = new ArrayCollection();
-        $this->databases = new ArrayCollection();
         $this->platforms = new ArrayCollection();
         $this->versionControls = new ArrayCollection();
         $this->frameworks = new ArrayCollection();
         $this->methodologies = new ArrayCollection();
         $this->codingLanguages = new ArrayCollection();
         $this->missions = new ArrayCollection();
+        $this->dbs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -334,32 +335,6 @@ class Freelance
         return $this;
     }
 
-    /**
-     * @return Collection<int, Database>
-     */
-    public function getDatabases(): Collection
-    {
-        return $this->databases;
-    }
-
-    public function addDatabase(Database $database): self
-    {
-        if (!$this->databases->contains($database)) {
-            $this->databases->add($database);
-            $database->addFreelanceDatabase($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDatabase(Database $database): self
-    {
-        if ($this->databases->removeElement($database)) {
-            $database->removeFreelanceDatabase($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Platform>
@@ -521,6 +496,33 @@ class Freelance
             if ($mission->getReceiveMission() === $this) {
                 $mission->setReceiveMission(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Db>
+     */
+    public function getDbs(): Collection
+    {
+        return $this->dbs;
+    }
+
+    public function addDb(Db $db): self
+    {
+        if (!$this->dbs->contains($db)) {
+            $this->dbs->add($db);
+            $db->addFreelanceDb($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDb(Db $db): self
+    {
+        if ($this->dbs->removeElement($db)) {
+            $db->removeFreelanceDb($this);
         }
 
         return $this;

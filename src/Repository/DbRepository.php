@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Database;
+use App\Entity\Db;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Database>
+ * @extends ServiceEntityRepository<Db>
  *
- * @method Database|null find($id, $lockMode = null, $lockVersion = null)
- * @method Database|null findOneBy(array $criteria, array $orderBy = null)
- * @method Database[]    findAll()
- * @method Database[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Db|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Db|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Db[]    findAll()
+ * @method Db[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DatabaseRepository extends ServiceEntityRepository
+class DbRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Database::class);
+        parent::__construct($registry, Db::class);
     }
 
-    public function save(Database $entity, bool $flush = false): void
+    public function save(Db $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class DatabaseRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Database $entity, bool $flush = false): void
+    public function remove(Db $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class DatabaseRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Database[] Returns an array of Database objects
+//     * @return Db[] Returns an array of Db objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class DatabaseRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Database
+//    public function findOneBySomeField($value): ?Db
 //    {
 //        return $this->createQueryBuilder('d')
 //            ->andWhere('d.exampleField = :val')
