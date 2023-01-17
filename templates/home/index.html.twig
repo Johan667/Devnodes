@@ -5,15 +5,36 @@
 {% block body %}
 
     <div class="section-1">
-    <h1>Vous êtes a la recherche d'un <div class="freelance">Freelance ?</div></h1>
-        <p>Embauchez d'exellents freelances, rapidement.</p>
-        <p>Devnodes vous facilitera votre recherche !</p>
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input class="btntrouverunfreelance" type="text" name="" id="" placeholder="Trouver un freelance">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" name="" id="" placeholder="Lieu de la mission">
-        <button class="trouverunfreelance">Trouver un freelance</button>
-        <img src="img/header.png" alt="homepage">
+        <div class="bdr">
+        <h1>Vous êtes a la recherche d'un <div class="freelance">Freelance ?</div></h1>
+            <br>
+            <div class="sous-titre">
+            <p>Embauchez d'exellents freelances, rapidement.</p>
+            <p>Devnodes vous facilitera votre recherche !</p>
+            </div>
+            <br>
+
+            <div class="btnSearch">
+                <span class="icon-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="btnSearch" type="text" name="" id="" placeholder="Essayez 'Java', 'Symfony', 'Webpack'...">
+                </span>
+            </div>
+
+            <div class="btnSearch">
+                <span class="icon-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="" class="btnSearch" placeholder="Lieu de la mission (ex : Paris, Lyon...)">
+                </span>
+            </div>
+
+            <button class="btn4">Trouver un freelance</button>
+        </div>
+        <div class="imagehome">
+            <img src="img/header.png" alt="homepage">
+        </div>
     </div>
+
+
 
 {% endblock %}

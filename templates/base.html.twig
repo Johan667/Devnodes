@@ -23,19 +23,17 @@
             <a href="{{ path('app_home') }}"><img src="img/logo.png" alt="logo devnodes"></a>
 
             <!-- NAVBAR -->
-            <div class="login_register">
-            <ul>
-                    <li><a class="btn1" href="{{ path('app_home') }}">Accueil</a></li>
+            <div id="navbar" class="navbar">
+                <ul>
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li class="btn3"><a href="#">Dashboard</a></li>
+                        <li><a class="btn3" href="{{ path('admin') }}">Dashboard</a></li>
                     {% endif %}
 
                     {% if app.user %}
                         {% if is_granted('ROLE_USER') %}
-                            <li><a class="btn1"  href="#">Messagerie</a></li>
-                            <li><a class="btn1"  href="#">Mission</a></li>
                             <li><a class="btn1"  href="#">Favoris</a></li>
+                            <li><a class="btn1"  href="#">Messagerie</a></li>
                             <li><a class="btn1"  href="#">Profil</a></li>
                             <li><a class="btn1"  href="#">Compte</a></li>
                         {% endif %}
@@ -46,8 +44,6 @@
                         <li><a class="btn1" href="{{ path('app_login') }}">Connexion</a></li>
                         <li><a class="btn1" href="{{ path('app_register') }}">Inscription</a></li>
                     {% endif %}
-
-                    <li><a class="btn1" href="#">Contact</a></li>
                 </ul>
             </div>
             <!-- FIN NAVBAR -->
@@ -56,10 +52,10 @@
             <div id="mySidenav" class="sidenav">
                 <a id="closeBtn" href="#" class="close">×</a>
                 <ul>
-                    <li><a href="#">A propos</a></li>
-                    <li><a href="#">Nos services</a></li>
-                    <li><a href="#">Témoignages</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Favoris</a></li>
+                    <li><a href="#">Messagerie</a></li>
+                    <li><a href="#">Profil</a></li>
+                    <li><a href="#">Compte</a></li>
                 </ul>
             </div>
 

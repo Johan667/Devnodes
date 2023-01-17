@@ -17,6 +17,12 @@ Typo2 : font-family: 'Raleway', sans-serif;
 
 /* --- NAVBAR --- */
 
+@media screen and (max-width: 768px){
+    #navbar{
+        display: none;
+    }
+}
+
 nav{
     display: flex;
     justify-content: space-between;
@@ -31,7 +37,7 @@ nav a:hover {
     text-decoration: none;
 }
 
-nav .login_register ul {
+nav .navbar ul {
     display: flex;
     list-style: none;
     gap: 1rem;
@@ -50,25 +56,26 @@ nav .login_register ul {
 
 .btn1:hover{
     background-color: rgba(71, 159, 159, 0.8);
+    color: white;
 }
 
 .btn2 {
-    color: #1e1e1e;
+    color: white;
     font-weight: bold;
     text-decoration: none;
-    background-color: #ff0000;
+    background-color: #c40000;
     padding: 8px 10px;
     text-transform: uppercase;
     border-radius: 1px;
 }
 
 .btn2:hover{
-    background-color: rgba(245, 242, 239, 0.94);
-    color: #1e1e1e;
+    background-color: rgba(196, 0, 0, 0.85);
+    color: white;
 }
 
 .btn3 {
-    color: #1e1e1e;
+    color: white;
     font-weight: bold;
     text-decoration: none;
     background-color: #EB6440;
@@ -77,14 +84,20 @@ nav .login_register ul {
     border-radius: 1px;
 }
 
-.btn2:hover{
+.btn3:hover{
     background-color: rgba(235, 100, 64, 0.85);
-    color: #1e1e1e;
+    color: white;
 }
 
 /* --- FIN NAVBAR --- */
 
 /* --- MENU BURGER --- */
+
+@media screen and (min-width: 768px){
+    #openBtn{
+        display: none;
+    }
+}
 
 /* Sidenav menu */
 .sidenav {
@@ -146,5 +159,67 @@ nav .login_register ul {
 
 /* --- HEADER HOME --- */
 
+@media screen and (max-width: 980px){
+    .imagehome{
+        display: none;
+    }
+}
+
+.section-1{
+    background-color: #479F9F;
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 30px 30px;
+}
+
+.freelance{
+    color: white;
+    font-family: "JetBrains Mono", sans-serif;
+    font-weight: bold;
+}
+
+.bdr h1{
+    font-weight: bold;
+}
+
+.sous-titre{
+    line-height: 0.5rem;
+}
+
+.btnSearch{
+    padding: 10px;
+    width: 20rem;
+    border-radius: 5px;
+    border: none;
+}
+
+.btnPlace{
+    margin-bottom: 30px;
+}
 
 /* --- FIN HEADER HOME --- */
+
+.icon-form {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-form input {
+    padding-left: 35px;
+}
+
+.icon-form i {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+
+.btn4{
+    padding: 15px;
+    background-color: #232323;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    margin-left: 6px;
+}
