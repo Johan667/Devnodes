@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <script src="{{ asset('js/script.js') }}"></script>
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 
         {% block stylesheets %}{% endblock %}
@@ -21,6 +20,8 @@
     <header>
         <nav>
             <a href="{{ path('app_home') }}"><img src="img/logo.png" alt="logo devnodes"></a>
+
+            <!-- NAVBAR -->
             <div class="login_register">
             <ul>
                     <li><a class="btn1" href="{{ path('app_home') }}">Accueil</a></li>
@@ -48,11 +49,38 @@
                     <li><a class="btn1" href="#">Contact</a></li>
                 </ul>
             </div>
+            <!-- FIN NAVBAR -->
+
+            <!-- MENU BURGER -->
+{#            {% if app.user %}#}
+{#                <div id="mySidenav" class="sidenav">#}
+{#                    <a id="closeBtn" href="#" class="close">×</a>#}
+{#                    <ul>#}
+{#                        <li class ="white"><a href="">Gestion</a></li>#}
+{#                        <li><a href="" class="orange">Accueil</a></li>#}
+{#                        <li><a href="" class="white">Profil</a></li>#}
+{#                        <li class ="user"><a href="" class="white">Messagerie</a>#}
+{#                        <li><a href="" class="white">Compte</a></li>#}
+{#                        <li><a href="" class="red">Déconnexion</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+
+{#                <a href="#" id="openBtn">#}
+{#						<span class="burger-icon">#}
+{#							<span></span>#}
+{#							<span></span>#}
+{#							<span></span>#}
+{#						</span>#}
+{#                </a>#}
+{#            {% endif %}#}
+            <!-- FIN MENU BURGER -->
         </nav>
     </header>
     <body>
    {% block body %}{% endblock %}
         {% block javascripts %}
+            <script src="{{ asset('js/script.js') }}"></script>
+            <script src="{{ asset('js/home.js') }}"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
         {% endblock %}
