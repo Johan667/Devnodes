@@ -1,0 +1,8 @@
+body {
+
+}
+
+.profilPicture{
+    border-radius: 50%; /* pour un cercle parfait */
+    border: 2px solid #000; /* pour une bordure de 2px noire */
+}
