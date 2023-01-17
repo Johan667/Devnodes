@@ -1,3 +1,4 @@
+/* MENU BURGER */
 var sidenav = document.getElementById("mySidenav");
 var openBtn = document.getElementById("openBtn");
 var closeBtn = document.getElementById("closeBtn");
@@ -14,3 +15,4 @@ function openNav() {
 function closeNav() {
     sidenav.classList.remove("active");
 }
+/* MENU BURGER */
