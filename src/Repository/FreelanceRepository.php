@@ -21,6 +21,33 @@ class FreelanceRepository extends ServiceEntityRepository
         parent::__construct($registry, Freelance::class);
     }
 
+    /**
+     * Récupère les événement en lien avec une recherche
+     * @return Freelance[]
+     */
+    public function findSearch(array $parameters): array //parameters est le tableau
+    {
+        $qb = $this->createQueryBuilder('F');
+        // fait une requête sur l'entité 'F' : 'FREELANCE'
+
+        if ($parameters['q'] !== null) {
+            // si le titre est différent de null une fois submit, on le cherche içi :
+            $qb->andWhere('F.title LIKE :title')
+                ->setParameter('title', "%{$parameters['q']}%");
+            // lie 'q' du tableau $parameter au title de la table user // bindParamPDO
+        }
+
+        if ($parameters['city'] !== null) {
+           $qb->andWhere('F.city = :city')
+                ->setParameter('city', $parameters['city']);
+        }
+
+        // requete bdd
+
+        return $qb->getQuery()
+            ->getResult(); //retourne le tableau des résultats
+    }
+
     public function save(Freelance $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
