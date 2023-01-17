@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Freelance;
+use App\Entity\User;
+use App\Repository\CodingLanguageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +21,12 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(): Response
     {
-
+        /** @var Freelance $user */
+        $user = $this->getUser();
+        $freelance = $this->entityManager->getRepository(Freelance::class);
 
         return $this->render('profil/index.html.twig', [
-
+        'freelance'=>$freelance,
         ]);
     }
 }
