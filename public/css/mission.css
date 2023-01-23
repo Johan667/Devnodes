@@ -33,3 +33,12 @@
     border: none;
     padding:1%;
 }
+.see{
+    text-decoration: none;
+    color: white;
+}
+
+.modal-footer{
+    text-align: center;
+    margin: auto;
+}

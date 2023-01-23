@@ -26,8 +26,10 @@ class MissionController extends AbstractController
         }
         $missions = $this->entityManager->getRepository(Mission::class)->findAll(['start_date' => 'DESC']);
 
+
         return $this->render('mission/index.html.twig', [
-            'missions'=>$missions
+            'missions'=>$missions,
         ]);
     }
+
 }
