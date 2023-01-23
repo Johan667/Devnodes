@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devnodes | Mes missions{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-3">Mes missions</h1>
+    <p class="text-center mt-3"> Ici vous pouvez voir et modifier toutes les informations relatives à vos missions.</p><br>
+    <hr>
+    <div class="row">
+
+            {% for mission in missions %}
+                <div class="col-7"><b>{{ mission.title }}</b><br>
+                    Nom du client : {{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}<br>
+                    Entreprise : {{ mission.sendMission.denominationCompany }}<br>
+                    Email : {{ mission.sendMission.email }}<br>
+                    Téléphone : {{ mission.sendMission.phone }}<br>
+
+                </div>
+                <div class="col-4"> {{ mission.startDate|date("d/m/Y") }}</div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <div class="statusMission mt-3">
+                Statut de la mission : {{ mission.state }}
+            </div>
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-message"></i></button> <button type="button" class="btn btn-secondary"> <i class="fa-solid fa-eye"></i> Voir </button>
+        </div>
+    </div>
+            {% endfor %}
+{% endblock %}
