@@ -5,8 +5,14 @@ namespace App\Entity;
 use App\Repository\PathRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\InheritanceType;
 
 #[ORM\Entity(repositoryClass: PathRepository::class)]
+#[InheritanceType('JOINED')]
+#[DiscriminatorColumn(name: 'discr', type: 'string')]
+#[DiscriminatorMap(['professionnal' => Professionnal::class, 'school' => School::class])]
 class Path
 {
     #[ORM\Id]
@@ -37,6 +43,9 @@ class Path
 
     #[ORM\ManyToOne(inversedBy: 'belong')]
     private ?Freelance $freelance = null;
+
+    #[ORM\ManyToOne(inversedBy: 'study')]
+    private ?School $school = null;
 
     public function getId(): ?int
     {
@@ -135,6 +144,18 @@ class Path
     public function setFreelance(?Freelance $freelance): self
     {
         $this->freelance = $freelance;
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }
