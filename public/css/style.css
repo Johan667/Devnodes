@@ -208,3 +208,29 @@ nav .navbar ul {
   margin-top: 10px;
   margin-left: 6px;
 }
+
+/* FOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOTER */
+
+footer {
+  flex-shrink: 0;
+  border-top: 1px dashed #000;
+  width: 100%;
+  background: #fff;
+  color: #333;
+}
+
+.content-footer {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 16px;
+  padding: 50px 0 100px;
+
+}
+
+.bloc {
+  flex-basis: 20%;
+  margin: 0 30px;
+}
