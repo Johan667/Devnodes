@@ -65,20 +65,6 @@ footer ul li a {
     margin: 0;
 }
 
-input,
-button {
-    font-size: 1em;
-    padding: 1em;
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-button {
-    background-color: #c7940a;
-    color: #ffffff;
-}
-
 div.social {
     display: flex;
     justify-content: space-evenly;
