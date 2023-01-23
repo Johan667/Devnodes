@@ -23,24 +23,23 @@ Typo2 : font-family: 'Raleway', sans-serif;
   }
 }
 
+.logo{
+  width: 75%;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
   background-color: white;
   color: #f5f2ef;
   align-items: center;
-  padding: 10px;
-}
-
-nav a:hover {
-  color: #f5f2ef;
-  text-decoration: none;
+  padding-top: 0 auto;
 }
 
 nav .navbar ul {
   display: flex;
   list-style: none;
-  gap: 1rem;
+  gap: 1.5rem;
   text-decoration: none;
 }
 
@@ -50,8 +49,8 @@ nav .navbar ul {
 }
 
 .btn1:hover {
-  font-weight: bold;
-  color: #1c1c1c;
+  color: #2fe6b8;
+  transition: ease 0.5s;
 }
 
 .btn2 {
@@ -60,19 +59,17 @@ nav .navbar ul {
 }
 
 .btn2:hover {
-  font-weight: bold;
   color: #c40000;
 }
 
 .btn3 {
+  transition: ease 0.5s;
   color: #eb6440;
   text-decoration: none;
 }
 
 .btn3:hover {
-  font-weight: bold;
   color: #eb6440;
-
 }
 
 /* --- FIN NAVBAR --- */
