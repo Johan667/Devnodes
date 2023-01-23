@@ -34,7 +34,8 @@
                         {% if is_granted('ROLE_USER') %}
                             <li><a class="btn1"  href="#">Favoris</a></li>
                             <li><a class="btn1"  href="#">Messagerie</a></li>
-                            <li><a class="btn1"  href="#">Profil</a></li>
+                            <li><a class="btn1"  href="{{ path('app_profil') }}">Profil</a></li>
+                            <li><a class="btn1"  href="{{ path('missions') }}">Mes missions</a></li>
                             <li><a class="btn1"  href="#">Compte</a></li>
                         {% endif %}
 
