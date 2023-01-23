@@ -4,7 +4,6 @@
 
 {% block body %}
     <div class="wrapper">
-        {{  dump(app.user) }}
     <div class="row">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
         <div class="col-3">
@@ -163,7 +162,10 @@
                         {% endif %}
                     </div>
                     <div class="col-8 advice">
-                        <h3>Advices</h3>
+                        <h3>Comment</h3>
+                    {% for comment in app.user.receivedComments %}
+                        {{ comment.content }}
+                        {% endfor %}
 
 
 
