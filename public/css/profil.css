@@ -12,10 +12,7 @@
 .fa-camera:hover{
     background-color: #479F9F;
 }
-a:hover::after {
-    content: "Vous êtes en train de survoler ce lien!";
-    display: block;
-}
+
 .bolder{
     font-weight: bolder;
 }
