@@ -208,3 +208,75 @@ nav .navbar ul {
   margin-top: 10px;
   margin-left: 6px;
 }
+
+
+/* --- RESULTAT BDR --- */
+
+.wrapper_resultat{
+  display:flex;
+  margin : 50px;
+  gap: 10px;
+}
+
+.filtre{
+  background-color: red;
+}
+
+.resultat{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.cardFreelance{
+  box-shadow : 1px 2px 0.5em 0.5em rgba(0, 0, 0, 0.11);
+  padding: 10px;
+}
+
+.card-title{
+  padding: 5px;
+  font-weight: bold;
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 1rem;
+}
+
+.card-body h4{
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.card-body h4 .fa-solid{
+  color: #8f0000;
+}
+
+.card-body h3{
+  font-size: 15px;
+  background-color: #479f9f;
+  border-radius: 5px;
+  color: white;
+  width: 95px;
+  padding: 10px;
+}
+
+.card-body .card-text{
+  font-weight: bold;
+}
+
+.viewProfil{
+  text-align: right;
+}
+
+.btn6{
+  background-color: #479f9f;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+
+
+
+
+
+
+/* --- FIN RESULTAT BDR --- */

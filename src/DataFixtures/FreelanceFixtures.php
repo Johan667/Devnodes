@@ -49,7 +49,7 @@ class FreelanceFixtures extends Fixture
                 ->setTitle("Best freelancer world")
                 ->setCountry($faker->country)
                 ->setAddress($faker->address)
-                ->setCity($faker->city)
+                ->setCity("Lyon")
                 ->setCodePostal($faker->postcode)
             ;
             $manager->persist($freelancer);
