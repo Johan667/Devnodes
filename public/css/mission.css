@@ -1,0 +1,35 @@
+.wrapper{
+    max-width: 1300px;
+    margin:auto;
+}
+.cardMission{
+    display:flex;
+    border: solid 1px black;
+    border-radius: 2%;
+    padding:5%;
+}
+.head{
+    display:flex;
+}
+.grp-btnn{
+    float:right;
+}
+.footerMission{
+    justify-content: space-around;
+}
+.headDate{
+    display: inline-block;
+}
+
+.stateMission{
+    color: #479F9F;
+    font-weight: bold;
+}
+
+.btn1 {
+    background-color: #479F9F;
+    color:white;
+    text-decoration: none;
+    border: none;
+    padding:1%;
+}
