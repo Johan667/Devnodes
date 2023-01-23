@@ -17,6 +17,7 @@ class HomeController extends AbstractController
      */
     public function bdr(FreelanceRepository $repository, Request $request): Response
     {
+        // 0fa0b48552695dfe968b7aa545dd43cc.398GdwVqlJebivlAeTgB7MsotgP0vhY3l0t7C7nSIkk.vZYxE2gm5t3SwawjPGpUnqBQj3OD6XNz4QQxfu2GeA20nWwCYUf5z9jNzQ
         $searchFreelance = $this->createForm(SearchForm::class, null);
         // crée le formulaire configuré dans le dossier FORM
         $searchFreelance->handleRequest($request);
@@ -26,11 +27,12 @@ class HomeController extends AbstractController
         if ($searchFreelance->isSubmitted() && $searchFreelance->isValid()) {
             // si le formulaire est envoyé et validé alors :
             $freelances = $repository->findSearch($searchFreelance->getData());
+            $request->query->remove('_token');
             // on passe le formulaire a la fonction du repository qui est un tableau classic : FreelanceRepository.php
+            return $this->redirectToRoute('app_resultbdr_index', $request->query->all());
         };
 
         return $this->render('home/index.html.twig', [
-            'freelances' => $freelances ?? null,
             'searchFreelance' => $searchFreelance->createView()
         ]);
     }

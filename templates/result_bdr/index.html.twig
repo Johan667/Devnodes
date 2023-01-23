@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devnodes{% endblock %}
+
+{% block body %}
+
+{#    {% include 'home/_filter.html.twig' with {form: searchFreelance} only %}#}
+
+    <div class="wrapper_resultat">
+        <div class="filtre">Filtre</div>
+        <div class="resultat">
+            {% for freelance in freelances %}
+                {% include 'result_bdr/_card.html.twig' with {freelance: freelance} only %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

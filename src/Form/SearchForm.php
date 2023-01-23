@@ -34,7 +34,9 @@ class SearchForm extends AbstractType
     //configuration du formulaire
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'method' => 'GET'
+        ]);
     }
 
     public function getBlockPrefix(): string
