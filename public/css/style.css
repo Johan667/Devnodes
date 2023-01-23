@@ -45,48 +45,34 @@ nav .navbar ul {
 }
 
 .btn1 {
-  color: white;
-  font-weight: bold;
+  color: #1c1c1c;
   text-decoration: none;
-  background-color: #479f9f;
-  padding: 8px 10px;
-  text-transform: uppercase;
-  border-radius: 1px;
 }
 
 .btn1:hover {
-  background-color: rgba(71, 159, 159, 0.8);
-  color: white;
+  font-weight: bold;
+  color: #1c1c1c;
 }
 
 .btn2 {
-  color: white;
-  font-weight: bold;
+  color: #c40000;
   text-decoration: none;
-  background-color: #c40000;
-  padding: 8px 10px;
-  text-transform: uppercase;
-  border-radius: 1px;
 }
 
 .btn2:hover {
-  background-color: rgba(196, 0, 0, 0.85);
-  color: white;
+  font-weight: bold;
+  color: #c40000;
 }
 
 .btn3 {
-  color: white;
-  font-weight: bold;
+  color: #eb6440;
   text-decoration: none;
-  background-color: #eb6440;
-  padding: 8px 10px;
-  text-transform: uppercase;
-  border-radius: 1px;
 }
 
 .btn3:hover {
-  background-color: rgba(235, 100, 64, 0.85);
-  color: white;
+  font-weight: bold;
+  color: #eb6440;
+
 }
 
 /* --- FIN NAVBAR --- */

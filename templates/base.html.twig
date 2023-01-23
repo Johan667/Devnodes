@@ -41,12 +41,8 @@
                         <li><a class="btn2"  href="{{ path('app_logout') }}">Deconnexion</a></li>
 
                     {% else %}
-                        <li><a class="btn1" href="{{ path('app_home') }}">Accueil</a></li>
-                        <li><a class="btn1" href="{{ path('app_home') }}">Trouver une mission</a></li>
-                        <li><a class="btn1" href="{{ path('app_home') }}">Trouver un freelance</a></li>
-                        <li><a class="btn1" href="{{ path('app_login') }}">Se connecter</a></li>
+                        <li><a class="btn1" href="{{ path('app_login') }}">Connexion</a></li>
                         <li><a class="btn1" href="{{ path('app_register') }}">Inscription</a></li>
-                        <button class="btn4" type="submit">Créer une offre</button>
                     {% endif %}
                 </ul>
             </div>

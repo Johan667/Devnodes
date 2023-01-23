@@ -2,17 +2,36 @@
 
 namespace App\Controller;
 
+use App\Form\SearchForm;
+use App\Repository\FreelanceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(): Response
+    /**
+     * barre de recherche multi filtre
+     * @Route("/", name="app_home")
+     */
+    public function bdr(FreelanceRepository $repository, Request $request): Response
     {
+        $searchFreelance = $this->createForm(SearchForm::class, null);
+        // crée le formulaire configuré dans le dossier FORM
+        $searchFreelance->handleRequest($request);
+        // traite les données du formulaire
+
+
+        if ($searchFreelance->isSubmitted() && $searchFreelance->isValid()) {
+            // si le formulaire est envoyé et validé alors :
+            $freelances = $repository->findSearch($searchFreelance->getData());
+            // on passe le formulaire a la fonction du repository qui est un tableau classic : FreelanceRepository.php
+        };
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'freelances' => $freelances ?? null,
+            'searchFreelance' => $searchFreelance->createView()
         ]);
     }
 }

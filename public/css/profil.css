@@ -1,8 +1,99 @@
-body {
-
+.wrapper{
+    max-width: 1300px;
+    margin: auto;
+    margin-top: 2rem;
+}
+.fa-camera{
+    font-size: 60px;
+    border-radius: 50%; /* pour un cercle parfait */
+    padding: 50px;
 }
 
-.profilPicture{
-    border-radius: 50%; /* pour un cercle parfait */
-    border: 2px solid #000; /* pour une bordure de 2px noire */
+.fa-camera:hover{
+    background-color: #479F9F;
+}
+a:hover::after {
+    content: "Vous êtes en train de survoler ce lien!";
+    display: block;
+}
+.bolder{
+    font-weight: bolder;
+}
+.bold{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.squares{
+    display: flex;
+    margin-top:1%;
+}
+.price{
+    text-align: center;
+    color: #EFF5F5;
+    border: solid 1px #479F9F;
+    border-radius: 2%;
+    width: 300px;
+    background-color: #479F9F;
+    padding:1%;
+}
+.xpYears{
+    text-align: center;
+    border: solid 1px #479F9F;
+    border-radius: 2%;
+    width: 300px;
+    padding:1%;
+}
+
+.shadowline{
+    box-shadow: 0px 0px 10px #EB6440;
+}
+
+.location,.skills{
+    border:solid 1px #479F9F;
+    border-radius: 2%;
+    border-top: 10px solid #479F9F;
+    padding: 2%;
+}
+
+.space{
+    display:flex;
+    gap: 30px;
+}
+
+.typeSkills{
+    column-count: 5;
+}
+
+.mtx30{
+    margin-top: 30px;
+}
+
+.preferences,
+.description,
+.verification,
+.portfolio,
+.reputation,
+.experience,
+.language,
+.advice,
+.categories,
+.recommendations,
+.share-profil,
+.education{
+    margin-top: 30px;
+    border:solid 1px #479F9F;
+    border-radius: 2%;
+    padding: 2%;
+}
+
+.verified-back{
+    background-color: #EB6440;
+    padding: 20px;
+}
+
+.verified-grey{
+
+    background-color: #D6E4E5;
+    padding: 20px;
 }
