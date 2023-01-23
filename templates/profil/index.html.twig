@@ -4,11 +4,12 @@
 
 {% block body %}
     <div class="wrapper">
+        {{  dump(app.user) }}
     <div class="row">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
         <div class="col-3">
             <div class="round-border">
-            <i class="fa-solid fa-camera"></i>
+                <a href="#" title="Upload your profil picture"><i class="fa-solid fa-camera"></i></a>
             </div>
         </div>
         <div class="col-6">
@@ -47,7 +48,7 @@
                 <i class="fa-solid fa-briefcase"></i> <b class="mtx30">{{ app.user.remoteWork }}</b><br>
             </div>
             <div class="col-8 skills">
-               <h3>Skills (x)</h3>
+               <h3>Skills </h3>
                 <div class="typeSkills">
                 <div class="codingLanguages">
                     <em>Languages</em><br>
@@ -162,7 +163,8 @@
                         {% endif %}
                     </div>
                     <div class="col-8 advice">
-                        <h3>Advices (x)</h3>
+                        <h3>Advices</h3>
+
 
                     </div>
                 </div>

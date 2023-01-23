@@ -25,6 +25,7 @@ class ProfilController extends AbstractController
         $user = $this->getUser();
         $freelance = $this->entityManager->getRepository(Freelance::class);
 
+
         return $this->render('profil/index.html.twig', [
         'freelance'=>$freelance,
         ]);
