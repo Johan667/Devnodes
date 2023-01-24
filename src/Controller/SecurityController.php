@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class SecurityController extends AbstractController
 {
@@ -28,5 +31,21 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route(path: '/verify-captcha', methods: ['POST'])]
+    public function verifyCaptcha(Request $request, HttpClientInterface $client) : JsonResponse
+    {
+        $token = $request->getContent();
+
+        $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+            'body' => [
+                'secret' => '6Ld0FiIkAAAAAJXSVDiY_ZMnXjkURtb2ZWIcFA67',
+                'response' => $token
+            ]
+        ]);
+        $result = json_decode($response->getContent(), true);
+
+        return new JsonResponse($result);
     }
 }

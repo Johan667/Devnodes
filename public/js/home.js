@@ -16,3 +16,11 @@ function closeNav() {
     sidenav.classList.remove("active");
 }
 /* MENU BURGER */
+
+/* CAPTCHA */
+
+    function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+}
+
+/* FIN CAPTCHA */
