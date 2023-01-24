@@ -6,7 +6,7 @@ use App\Repository\ProfessionnalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfessionnalRepository::class)]
-class Professionnal
+class Professionnal extends Path
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

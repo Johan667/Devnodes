@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Freelance;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,7 +26,7 @@ class FreelanceRepository extends ServiceEntityRepository
      * Récupère les événement en lien avec une recherche
      * @return Freelance[]
      */
-    public function findSearch(array $parameters): array //parameters est le tableau
+    public function findSearch(array $parameters): Query //parameters est le tableau
     {
         $qb = $this->createQueryBuilder('F');
         // fait une requête sur l'entité 'F' : 'FREELANCE'
@@ -44,9 +45,21 @@ class FreelanceRepository extends ServiceEntityRepository
 
         // requete bdd
 
-        return $qb->getQuery()
-            ->getResult(); //retourne le tableau des résultats
+        return $qb->getQuery();
+            //->getResult(); //retourne le tableau des résultats
     }
+
+    /**
+     * @return Query
+     */
+    public function findAllNotSoldQuery(): Query
+    {
+        return $this->findNotSoldQuery()
+            ->getQuery()
+            ;
+    }
+
+
 
     public function save(Freelance $entity, bool $flush = false): void
     {
