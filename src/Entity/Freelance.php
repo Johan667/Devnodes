@@ -10,10 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FreelanceRepository::class)]
 class Freelance extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $title = null;
@@ -45,8 +41,6 @@ class Freelance extends User
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $xpYears = null;
 
-    #[ORM\OneToMany(mappedBy: 'freelance', targetEntity: Opinion::class)]
-    private Collection $opinions;
 
     #[ORM\OneToMany(mappedBy: 'freelance', targetEntity: Path::class)]
     private Collection $belong;
@@ -82,7 +76,6 @@ class Freelance extends User
 
     public function __construct()
     {
-        $this->opinions = new ArrayCollection();
         $this->belong = new ArrayCollection();
         $this->freelanceCategory = new ArrayCollection();
         $this->workCategories = new ArrayCollection();
@@ -96,10 +89,6 @@ class Freelance extends User
         $this->dbs = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getTitle(): ?string
     {
@@ -217,36 +206,6 @@ class Freelance extends User
     public function setXpYears(?string $xpYears): self
     {
         $this->xpYears = $xpYears;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Opinion>
-     */
-    public function getOpinions(): Collection
-    {
-        return $this->opinions;
-    }
-
-    public function addOpinion(Opinion $opinion): self
-    {
-        if (!$this->opinions->contains($opinion)) {
-            $this->opinions->add($opinion);
-            $opinion->setFreelance($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOpinion(Opinion $opinion): self
-    {
-        if ($this->opinions->removeElement($opinion)) {
-            // set the owning side to null (unless already changed)
-            if ($opinion->getFreelance() === $this) {
-                $opinion->setFreelance(null);
-            }
-        }
 
         return $this;
     }

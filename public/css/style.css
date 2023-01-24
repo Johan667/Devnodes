@@ -72,7 +72,18 @@ nav .navbar ul {
 .btn3:hover {
   font-weight: bold;
   color: #eb6440;
+}
 
+.btn7{
+  text-decoration: none;
+  color: white;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.btn7:hover {
+  background-color: rgba(28, 28, 28, 0.84);
 }
 
 /* --- FIN NAVBAR --- */
@@ -207,6 +218,7 @@ nav .navbar ul {
   border: none;
   margin-top: 10px;
   margin-left: 6px;
+  width : 15rem;
 }
 
 

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devnodes | RegisterChoice{% endblock %}
+
+{% block body %}
+    <div id="registerChoice">
+
+        <div class="textSide">
+            <h1>Inscription</h1>
+        </div>
+        <div class="rightSide">
+            <p>Veuillez choisir l'option qui vous correspond ?</p>
+            <a href="{{ path('app_register') }}" class="white-button clientSide">
+                <span>Client</span>
+                <span>Je cherche des Freelance</span>
+            </a>
+            <a href="{{ path('app_register_freelance') }}" class="white-button freelanceSide">
+                <span>Freelance</span>
+                <span>Je cherche des sryhr</span>
+            </a>
+            <div>
+                <p>Déjà inscrit ? <a href="{{ path('app_login') }}" id="parIci">C'est par ici</a></p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

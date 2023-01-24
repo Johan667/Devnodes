@@ -78,8 +78,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Social::class)]
     private Collection $share;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Opinion::class)]
-    private Collection $opinions;
 
     #[ORM\OneToMany(mappedBy: 'sendMission', targetEntity: Mission::class)]
     private Collection $missions;
@@ -87,13 +85,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'comments', targetEntity: Comment::class)]
+    private Collection $comments;
+
+    #[ORM\OneToMany(mappedBy: 'received', targetEntity: Comment::class)]
+    private Collection $receivedComments;
+
     public function __construct()
     {
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
         $this->share = new ArrayCollection();
-        $this->opinions = new ArrayCollection();
         $this->missions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->receivedComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -376,35 +381,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Opinion>
-     */
-    public function getOpinions(): Collection
-    {
-        return $this->opinions;
-    }
-
-    public function addOpinion(Opinion $opinion): self
-    {
-        if (!$this->opinions->contains($opinion)) {
-            $this->opinions->add($opinion);
-            $opinion->setUsers($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOpinion(Opinion $opinion): self
-    {
-        if ($this->opinions->removeElement($opinion)) {
-            // set the owning side to null (unless already changed)
-            if ($opinion->getUsers() === $this) {
-                $opinion->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Mission>
@@ -444,6 +420,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setComments($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getComments() === $this) {
+                $comment->setComments(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getReceivedComments(): Collection
+    {
+        return $this->receivedComments;
+    }
+
+    public function addReceivedComment(Comment $receivedComment): self
+    {
+        if (!$this->receivedComments->contains($receivedComment)) {
+            $this->receivedComments->add($receivedComment);
+            $receivedComment->setReceived($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedComment(Comment $receivedComment): self
+    {
+        if ($this->receivedComments->removeElement($receivedComment)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedComment->getReceived() === $this) {
+                $receivedComment->setReceived(null);
+            }
+        }
 
         return $this;
     }

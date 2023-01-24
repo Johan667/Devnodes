@@ -5,10 +5,15 @@ namespace App\Entity;
 use App\Repository\MissionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use http\Env\Request;
 
 #[ORM\Entity(repositoryClass: MissionRepository::class)]
 class Mission
 {
+    public function __construct()
+    {
+        $this->startDate = new \DateTime();
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -76,6 +81,12 @@ class Mission
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->startDate = new \DateTime();
     }
 
     public function setStartDate(\DateTimeInterface $startDate): self
@@ -164,7 +175,8 @@ class Mission
 
     public function setReceiveMission(?Freelance $receiveMission): self
     {
-        $this->receiveMission = $receiveMission;
+
+       $this->receiveMission = $receiveMission;
 
         return $this;
     }
