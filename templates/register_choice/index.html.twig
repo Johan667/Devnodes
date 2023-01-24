@@ -10,38 +10,18 @@
         </div>
         <div class="rightSide">
             <p>Veuillez choisir l'option qui vous correspond ?</p>
-            <a href="#" class="white-button clientSide">
+            <a href="{{ path('app_register') }}" class="white-button clientSide">
                 <span>Client</span>
                 <span>Je cherche des Freelance</span>
             </a>
-            <a href="#" class="white-button freelanceSide">
+            <a href="{{ path('app_register_freelance') }}" class="white-button freelanceSide">
                 <span>Freelance</span>
                 <span>Je cherche des sryhr</span>
             </a>
+            <div>
+                <p>Déjà inscrit ? <a href="{{ path('app_login') }}" id="parIci">C'est par ici</a></p>
+            </div>
         </div>
 
     </div>
-
-{#    <div class="session">#}
-{#        <div class="left">#}
-{#            <h1>Inscription</h1>#}
-{#        </div>#}
-{#        <div class="right">#}
-{#            <p>Veuillez choisir l'option qui vous correspond ?</p>#}
-{#            <a href="{{ path('app_register') }}">#}
-{#                <div class="white-button">#}
-{#                    <h4>Client</h4>#}
-{#                    <p>Je recherche des freelances</p>#}
-{#                </div>#}
-{#            </a>#}
-{#            <a href="{{ path('app_register_freelance') }}">#}
-{#                <div class="white-button">#}
-{#                    <h4>Freelance</h4>#}
-{#                    <p>Je crée mon profil</p>#}
-{#                </div>#}
-{#            </a>#}
-{#        </div>#}
-{#    </div>#}
-
-
 {% endblock %}
