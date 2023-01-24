@@ -24,12 +24,8 @@ class SearchForm extends AbstractType
             ])
             ->add('city', TextType::class, [
                 'label' => false,
-                'required' => false,
+                'attr' => ['id' => 'city'],
 
-                'attr' => [
-                    'placeholder' => 'Lieu de la mission (ex: Lyon, Paris...)',
-                     'id'=>'autocomplete' ,
-                ]
             ]);
     }
 
