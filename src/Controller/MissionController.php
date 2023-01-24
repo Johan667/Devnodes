@@ -28,7 +28,8 @@ class MissionController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
-        $missions = $this->entityManager->getRepository(Mission::class)->findAll(['start_date' => 'DESC']);
+
+        $missions = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
 
 
         return $this->render('mission/index.html.twig', [
