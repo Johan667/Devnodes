@@ -1,0 +1,39 @@
+/* Formulaire Create Mission */
+.formBase{
+    column-count: 2;
+    padding:3rem;
+}
+
+/* Fin Formulaire Create Mission */
+
+.sidebar{
+    padding:5rem;
+}
+
+/* Proposer une mission */
+
+.proposeMission a{
+    text-decoration: none;
+    color: white;
+    margin:auto;
+}
+/* Fin proposer une mission */
+
+/* Register Freelance */
+
+.registerFreelance{
+    column-count: 3;
+}
+/* Fin Register Freelance */
+
+/* Register Client */
+.formRegister{
+    column-count: 2;
+}
+/* Fin Register Client */
+
+/* headerProfil */
+
+.headerProfil{
+    max-height: 300px;
+}
