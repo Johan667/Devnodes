@@ -37,3 +37,15 @@
 .headerProfil{
     max-height: 300px;
 }
+
+/* Messaging */
+
+.AllMessages{
+    padding: 3%;
+    border: solid 1px #479F9F;
+}
+
+.ActualMessage{
+    padding: 3%;
+    border: solid 1px #479F9F;
+}
