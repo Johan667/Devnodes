@@ -19,7 +19,7 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Essayez Java, Symfony, Webpack...'
+                    'placeholder' => 'Entrez une compétence'
                 ]
             ])
             ->add('city', TextType::class, [

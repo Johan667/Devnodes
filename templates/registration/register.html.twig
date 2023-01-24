@@ -8,19 +8,19 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<div class="registerPage">
-		<h1>Inscription</h1>
-		<p>Vous êtes a la recherche d'un Freelance ?</p>
-		<p>Vous êtes un Freelance ?</p>
-	</div>
+	<div class="wrapper">
+		<h1 class="text-center">Inscription</h1>
+		<p class="text-center">Vous êtes a la recherche d'un Freelance ?</p>
 
+	<hr>
+<div class="formRegister">
 	{{ form_start(registrationForm) }}
 	{{ form_row(registrationForm.email) }}
 	{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
 	{{ form_row(registrationForm.agreeTerms) }}
-
-	<button type="submit" class="btn1">Create an account</button>
 	{{ form_end(registrationForm) }}
+</div>
+	</div>
 {% endblock %}

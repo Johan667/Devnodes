@@ -5,16 +5,26 @@
 {% block body %}
 
 {#    {% include 'home/_filter.html.twig' with {form: searchFreelance} only %}#}
+    <h1 class="text-center">Résulat de votre recherche</h1>
 
     <div class="wrapper_resultat">
-        <div class="filtre">Filtre</div>
-        <div class="resultat">
-            {% for freelance in freelances %}
-                {% include 'result_bdr/_card.html.twig' with {freelance: freelance} only %}
-            {% endfor %}
-        </div>
+        <div class="row">
+            <div class="col-2">
+{#                <div id="sidebar">#}
+{#                    <h2>Filtres</h2>#}
+{#                    <hr>#}
+{#                </div>#}
+            </div>
+            <div class="col-10 cardsFreelance">
+                <div class="resultat">
+                    {% for freelance in freelances %}
+                        {% include 'result_bdr/_card.html.twig' with {freelance: freelance} only %}
+                    {% endfor %}
+                </div>
+            </div>
     </div>
     <div class="pagination" style="float:right">
         {{ knp_pagination_render(freelances) }}
+    </div>
     </div>
 {% endblock %}

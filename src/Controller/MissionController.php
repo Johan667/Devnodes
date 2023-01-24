@@ -68,7 +68,6 @@ class MissionController extends AbstractController
                 $this->entityManager->remove($mission);
                 $this->entityManager->flush($mission);
 
-
             return $this->redirectToRoute('missions');
         }
 
