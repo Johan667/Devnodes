@@ -28,9 +28,7 @@ class MissionController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
-
         $missions = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
-
 
         return $this->render('mission/index.html.twig', [
             'missions'=>$missions,
@@ -62,5 +60,16 @@ class MissionController extends AbstractController
         ]);
 
     }
+        #[Route('/delete/mission/{id}', name: 'delete_mission')]
+        public function delete(Request $request, $id): Response
+        {
+            $mission = $this->entityManager->getRepository(Mission::class)->findOneById($id);
+
+                $this->entityManager->remove($mission);
+                $this->entityManager->flush($mission);
+
+
+            return $this->redirectToRoute('missions');
+        }
 
 }
