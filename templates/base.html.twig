@@ -63,17 +63,18 @@
                     <a class="btn2" href="{{ path('app_logout') }}">Deconnexion</a>
                 </li>
 
-                {% else %}
-                <li>
-                    <a class="btn1" href="{{ path('app_login') }}">Connexion</a>
-                </li>
-                <li>
-                    <a class="btn1" href="{{ path('app_register') }}">Inscription</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
+
+                    {% else %}
+                        <li><a class="btn1" href="{{ path('app_login') }}">Connexion</a></li>
+                        <li><a class="btn1" href="{{ path('app_register_choice') }}">Inscription</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- FIN NAVBAR -->
+
+
         <!-- FIN NAVBAR -->
+
 
         <!-- MENU BURGER -->
         <div id="mySidenav" class="sidenav">
