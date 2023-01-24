@@ -7,7 +7,7 @@
         <p class="card-text">{{ freelance.title }}</p>
         NOTATION
         <div class="viewProfil">
-        <a href="#" class="btn6"><i class="fa-solid fa-eye"></i></a>
+        <a href="{{ path('app_profil_show', {'id': freelance.id })}}" class="btn6"><i class="fa-solid fa-eye"></i></a>
         </div>
     </div>
 </div>
