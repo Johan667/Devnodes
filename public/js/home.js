@@ -17,4 +17,11 @@ function closeNav() {
 }
 /* MENU BURGER */
 
+/* CAPTCHA */
+
+    function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+}
+
+/* FIN CAPTCHA */
 

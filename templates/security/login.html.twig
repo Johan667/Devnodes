@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form id="loginForm"  method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,15 +14,47 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <div id="login-page">
+        <div class="textSide">
+            <h1>Connexion</h1>
+        </div>
+        <div class="rightSide">
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+            <div class="input-space">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+
+
+            <div class="input-space">
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+
+            <button class="g-recaptcha"
+                    type="submit"
+                    data-sitekey="6Ld0FiIkAAAAABNn3uVj7xBf5SQQ4xmh_ZOocfo3"
+                    data-callback='onSubmit'
+                    data-action='submit'>Se Connecter</button>
+            <input type="submit" value="Je ne suis pas un robot">
+
+
+            <div>
+                <p>Pas encore inscrit ? <a href="{{ path('app_register_choice') }}" id="parIci">C'est par ici</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+{#    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
+{#    <label for="inputEmail">Email</label>#}
+{#    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>#}
+{#    <label for="inputPassword">Password</label>#}
+{#    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>#}
+
+{#    <input type="hidden" name="_csrf_token"#}
+{#           value="{{ csrf_token('authenticate') }}"#}
+{#    >#}
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +67,31 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+{#    <button class="btn btn-lg btn-primary" type="submit">#}
+{#        Sign in#}
+{#    </button>#}
 </form>
+<script>
+    const route = "{{ url('app_security_verifycaptcha') }}"
+
+    document.querySelector('[type=submit]').addEventListener('click', e => {
+        console.log('test')
+        e.preventDefault();
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Ld0FiIkAAAAABNn3uVj7xBf5SQQ4xmh_ZOocfo3', {action: 'submit'}).then(function(token) {
+                fetch(route, {
+                    method: 'POST',
+                    body: token
+                }).then(r => r.json())
+                .then(response => {
+                    if (response.success) {
+                        document.getElementById('loginForm').submit()
+                    }
+                })
+            });
+        });
+    })
+</script>
+
+
 {% endblock %}
