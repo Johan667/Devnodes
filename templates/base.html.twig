@@ -45,10 +45,10 @@
                 {% if app.user %}
                 {% if is_granted('ROLE_USER') %}
                 <li>
-                    <a class="btn1" href="#">Favoris</a>
+                    <a class="btn1" href="{{ path('app_favorite') }}">Favoris</a>
                 </li>
                 <li>
-                    <a class="btn1" href="#">Messagerie</a>
+                    <a class="btn1" href="{{ path('app_messaging') }}">Messagerie</a>
                 </li>
                 <li>
                     <a class="btn1" href="{{ path('app_profil') }}">Profil</a>
@@ -57,7 +57,7 @@
                     <a class="btn1" href="{{ path('missions') }}">Mes missions</a>
                 </li>
                 <li>
-                    <a class="btn1" href="#">Compte</a>
+                    <a class="btn1" href="{{ path('app_account') }}">Compte</a>
                 </li>
                 {% endif %}
 
