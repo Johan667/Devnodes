@@ -101,51 +101,52 @@
 
 <body>
     {% block body %}{% endblock %}
-<footer>
-    <div class="row primary">
-        <div class="column about">
-            <a href="{{ path('app_home') }}"><img src="../img/logo.png" alt="logo devnodes"></a>
-            <div class="social">
-                <a href=""><i class="fa-brands fa-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-twitter"></i></a>
-                <a href=""><i class="fa-brands fa-facebook"></i></a>
-                <a href=""><i class="fa-brands fa-github"></i></a>
-            </div>
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+            <a href="{ path('app_home') }}" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                <img src="../img/logo.png" alt="logo devnodes">
+            </a>
+            <p class="text-muted logoSocial">
+                <i class="fa-brands fa-instagram"></i>&nbsp;
+                <i class="fa-brands fa-linkedin"></i>&nbsp;
+                <i class="fa-brands fa-facebook"></i>&nbsp;
+            <i class="fa-brands fa-snapchat"></i></p>
         </div>
 
-        <div class="column links">
-            <h3>For Clients</h3>
-            <ul>
-                <li><a href="">Trouver un Freelance</a></li>
-                <li><a href="">Créer une offre</a></li>
-                <li><a href="">Conditions générales d'utilisations</a></li>
-                <li><a href="">Conditions générales de ventes</a></li>
-            </ul>
-        </div>
-        <div class="column links">
-            <h3>For Freelances</h3>
-            <ul>
-                <li><a href="">Trouver des clients</a></li>
-                <li><a href="">Créer un compte</a></li>
-                <li><a href="">Abonnements</a></li>
-            </ul>
-        </div>
-        <div class="column contact">
-            <h3>Contactez nous !</h3>
-            <ul>
-                <li><i class="fa-solid fa-location-pin"></i> <a href="">France</a></li>
-                <li><i class="fa-solid fa-phone"></i> <a href="">+33 03 88 00 00</a></li>
-                <li><i class="fa-regular fa-envelope"></i> <a href="mailto:contact@devnodes.fr">contact@devnodes.fr</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row copyright">
-        2022 devnodes. All right reserved &copy;
-    </div>
-</footer>
-</body>
+        <div class="col mb-3">
 
+        </div>
+
+        <div class="col mb-3">
+            <h5>Clients</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="{{ path('app_home') }}" class="nav-link p-0 text-muted">Accueil</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_home') }}" class="nav-link p-0 text-muted">Rechercher un freelance</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_charts') }}" class="nav-link p-0 text-muted">Guide Utilisation</a></li>
+
+            </ul>
+        </div>
+
+        <div class="col mb-3">
+            <h5>Freelances</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="{{ path('app_charts') }}" class="nav-link p-0 text-muted">Charte du Freelance</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_register_choice') }}" class="nav-link p-0 text-muted">Inscription</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">CGU</a></li>
+
+            </ul>
+        </div>
+
+        <div class="col mb-3">
+            <h5>Contactez nous</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Formulaire de contact</a></li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-location-dot"></i> France</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-phone"></i> 118 218</li>
+                <li class="nav-item mb-2"><i class="fa-solid fa-envelope"></i> devnodes.contact@gmail.com </li>
+            </ul>
+        </div>
+    </footer>
     {% block javascripts %}
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRiHKpx4yHpgxRuzBdY72UzyLgBA8aBhA&libraries=places"></script>
         <script src="{{ asset('js/home.js') }}"></script>
@@ -158,4 +159,7 @@
                 integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
                 crossorigin="anonymous"></script>
     {% endblock %}
+</body>
+
+
 </html>
