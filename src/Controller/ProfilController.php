@@ -30,4 +30,15 @@ class ProfilController extends AbstractController
         'freelance'=>$freelance,
         ]);
     }
+
+    #[Route('/profil/{id}', name: 'app_profil_show')]
+    public function show($id): Response
+    {
+        $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
+
+
+        return $this->render('profil/show.html.twig',[
+        'freelance'=>$freelance,
+            ]);
+    }
 }
