@@ -49,3 +49,41 @@
     padding: 3%;
     border: solid 1px #479F9F;
 }
+
+/* Mon compte */
+
+/* Mon compte */
+.account-item {
+
+    background-color: #479F9F;
+    padding: 75px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.account-item:hover {
+    -webkit-transform: scale(1.05);
+    /* Safari et Chrome */
+    -moz-transform: scale(1.05);
+    /* Firefox */
+    -ms-transform: scale(1.05);
+    /* Internet Explorer 9 */
+    -o-transform: scale(1.05);
+    /* Opera */
+    transform: scale(1.05);
+}
+
+.account-item a {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: black;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.account-item a:hover {
+    text-transform: uppercase;
+    color: #EFF5F5;
+    font-weight: bolder;
+    text-decoration: none;
+}
