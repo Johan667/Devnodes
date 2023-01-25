@@ -27,7 +27,9 @@ class MissionType extends AbstractType
                 ),
             ))
             ->add('description', TextareaType::class)
-            ->add('addFile', FileType::class)
+            ->add('addFile', FileType::class, array(
+                'required' => false
+            ))
 
             ->add('submit', SubmitType::class)
 

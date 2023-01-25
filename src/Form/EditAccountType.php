@@ -16,14 +16,30 @@ class EditAccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email',EmailType::class)
-            ->add('firstname',TextType::class)
-            ->add('lastname',TextType::class)
-            ->add('denominationCompany',TextType::class)
-            ->add('siretCompany',TextType::class)
-            ->add('tvaCompany',TextType::class)
-            ->add('phone',TelType::class)
-            ->add('submit',SubmitType::class)
+            ->add('email',EmailType::class, array(
+                'required' => false
+            ))
+            ->add('firstname',TextType::class, array(
+                'required' => false
+            ))
+            ->add('lastname',TextType::class, array(
+                'required' => false
+            ))
+            ->add('denominationCompany',TextType::class, array(
+                'required' => false
+            ))
+            ->add('siretCompany',TextType::class, array(
+                'required' => false
+            ))
+            ->add('tvaCompany',TextType::class, array(
+                'required' => false
+            ))
+            ->add('phone',TelType::class, array(
+                'required' => false
+            ))
+            ->add('submit',SubmitType::class, array(
+                'required' => false
+            ))
         ;
     }
 
