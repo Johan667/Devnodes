@@ -55,31 +55,31 @@
                 <h3>Skills </h3>
                 <div class="typeSkills">
                     <div class="codingLanguages">
-                        <em>Languages</em><br>
+                        <em><b>Languages</b></em><br>
                         {% for codingLanguages in freelance.codingLanguages %}
                             {{ codingLanguages.nameCodingLanguage }}<br>
                         {% endfor %}
                     </div>
                     <div class="framework">
-                        <em>Framework</em><br>
+                        <em><b>Framework</b></em><br>
                         {% for frameworks in freelance.frameworks %}
                             {{ frameworks.nameFramework }}<br>
                         {% endfor %}
                     </div>
                     <div class="database">
-                        <em>Database</em><br>
+                        <em><b>Database</b></em><br>
                         {% for dbs in freelance.dbs %}
                             {{ dbs.nameDb }}<br>
                         {% endfor %}
                     </div>
                     <div class="methodology">
-                        <em>Methodology</em><br>
+                        <em><b>Methodology</b></em><br>
                         {% for methodologies in freelance.methodologies %}
                             {{ methodologies.nameMethodology }}<br>
                         {% endfor %}
                     </div>
                     <div class="versionControl">
-                        <em>Version Control</em><br>
+                        <em><b>Version Control</b></em><br>
                         {% for versionControls in freelance.versionControls %}
                             {{ versionControls.nameVersionControl }}<br>
                         {% endfor %}
@@ -118,14 +118,15 @@
                     {% endif %}
                     <div class="verified-grey mt-3">
                         <i class="fa-solid fa-scale-balanced"></i> Code of conduct not signed<br>
-                        <a href="">Read the  code of conduct</a>
+                        <a href="{{ path('app_charts') }}">Read the  code of conduct</a>
                     </div>
                 </div>
                 <div class="col-8 portfolio">
                     <h3>Portfolio</h3>
                     Please, enter your portfolio link
                 </div>
-            </div>
+
+        </div>
         </div>
         <!-- fin verification & portfolio -->
 
