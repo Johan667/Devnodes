@@ -49,9 +49,15 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('denominationCompany', TextType::class)
-            ->add('siretCompany', TextType::class)
-            ->add('tvaCompany', TextType::class)
+            ->add('denominationCompany', TextType::class, array(
+                'required' => false
+            ))
+            ->add('siretCompany', TextType::class, array(
+                'required' => false
+            ))
+            ->add('tvaCompany', TextType::class, array(
+                'required' => false
+            ))
             ->add('profilPicture', FileType::class, array(
                 'required' => false
             ))
