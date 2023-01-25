@@ -84,13 +84,48 @@ class FreelanceType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ))
-            ->add('spokenLanguages', TextType::class)
-            ->add('dbs', TextType::class)
-            ->add('platforms', TextType::class)
-            ->add('versionControls', TextType::class)
-            ->add('frameworks', TextType::class)
-            ->add('methodologies', TextType::class)
-            ->add('codingLanguages', TextType::class)
+            ->add('spokenLanguages', EntityType::class, array(
+                'class' => 'App\Entity\spokenLanguage',
+                'choice_label' => 'name_language',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('dbs',  EntityType::class, array(
+                'class' => 'App\Entity\Db',
+                'choice_label' => 'name_db',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('platforms', EntityType::class, array(
+                'class' => 'App\Entity\Platform',
+                'choice_label' => 'name_platform',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('versionControls', EntityType::class, array(
+                'class' => 'App\Entity\VersionControl',
+                'choice_label' => 'name_version_control',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('frameworks', EntityType::class, array(
+                'class' => 'App\Entity\Framework',
+                'choice_label' => 'name_framework',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('methodologies', EntityType::class, array(
+                'class' => 'App\Entity\Methodology',
+                'choice_label' => 'name_methodology',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('codingLanguages', EntityType::class, array(
+                'class' => 'App\Entity\codingLanguage',
+                'choice_label' => 'name_coding_language',
+                'multiple' => true,
+                'expanded' => true,
+            ))
             ->add('submit', SubmitType::class)
         ;
     }
