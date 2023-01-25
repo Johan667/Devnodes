@@ -27,7 +27,7 @@
 /* Fin Register Freelance */
 
 /* Register Client */
-.formRegister{
+.formRegister,.formEditRegister{
     column-count: 2;
 }
 /* Fin Register Client */
