@@ -19,6 +19,7 @@ final class Version20230123153946 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        // FIX: faire le ménage dans cette migration car elle fait des requêtes déjà présente dans des migrations précédentes
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE comment (id INT AUTO_INCREMENT NOT NULL, comments_id INT DEFAULT NULL, received_id INT DEFAULT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_9474526C63379586 (comments_id), INDEX IDX_9474526CB821E5F5 (received_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C63379586 FOREIGN KEY (comments_id) REFERENCES `user` (id)');
