@@ -46,29 +46,14 @@ class FreelanceType extends AbstractType
             ])
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('denominationCompany', TextType::class)
-            ->add('siretCompany', TextType::class)
-            ->add('tvaCompany', TextType::class)
-            ->add('profilPicture', FileType::class)
-            ->add('coverPicture', FileType::class)
             ->add('description', TextareaType::class)
             ->add('phone', TelType::class)
-            ->add('registerDate', DateType::class)
             ->add('title', TextType::class)
-            ->add('location', TextType::class)
             ->add('country', CountryType::class)
             ->add('address', TextType::class)
             ->add('city', TextType::class)
             ->add('codePostal', TextType::class)
             ->add('price', NumberType::class)
-            ->add('durationPreference', ChoiceType::class, array(
-                'choices' => array(
-                    'Half Day' => 'Half Day',
-                    'Full Day' => 'Full Day',
-                    'Week' => 'Week',
-                    'Month' => 'Month',
-                )
-            ))
             ->add('remoteWork', ChoiceType::class, array(
                 'choices' => array(
                     'Yes' => true,
