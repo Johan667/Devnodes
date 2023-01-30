@@ -283,6 +283,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->registerDate;
     }
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->registerDate = new \DateTime();
+    }
 
     public function setRegisterDate(?\DateTimeInterface $registerDate): self
     {
