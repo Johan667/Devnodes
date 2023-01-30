@@ -51,7 +51,10 @@ class FreelanceType extends AbstractType
             ->add('title', TextType::class)
             ->add('country', CountryType::class)
             ->add('address', TextType::class)
-            ->add('city', TextType::class)
+            ->add('city', TextType::class, [
+                'attr' => [
+                    'id' => 'city',
+                ]])
             ->add('codePostal', TextType::class)
             ->add('price', NumberType::class)
             ->add('remoteWork', ChoiceType::class, array(
