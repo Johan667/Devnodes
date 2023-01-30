@@ -29,6 +29,13 @@ class LegalsController extends AbstractController
         ]);
     }
 
+    #[Route('/charts', name: 'app_cgu')]
+    public function cgu(): Response
+    {
+        return $this->render('legals/cgu.html.twig', [
+        ]);
+    }
+
     #[Route('/contact', name: 'app_contact')]
     public function contact(MailerInterface $mailer,Request $request): Response
     {
