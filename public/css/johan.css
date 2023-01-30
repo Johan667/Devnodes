@@ -87,3 +87,18 @@
     font-weight: bolder;
     text-decoration: none;
 }
+
+/* Formulaire de contact */
+
+.column-contact {
+    margin: auto;
+    position: relative;
+    width: 500px;
+    margin-bottom: 3rem;
+    padding-left: 35px;
+    padding-right: 35px;
+    vertical-align: top;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    box-shadow: #EFF5F5 -8px 2px 11px;
+}

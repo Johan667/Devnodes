@@ -37,7 +37,11 @@ class EditAccountType extends AbstractType
             ->add('phone',TelType::class, array(
                 'required' => false
             ))
-            ->add('submit',SubmitType::class)
+            ->add('submit',SubmitType::class, [
+                'attr' => [
+                    'class' => 'boutton1',
+    ],
+])
         ;
     }
 
