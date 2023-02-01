@@ -19,10 +19,25 @@ use Doctrine\Persistence\ManagerRegistry;
 class MessageController extends AbstractController
 {
     #[Route('/mission/{id}/messages')]
-    public function messages(MissionRepository $missionRepository, Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry)
+    public function messages(Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry)
     {
         $messages = $messageRepository->findByMissionId($mission->getId());
         $currentUser = $this->getUser();
+        $users = [
+            $mission->getSendMission(),
+            $mission->getReceiveMission()
+        ];
+
+        foreach ($users as $user) {
+            if($user != $this->getUser()){
+                $reciever = $user;
+            }
+
+        return $this->render('message/index.html.twig', [
+            'messages' => $messageRepository->findAll(),
+        ]);
+
+        }
 
         //TODO: take the reciever ID from the Missions and compare it to the currentUser, if it's not the same, that will be the reciever.
         
