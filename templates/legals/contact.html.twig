@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devnodes | Contactez nous{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+
+            <div class="column-contact">
+                <h2> Contactez nous </h2>
+                <p> N'hésitez pas à contacter notre équipe, nous vous répondrons dans les meilleurs délais</p>
+
+                <hr><br>
+                {{ form_start(form) }}
+                <div>
+                    {{ form_label(form.email) }}<br>
+                    {{ form_widget(form.email) }}
+                </div>
+                <div>
+                    {{ form_label(form.objet) }}<br>
+                    {{ form_widget(form.objet) }}
+                </div>
+                <div>
+                    {{ form_label(form.message) }}<br>
+                    {{ form_widget(form.message) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -18,12 +18,10 @@ class AccountController extends AbstractController
 {
 
     private $entityManager;
-    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
     #[Route('/account', name: 'app_account')]
@@ -52,27 +50,29 @@ class AccountController extends AbstractController
     }
 
     #[Route('/account/password', name: 'app_account_password')]
-    public function changePassword(Request $request, UserPasswordHasherInterface $passwordEncoder)
+    public function changePassword(Request $request, UserPasswordHasherInterface $encoder): Response
     {
+        $notification = null;
         $user = $this->getUser();
-        $form = $this->createForm(ChangePasswordType::class, $user);
-        $form->handleRequest($request);
+        $modifPassword = $this->createForm(ChangePasswordType::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->hashPassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+        $modifPassword->handleRequest($request);
 
+        if ($modifPassword->isSubmitted() && $modifPassword->isValid()) {
+            $old_pwd = $modifPassword->get('old_password')->getData();
+            // On veux verifier ici que l'ancien mot de passe coresspond à celui de la bdd.
+            if ($encoder->isPasswordValid($user, $old_pwd)) {
+                $new_pwd = $modifPassword->get('new_password')->getData();
+                $password = $encoder->hashPassword($user, $new_pwd);
 
-            $this->entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Votre mot de passe a été modifié avec succès.');
-
-            return $this->redirectToRoute('homepage');
+                $user->setPassword($password);
+                $this->entityManager->flush($password);
+                $notification = 'Votre mot de passe à bien été mise à jours';
+            }
         }
 
         return $this->render('account/password.html.twig', [
-            'form' => $form->createView()
+            'form' => $modifPassword->createView()
         ]);
 
     }
