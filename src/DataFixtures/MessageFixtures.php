@@ -52,8 +52,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
                 }
         }
         
-        
-
         // $product = new Product();
         // $manager->persist($product);
 

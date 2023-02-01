@@ -3,23 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\Mission;
+use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\MissionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 
 // TODO : une route /mission/{id}/messages 
 class MessageController extends AbstractController
 {
     #[Route('/mission/{id}/messages')]
-    public function messages(UserRepository $userRepository)
+    public function messages(MissionRepository $missionRepository, Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry)
     {
-        // récupérer la mission avec l'id {id}
-        // récupérer tous les messages de la mission
+        $messages = $messageRepository->findByMissionId($mission->getId());
+        $currentUser = $this->getUser();
 
+        //TODO: take the reciever ID from the Missions and compare it to the currentUser, if it's not the same, that will be the reciever.
+        
         // création d'un formulaire avec MessageType
         // si le formulaire est envoyé
             // création d'un nouveau message
@@ -27,6 +33,7 @@ class MessageController extends AbstractController
             // liaison du sender et du recepient au message
     
         // afficher les messages et le formulaire sous les messages
+        
     }   
 
     #[Route('/message', name: 'app_message_index', methods: ['GET'])]
