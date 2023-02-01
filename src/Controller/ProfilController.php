@@ -28,6 +28,11 @@ class ProfilController extends AbstractController
         /** @var Freelance $user */
         $user = $this->getUser();
         $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$this->getUser()]);
+        $spokenLanguages = $freelance->getSpokenLanguages($freelance);
+        $languages = [];
+        foreach($spokenLanguages as $lang) {
+            $languages[] = $lang;
+        }
 
         // Formulaires
 
@@ -55,6 +60,7 @@ class ProfilController extends AbstractController
         }
 
         return $this->render('profil/index.html.twig', [
+            'languages' => $languages,
             'freelanceBase' => $freelanceBase->createView(),
             'freelanceTechnology' => $freelanceTechnology->createView(),
             'freelanceDescription' => $freelanceDescription->createView(),
@@ -66,7 +72,7 @@ class ProfilController extends AbstractController
     {
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
 
-
+        
         return $this->render('profil/show.html.twig',[
         'freelance'=>$freelance,
             ]);

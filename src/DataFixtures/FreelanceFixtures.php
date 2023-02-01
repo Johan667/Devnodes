@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Freelance;
+use App\Entity\SpokenLanguage;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -31,8 +32,23 @@ class FreelanceFixtures extends Fixture
             ->setPhone('0769553504')
             ->setDescription('SuperBadr')
             ->setPrice(500)
+            ->setTitle("Best freelancer world")
+            ->setCountry('Yemen')
+            ->setAddress('Somewhere')
+            ->setCity("Lyon")
+            ->setCodePostal('67000')
         ;
         $manager->persist($freelancer);
+
+        for($j=0; $j < 3; $j++) {
+            $faker = Faker::create('fr_FR');
+            $spokenLang = new SpokenLanguage;
+            $spokenLang
+                ->setNameLanguage($faker->randomElement(['English','French', 'Arabic']))
+                ->addFreelanceSpokenLanguage($freelancer)
+                ;
+            $manager->persist($spokenLang);
+        }
 
         $password = $this->encoder->hashPassword(new Freelance(), 'password');
         $faker = Faker::create('fr_FR');
