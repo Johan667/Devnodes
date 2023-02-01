@@ -31,9 +31,8 @@ class ProfilController extends AbstractController
         $spokenLanguages = $freelance->getSpokenLanguages($freelance);
         $languages = [];
         foreach($spokenLanguages as $lang) {
-            $languages[] = $lang;
+            $languages[] = $lang->getNameLanguage();
         }
-
         // Formulaires
 
         $freelanceBase = $this->createForm(EditHeaderProfilType::class, $freelance);

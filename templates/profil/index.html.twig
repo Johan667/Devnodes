@@ -59,10 +59,9 @@
                 <div class="typeSkills">
                 <div class="codingLanguages">
                     <em>Languages</em><br>
-                    <h1>
-                        {{ dump(languages) }}
-                    </h1>
-
+                    {% for language in languages %}
+                        <h1>{{ language }}<br></h1>
+                    {% endfor %}
                     {% for codingLanguages in app.user.codingLanguages %}
 
                         {{ codingLanguages.nameCodingLanguage }}<br>
