@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Freelance;
 use App\Entity\User;
-use App\Repository\CodingLanguageRepository;
+use App\Form\EditHeaderProfilType;
+use App\Form\TechnologyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,16 +20,35 @@ class ProfilController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+
     #[Route('/profil', name: 'app_profil')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         /** @var Freelance $user */
         $user = $this->getUser();
-        $freelance = $this->entityManager->getRepository(Freelance::class);
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$this->getUser()]);
 
+        // Formulaires
+
+        $freelanceBase = $this->createForm(EditHeaderProfilType::class, $freelance);
+        $freelanceTechnology = $this->createForm(TechnologyType::class);
+        $freelanceBase->handleRequest($request);
+
+        // Traitement
+
+        if ($freelanceBase->isSubmitted() && $freelanceBase->isValid() || $freelanceTechnology->isSubmitted() && $freelanceTechnology->isValid()) {
+
+            $this->entityManager->persist($data);
+            $this->entityManager->flush();
+
+
+            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
+            return $this->redirectToRoute('app_profil');
+        }
 
         return $this->render('profil/index.html.twig', [
-        'freelance'=>$freelance,
+            'freelanceBase' => $freelanceBase->createView(),
+            'freelanceTechnology' => $freelanceTechnology->createView(),
         ]);
     }
 
