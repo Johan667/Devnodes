@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/johan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/registerFreelance.css') }}">
     <link href="{{ asset('css/profil.css') }}" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -48,7 +49,7 @@
                     <a class="btn1" href="{{ path('app_favorite') }}">Favoris</a>
                 </li>
                 <li>
-                    <a class="btn1" href="{{ path('app_messaging') }}">Messagerie</a>
+                    <a class="btn1" href="{{ path('app_message_index') }}">Messagerie</a>
                 </li>
                 <li>
                     <a class="btn1" href="{{ path('app_profil') }}">Profil</a>
@@ -82,10 +83,10 @@
         <div id="mySidenav" class="sidenav">
             <a id="closeBtn" href="#" class="close">×</a>
             <ul>
-                <li><a href="#">Favoris</a></li>
-                <li><a href="#">Messagerie</a></li>
-                <li><a href="#">Profil</a></li>
-                <li><a href="#">Compte</a></li>
+                <li><a href="{{ path('app_favorite') }}">Favoris</a></li>
+                <li><a href="{{ path('app_message_index') }}">Messagerie</a></li>
+                <li><a href="{{ path('app_profil') }}">Profil</a></li>
+                <li><a href="{{ path('app_account') }}">Compte</a></li>
             </ul>
         </div>
 
@@ -134,7 +135,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="{{ path('app_charts') }}" class="nav-link p-0 text-muted">Charte du Freelance</a></li>
                 <li class="nav-item mb-2"><a href="{{ path('app_register_choice') }}" class="nav-link p-0 text-muted">Inscription</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">CGU</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_cgu') }}" class="nav-link p-0 text-muted">CGU</a></li>
 
             </ul>
         </div>
@@ -142,7 +143,7 @@
         <div class="col mb-3">
             <h5>Contactez nous</h5>
             <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Formulaire de contact</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_contact') }}" class="nav-link p-0 text-muted">Formulaire de contact</a></li>
                 <li class="nav-item mb-2"><i class="fa-solid fa-location-dot"></i> France</li>
                 <li class="nav-item mb-2"><i class="fa-solid fa-phone"></i> 118 218</li>
                 <li class="nav-item mb-2"><i class="fa-solid fa-envelope"></i> devnodes.contact@gmail.com </li>
@@ -154,6 +155,7 @@
          <script src="https://www.google.com/recaptcha/api.js?render=6Ld0FiIkAAAAABNn3uVj7xBf5SQQ4xmh_ZOocfo3"></script>
         <script src="{{ asset('js/home.js') }}"></script>
         <script src="{{ asset('js/autocompletion.js') }}"></script>
+        <script src="{{ asset('js/registerFreelance.js') }}"></script>
         <script src="https://kit.fontawesome.com/81ab4e445e.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
                 integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
