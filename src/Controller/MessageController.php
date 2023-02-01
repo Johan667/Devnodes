@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     #[Route('/mission/{id}/messages')]
-    public function messages()
+    public function messages(UserRepository $userRepository)
     {
         // récupérer la mission avec l'id {id}
         // récupérer tous les messages de la mission
 
-        // crétion d'un formulaire avec MessageType
+        // création d'un formulaire avec MessageType
         // si le formulaire est envoyé
             // création d'un nouveau message
             // liaison de la mission au message
