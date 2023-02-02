@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Freelance;
 use App\Entity\User;
 use App\Form\DescriptionProfilType;
+use App\Form\DurationPrefType;
 use App\Form\EditHeaderProfilType;
+use App\Form\LanguageType;
+use App\Form\LocationRemoteType;
 use App\Form\TechnologyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,39 +30,39 @@ class ProfilController extends AbstractController
     {
         /** @var Freelance $user */
         $user = $this->getUser();
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$this->getUser()]);
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$user]);
 
-        // Formulaires
+        $forms = [
+            'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
+            'loc' => $this->createForm(LocationRemoteType::class, $freelance),
+            'dur' => $this->createForm(DurationPrefType::class, $freelance),
+            'desc' => $this->createForm(DescriptionProfilType::class, $freelance),
+            'lang' => $this->createForm(LanguageType::class, $freelance),
+        ];
 
-        $freelanceBase = $this->createForm(EditHeaderProfilType::class, $freelance);
-        $freelanceTechnology = $this->createForm(TechnologyType::class);
-        $freelanceDescription = $this->createForm(DescriptionProfilType::class,$freelance);
+        foreach ($forms as $form) {
+            $form->handleRequest($request);
+        }
 
-        $freelanceBase->handleRequest($request);
-        $freelanceDescription->handleRequest($request);
-
-        // Traitement
-
-        if ($freelanceBase->isSubmitted() && $freelanceBase->isValid() ||
-            $freelanceTechnology->isSubmitted() && $freelanceTechnology->isValid() ||
-            $freelanceDescription->isSubmitted() && $freelanceDescription->isValid())
-
-        {
-
+        if (array_reduce($forms, function ($isSubmitted, $form) {
+            return $isSubmitted || ($form->isSubmitted() && $form->isValid());
+        }, false)) {
             $this->entityManager->persist($freelance);
             $this->entityManager->flush();
-
 
             $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
             return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('profil/index.html.twig', [
-            'freelanceBase' => $freelanceBase->createView(),
-            'freelanceTechnology' => $freelanceTechnology->createView(),
-            'freelanceDescription' => $freelanceDescription->createView(),
+            'freelanceBase' => $forms['base']->createView(),
+            'freelanceDescription' => $forms['desc']->createView(),
+            'freelanceLocation' => $forms['loc']->createView(),
+            'freelanceDuration' => $forms['dur']->createView(),
+            'freelanceLanguage' => $forms['lang']->createView(),
         ]);
     }
+
 
     #[Route('/profil/{id}', name: 'app_profil_show')]
     public function show($id): Response
@@ -72,12 +75,4 @@ class ProfilController extends AbstractController
             ]);
     }
 
-    #[Route('/profil/test', name: 'app_profil_test')]
-    public function test(): Response
-    {
-
-        return $this->render('profil/test.html.twig',[
-
-        ]);
-    }
 }

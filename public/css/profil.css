@@ -23,7 +23,8 @@
 
 .squares{
     display: flex;
-    margin-top:1%;
+
+    margin:auto;
 }
 .price{
     text-align: center;
@@ -90,7 +91,14 @@
 }
 
 .verified-grey{
-
     background-color: #D6E4E5;
     padding: 20px;
+}
+
+.bigdeal{
+
+}
+
+.profilBlock{
+  border: solid 1px #479F9F;
 }

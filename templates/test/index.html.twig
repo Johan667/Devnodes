@@ -1,0 +1,380 @@
+{#<div class="wrapper">#}
+{#    <div class="row headerProfil">#}
+{#        <!-- Header (photo, titre, prix, disponibilité, experience. -->#}
+{#        <div class="col-3">#}
+{#            <div class="round-border">#}
+{#                <a href="#" title="Upload your profil picture"><i class="fa-solid fa-camera"></i></a>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-6">#}
+{#            <h1 class="bolder">{{ app.user.firstname }} {{ app.user.lastname }}</h1>#}
+{#            <h2 class="bold">{{ app.user.title }}</h2>#}
+{#            <i class="fa-solid fa-briefcase"></i> {{ app.user.remoteWork }}<br>#}
+{#            <i class="fa-solid fa-star"></i>(x) Advices#}
+{#            <div class="squares">#}
+{#                <div class="price">#}
+{#                    Price<br>#}
+{#                    {{ app.user.price }} € per day#}
+{#                </div>#}
+{#                <div class="xpYears">#}
+{#                    Experience<br>#}
+{#                    {{ app.user.xpYears }} years#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-3">#}
+{#            <i class="fa-sharp fa-solid fa-circle"></i> Disponibility<br>#}
+{#            <!-- Bouton modal modifier ses infos -->#}
+{#            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">#}
+{#                <i class="fa-solid fa-pen-to-square"></i>#}
+{#            </button>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<!-- fin header -->#}
+
+{#<div class="shadowline"><hr></div>#}
+
+{#<div class="wrapper">#}
+{#    <div class="row">#}
+{#        <!-- Location & Skills -->#}
+{#        <div class="space">#}
+{#            <div class="col-4 location">#}
+{#                <h3 class="text-center"> Location and workplace preferences </h3>#}
+{#                <!-- Bouton modal modifier la ville et remote work -->#}
+{#                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">#}
+{#                    <i class="fa-solid fa-pen-to-square"></i>#}
+{#                </button>#}
+{#                <i class="fa-solid fa-location-dot"></i> <b>Location</b><br>#}
+{#                {{ app.user.city }}, {{ app.user.country }}<br>#}
+{#                <i class="fa-solid fa-briefcase"></i> <b class="mtx30">{{ app.user.remoteWork }}</b><br>#}
+{#            </div>#}
+{#            <div class="col-8 skills">#}
+{#                <h3>Skills</h3>#}
+{#                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">#}
+{#                    <i class="fa-solid fa-pen-to-square"></i>#}
+{#                </button>#}
+{#                <div class="typeSkills">#}
+{#                    <div class="codingLanguages">#}
+{#                        <em>Languages</em><br>#}
+
+{#                        {% for codingLanguages in app.user.codingLanguages %}#}
+
+{#                            {{ codingLanguages.nameCodingLanguage }}<br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="framework">#}
+{#                        <em>Framework</em><br>#}
+{#                        {% for frameworks in app.user.frameworks %}#}
+{#                            {{ frameworks.nameFramework }}<br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="database">#}
+{#                        <em>Database</em><br>#}
+{#                        {% for dbs in app.user.dbs %}#}
+{#                            {{ dbs.nameDb }}<br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="methodology">#}
+{#                        <em>Methodology</em><br>#}
+{#                        {% for methodologies in app.user.methodologies %}#}
+{#                            {{ methodologies.nameMethodology }}<br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="versionControl">#}
+{#                        <em>Version Control</em><br>#}
+{#                        {% for versionControls in app.user.versionControls %}#}
+{#                            {{ versionControls.nameVersionControl }}<br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- fin location & skills -->#}
+
+{#        <!-- preference & description -->#}
+{#        <div class="row">#}
+{#            <div class="space">#}
+{#                <div class="col-4 preferences">#}
+{#                    <h3 class="text-center">Duration Preferences</h3>#}
+{#                    <!-- Bouton modal modifier la ville et remote work -->#}
+{#                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal5">#}
+{#                        <i class="fa-solid fa-pen-to-square"></i>#}
+{#                    </button>#}
+{#                    <i class="fa-solid fa-business-time"></i> {{ app.user.durationPreference }}#}
+{#                </div>#}
+{#                <div class="col-8 description">#}
+{#                    <h3>Description</h3>#}
+{#                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">#}
+{#                        <i class="fa-solid fa-pen-to-square"></i>#}
+{#                    </button>#}
+{#                    {{ app.user.description }}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- fin preference & description -->#}
+
+{#        <!-- verification & portfolio -->#}
+{#        <div class="row">#}
+{#            <div class="space">#}
+{#                <div class="col-4 verification">#}
+{#                    <h3 class="text-center">Verifications</h3>#}
+{#                    {% if app.user.isVerified is  null %}#}
+{#                        <div class="verified-back"><i class="fa-solid fa-check"></i> Email verified#}
+{#                        </div>#}
+{#                    {% else %}#}
+{#                        <div class="verified-back"><i class="fa-solid fa-x"></i> Email not verified#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                    <div class="verified-grey mt-3">#}
+{#                        <i class="fa-solid fa-scale-balanced"></i> Code of conduct not signed<br>#}
+{#                        <a href="{{ path('app_charts') }}">Read the  code of conduct</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-8 portfolio">#}
+{#                    <h3>Portfolio</h3>#}
+{#                    Please, enter your portfolio link#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- fin verification & portfolio -->#}
+
+{#        <!-- réputation & experience -->#}
+
+{#        <div class="row">#}
+{#            <div class="space">#}
+{#                <div class="col-4 reputation">#}
+{#                    <h3 class="text-center">Reputation</h3>#}
+{#                    <p>Share your github or linkedin profile</p>#}
+{#                    #}{#                    {% for share in app.user.share %}#}
+{#                    #}{#                        {{ share.link }}#}
+{#                    #}{#                    {% endfor %}#}
+{#                    <i class="fa-brands fa-github"></i><a href="#"></a><br>#}
+{#                    <i class="fa-brands fa-linkedin"></i><a href="#"></a><br>#}
+{#                </div>#}
+{#                <div class="col-8 experience">#}
+{#                    <h3>Experiences</h3>#}
+{#                    {% for path in app.user.belong %}#}
+{#                        <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }})<br>#}
+
+{#                    {% endfor %}#}
+
+{#                </div>#}
+{#            </div>#}
+{#            <!-- fin réputation & experience-->#}
+
+{#            <!-- Language & advices -->#}
+{#            <div class="row">#}
+{#                <div class="space">#}
+{#                    <div class="col-4 language">#}
+{#                        <h3 class="text-center">Language</h3>#}
+{#                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal6">#}
+{#                            <i class="fa-solid fa-pen-to-square"></i>#}
+{#                        </button>#}
+{#                        {% for spokenLanguages in app.user.spokenLanguages %}#}
+{#                            {{ spokenLanguages.nameLanguage }}<br>#}
+{#                        {% endfor %}#}
+{#                        {% if app.user.spokenLanguages is null %}#}
+{#                            <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> Be sure to add your native language</div>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    <div class="col-8 advice">#}
+{#                        <h3>Comment</h3>#}
+{#                        {% for comment in app.user.receivedComments %}#}
+{#                            {{ comment.content }}#}
+{#                        {% endfor %}#}
+
+
+
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- fin language & advices -->#}
+
+{#                <!-- Categories & Recommendations -->#}
+
+{#                <div class="row">#}
+{#                    <div class="space">#}
+{#                        <div class="col-4 categories">#}
+{#                            <h3 class="text-center">Categories</h3>#}
+
+{#                            {% for workCategories in app.user.workCategories %}#}
+{#                                {{ workCategories.nameCategory }}<br>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        <div class="col-8 recommendations">#}
+{#                            <h3>Recommendations</h3>#}
+{#                            <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> No recommendations yet</div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- fin categories & recommendation -->#}
+
+{#                    <!-- share profil & education -->#}
+{#                    <div class="row">#}
+{#                        <div class="space">#}
+{#                            <div class="col-4 share-profil">#}
+{#                                <h3 class="text-center">Share your profile</h3>#}
+{#                                <p class="text-center">#}
+{#                                    <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>#}
+{#                                    <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>#}
+{#                                    <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>#}
+{#                                    <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>#}
+{#                                </p>#}
+{#                                #}{#      attends le id/slug                          <p>Click to edit :</p><br>#}
+{#                                #}{#                                <input type="text">#}
+{#                            </div>#}
+{#                            <div class="col-8 education">#}
+{#                                <h3>School</h3>#}
+{#                                {% for school in app.user.belong %}#}
+{#                                    <b>{{ school.diplomaTitle }}</b> {{ school.schoolName }} ({{ school.startDate |date("m/Y")}} - {{ school.endDate |date("m/Y")}})#}
+{#                                    <br>#}
+{#                                {% endfor %}#}
+
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- Modal modifier ses infos -->#}
+{#                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+
+{#                                    {{ form_start(freelanceBase) }}#}
+
+{#                                    {{ form_label(freelanceBase.title) }}#}
+{#                                    {{ form_widget(freelanceBase.title) }}#}
+{#                                    {{ form_errors(freelanceBase.title) }}#}
+
+{#                                    {{ form_label(freelanceBase.price) }}#}
+{#                                    {{ form_widget(freelanceBase.price) }}#}
+{#                                    {{ form_errors(freelanceBase.price) }}#}
+
+{#                                    {{ form_label(freelanceBase.remoteWork) }}#}
+{#                                    {{ form_widget(freelanceBase.remoteWork) }}#}
+{#                                    {{ form_errors(freelanceBase.remoteWork) }}#}
+
+{#                                    {{ form_label(freelanceBase.xpYears) }}#}
+{#                                    {{ form_widget(freelanceBase.xpYears) }}#}
+{#                                    {{ form_errors(freelanceBase.xpYears) }}#}
+
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                    #}{#                                    {{ form_widget(freelanceBase.submit) }}#}
+{#                                    {{ form_end(freelanceBase) }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <!-- Modal modifier skills -->#}
+{#                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+
+
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    #}{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <!-- Modal description -->#}
+{#                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+{#                                    {{ form_start(freelanceDescription) }}#}
+{#                                    {{ form_widget(freelanceDescription.description) }}#}
+
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    #}{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                    {{ form_end(freelanceDescription) }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <!-- Modal Location -->#}
+{#                    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+{#                                    {{ form_start(freelanceLocation) }}#}
+{#                                    {{ form_widget(freelanceLocation.city) }}#}
+{#                                    {{ form_widget(freelanceLocation.remoteWork) }}#}
+
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    #}{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                    {{ form_end(freelanceLocation) }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <!-- Modal Location -->#}
+{#                    <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+{#                                    {{ form_start(freelanceDuration) }}#}
+{#                                    {{ form_widget(freelanceDuration.durationPreference) }}#}
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    #}{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                    {{ form_end(freelanceDuration) }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <!-- Modal SpokenLanguage -->#}
+{#                    <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>#}
+{#                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+{#                                    {{ form_start(freelanceLanguage) }}#}
+{#                                    {{ form_widget(freelanceLanguage.spokenLanguages) }}#}
+
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    #}{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                    {{ form_end(freelanceLanguage) }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
