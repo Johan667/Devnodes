@@ -127,7 +127,7 @@ class FreelanceType extends AbstractType
             ->add('platforms', EntityType::class, array(
                 'label' => 'Quelle plateforme utilisez vous ?',
                 'class' => Platform::class,
-                'choice_label' => 'name_platform',
+                'choice_label' => 'name_plateform',
                 'multiple' => true,
                 'expanded' => true,
             ))
