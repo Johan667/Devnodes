@@ -3,6 +3,7 @@
 {% block title %}{{ app.user.firstname }} {{ app.user.lastname }}, {{ app.user.title }}{% endblock %}
 
 {% block body %}
+
     <div class="wrapper">
     <div class="row headerProfil">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
@@ -28,7 +29,11 @@
             </div>
         </div>
         <div class="col-3">
-            <i class="fa-sharp fa-solid fa-circle"></i> Disponibility
+            <i class="fa-sharp fa-solid fa-circle"></i> Disponibility<br>
+            <!-- Bouton modal modifier ses infos -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
         </div>
     </div>
     </div>
@@ -47,11 +52,16 @@
                 <i class="fa-solid fa-briefcase"></i> <b class="mtx30">{{ app.user.remoteWork }}</b><br>
             </div>
             <div class="col-8 skills">
-               <h3>Skills </h3>
+                <h3>Skills</h3>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                </button>
                 <div class="typeSkills">
                 <div class="codingLanguages">
                     <em>Languages</em><br>
+
                     {% for codingLanguages in app.user.codingLanguages %}
+
                         {{ codingLanguages.nameCodingLanguage }}<br>
                     {% endfor %}
                 </div>
@@ -93,6 +103,9 @@
                 </div>
                 <div class="col-8 description">
                    <h3>Description</h3>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     {{ app.user.description }}
                 </div>
                 </div>
@@ -215,4 +228,85 @@
                             </div>
                         </div>
 </div>
+                    <!-- Modal modifier ses infos -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    {{ form_start(freelanceBase) }}
+
+                                    {{ form_label(freelanceBase.title) }}
+                                    {{ form_widget(freelanceBase.title) }}
+                                    {{ form_errors(freelanceBase.title) }}
+
+                                    {{ form_label(freelanceBase.price) }}
+                                    {{ form_widget(freelanceBase.price) }}
+                                    {{ form_errors(freelanceBase.price) }}
+
+                                    {{ form_label(freelanceBase.remoteWork) }}
+                                    {{ form_widget(freelanceBase.remoteWork) }}
+                                    {{ form_errors(freelanceBase.remoteWork) }}
+
+                                    {{ form_label(freelanceBase.xpYears) }}
+                                    {{ form_widget(freelanceBase.xpYears) }}
+                                    {{ form_errors(freelanceBase.xpYears) }}
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+{#                                    {{ form_widget(freelanceBase.submit) }}#}
+                                    {{ form_end(freelanceBase) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal modifier skills -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+
+
+                                </div>
+                                <div class="modal-footer">
+{#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal description -->
+                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier / Editer mes infos </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ form_start(freelanceDescription) }}
+                                    {{ form_widget(freelanceDescription.description) }}
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    {#                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+                                    {{ form_end(freelanceDescription) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 {% endblock %}
