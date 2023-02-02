@@ -34,8 +34,9 @@ class MessageController extends AbstractController
             }
 
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll(),
-        ]);
+            'mission' => $mission,
+            'messages' => $messages,
+        ]); 
 
         }
 
