@@ -42,7 +42,7 @@ class RegistrationFreelanceController extends AbstractController
             $freelance->setPassword(
                 $userPasswordHasher->hashPassword(
                     $freelance,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
