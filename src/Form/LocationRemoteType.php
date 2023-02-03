@@ -28,7 +28,6 @@ class LocationRemoteType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ))
-            ->add('submit', SubmitType::class)
 
         ;
     }

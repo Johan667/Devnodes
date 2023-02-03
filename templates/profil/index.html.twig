@@ -6,22 +6,39 @@
 
     <header>
         <!-- En-tête de profil -->
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container text-center">
-                <a href="#" title="Upload your profil picture"><i class="fa-solid fa-camera"></i></a>
-                <h1 class="display-4">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
-                <p class="lead">{{ app.user.title }}</p>
+        <div class="container">
+            <div class="column"><i class="fa-solid fa-camera"></i></div>
+            <div class="column">
+                <h1 class="bolder">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
+                <h2 class="bold">{{ app.user.title }}</h2>
                 <i class="fa-solid fa-briefcase"></i> {{ app.user.remoteWork }}<br>
-                <i class="fa-solid fa-star"></i>(x) Advices
+                <i class="fa-solid fa-star"></i>Avis
+                <div class="squares">
+                    <div class="price">
+                        Prix<br>
+                        {{ app.user.price }} € par jours
+                    </div>
+                    <div class="xpYears">
+                        Experience<br>
+                        {{ app.user.xpYears }} an
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="column">
+
+            </div>
         <div class="shadowline"><hr></div>
     </header>
+
+    <hr>
+    <br>
 
         <!-- 14 blocs réponsifs de deux colonnes -->
         <div class="wrapper">
 
+
                     <h2 class="text-center">Modifier mes informations</h2>
+
                     <div class="group-btn">
                         <div class="select-edit">
                     <button class="step-button" data-step="1" onclick="nextStep(1)"><small>Informations de Base</small></button>
@@ -55,6 +72,7 @@
                         {{ form_widget(freelanceBase.xpYears) }}
                         {{ form_errors(freelanceBase.xpYears) }}
 
+                        <button type="submit">Modifier</button>
                         {{ form_end(freelanceBase) }}
 
                     </div>
@@ -75,6 +93,8 @@
                         {{ form_widget(freelanceLocation.remoteWork) }}
                         {{ form_errors(freelanceLocation.remoteWork) }}
 
+                        <button type="submit">Modifier</button>
+
                         {{ form_end(freelanceLocation) }}
                     </div>
 
@@ -86,6 +106,8 @@
 
                         <p>Sélectionner vos compétences</p>
 
+                        <button type="submit">Modifier</button>
+
                         {{ form_end(freelanceTechnology) }}
 
                     </div>
@@ -95,7 +117,8 @@
                     <div id="step4">
                         {{ form_start(freelanceDescription) }}
 
-                        {{ form_end(freelanceDescription) }}
+                        {{ form_widget(freelanceDescription) }}
+                        <button type="submit">Modifier</button>
                     </div>
             </div>
         </div>
