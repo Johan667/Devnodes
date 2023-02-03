@@ -4,9 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\ChangePasswordFormType;
 use App\Form\ChangePasswordType;
 use App\Form\EditAccountType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,33 +51,55 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/account/password', name: 'app_account_password')]
-    public function changePassword(Request $request, UserPasswordHasherInterface $encoder): Response
+    /**
+     * @Route("/password/change", name="change_password")
+     */
+    public function changePassword(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $notification = null;
-        $user = $this->getUser();
-        $modifPassword = $this->createForm(ChangePasswordType::class);
 
-        $modifPassword->handleRequest($request);
+        $change = $this->createForm(ChangePasswordType::class);
 
-        if ($modifPassword->isSubmitted() && $modifPassword->isValid()) {
-            $old_pwd = $modifPassword->get('old_password')->getData();
-            // On veux verifier ici que l'ancien mot de passe coresspond à celui de la bdd.
-            if ($encoder->isPasswordValid($user, $old_pwd)) {
-                $new_pwd = $modifPassword->get('new_password')->getData();
-                $password = $encoder->hashPassword($user, $new_pwd);
+        $change->handleRequest($request);
+        if ($change->isSubmitted() && $change->isValid()) {
+            $user = $this->getUser();
+            $oldPass = $change->get('password')->getData();
+            $newPass = $change->get('newPassword')->getData();
 
-                $user->setPassword($password);
-                $this->entityManager->flush($password);
-                $notification = 'Votre mot de passe à bien été mise à jours';
+            if (password_verify($oldPass, $user->getPassword())) {
+                $user->setPassword( $userPasswordHasher->hashPassword($user, $newPass) );
+                $this->entityManager->flush();
+                $this -> addFlash ("message", "Mot de passe modifié avec succès.");
+                return $this->redirectToRoute("app_account");
             }
         }
 
         return $this->render('account/password.html.twig', [
-            'form' => $modifPassword->createView()
+            'form' => $change->createView()
         ]);
-
     }
+
+//    #[Route('/account/password', name: 'app_account_password')]
+//       public function editRegister(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+//       {
+//
+//           $user = $this->getUser();
+//           $reset->handleRequest($request);
+//           if ($reset->isSubmitted() && $reset->isValid()) {
+//               $oldPass = $reset->get('oldPassword')->getData();
+//               $newPass = $reset->get('newPassword')->getData();
+//               if (password_verify($oldPass, $user->getPassword())) { // on verifie que l'ancien mot de passe coresponde au nouveau
+//                   $user->setPassword($userPasswordHasher->hashPassword($user, $newPass)); // on hash le mot de passe et on l'associe a l'utilisateur
+//                   $doctrine->getManager()->flush(); // on l'enregistre
+//                   $this->addFlash('sucess', 'Votre mot de passe a bien été mis a jour !');
+//
+//                   return $this->redirectToRoute("app_account");
+//               }
+//
+//           return $this->render('account/password.html.twig', [
+//               'form' => $form->createView(),
+//           ]);
+//
+//       }
 
     #[Route('/account/delete', name: 'delete_account')]
     public function deleteAccount()

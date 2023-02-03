@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe | Devnodes{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <br>
+    <div class="wrapper" style="margin-left: 10px; margin-right: 10px;">
+        <h1 class="text-center">Réinitialisation du mot de passe</h1>
+
+        {{ form_start(requestForm) }}
+            {{ form_row(requestForm.email) }}
+            <div>
+                <small>
+                    Entrez votre email et nous vous enverrons un lien de réinitialisation de votre mot de passe.
+                </small>
+            </div>
+        <br>
+
+            <button type="submit" style="width:200px;">Envoyez l'email de réinitialisation</button>
+        {{ form_end(requestForm) }}
+    </div>
+{% endblock %}
