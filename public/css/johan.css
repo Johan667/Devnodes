@@ -118,3 +118,21 @@
 }
 
 /** Show Profil **/
+.col-4{
+    background-color: black;
+}
+
+.col-6{
+    background-color: red;
+}
+.container-wrapper{
+    display: flex;
+    flex-direction: column;
+    max-width: 1300px;
+}
+
+@media (max-width: 600px) {
+    .container-wrapper {
+        flex-direction: column;
+    }
+}
