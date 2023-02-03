@@ -25,7 +25,6 @@ class EditHeaderProfilType extends AbstractType
                 ]
             ])
             ->add('xpYears',NumberType::class)
-            ->add('submit',SubmitType::class)
         ;
     }
 
