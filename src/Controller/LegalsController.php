@@ -50,7 +50,7 @@ class LegalsController extends AbstractController
                 ->text($form->get('message')->getData())
             ;
             $mailer->send($mail);
-            $this->addFlash('notice', 'Votre demande à bien été prise en compte nous y repondrons au plus tard 48 heures après votre demande ! ');
+            $this->addFlash('message', 'Votre demande à bien été prise en compte, nous y repondrons au plus tard 48 heures après votre demande ! ');
         }
 
         return $this->render('legals/contact.html.twig', [

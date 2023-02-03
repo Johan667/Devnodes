@@ -44,6 +44,7 @@ class AccountController extends AbstractController
             // Traitement des données soumises
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+            $this -> addFlash ("message", "Informations modifié avec succès.");
             return $this->redirectToRoute('app_account');
         }
         return $this->render('account/modify.html.twig', [
@@ -112,6 +113,7 @@ class AccountController extends AbstractController
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
+        $this -> addFlash ("message", "Compte supprimé avec succès.");
 
         return $this->redirectToRoute('app_home');
     }
