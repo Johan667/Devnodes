@@ -37,8 +37,7 @@ class TechnologyType extends AbstractType
             ->add('version_control', EntityType::class, [
                 'class' => VersionControl::class,
                 'choice_label' => 'name_version_control',
-            ])
-            ->add('submit',SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

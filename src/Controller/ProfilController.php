@@ -34,6 +34,7 @@ class ProfilController extends AbstractController
 
         $forms = [
             'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
+            'tech' => $this->createForm(TechnologyType::class),
             'loc' => $this->createForm(LocationRemoteType::class, $freelance),
             'dur' => $this->createForm(DurationPrefType::class, $freelance),
             'desc' => $this->createForm(DescriptionProfilType::class, $freelance),
@@ -60,6 +61,7 @@ class ProfilController extends AbstractController
             'freelanceLocation' => $forms['loc']->createView(),
             'freelanceDuration' => $forms['dur']->createView(),
             'freelanceLanguage' => $forms['lang']->createView(),
+            'freelanceTechnology' => $forms['tech']->createView(),
         ]);
     }
 

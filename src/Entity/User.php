@@ -79,6 +79,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'received', targetEntity: Comment::class)]
     private Collection $receivedComments;
 
+    #[ORM\ManyToMany(targetEntity: CodingLanguage::class, inversedBy: 'users')]
+    private Collection $testi;
+
+
     public function __construct()
     {
         $this->sent = new ArrayCollection();
@@ -417,4 +421,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CodingLanguage>
+     */
+    public function getTesti(): Collection
+    {
+        return $this->testi;
+    }
+
+    public function addTesti(CodingLanguage $testi): self
+    {
+        if (!$this->testi->contains($testi)) {
+            $this->testi->add($testi);
+        }
+
+        return $this;
+    }
+
+    public function removeTesti(CodingLanguage $testi): self
+    {
+        $this->testi->removeElement($testi);
+
+        return $this;
+    }
+
+
 }

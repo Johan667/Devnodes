@@ -1,104 +1,74 @@
-.wrapper{
-    max-width: 1300px;
-    margin: auto;
-    margin-top: 2rem;
+.fa-star{
+    color:gold;
 }
-.fa-camera{
-    font-size: 60px;
-    border-radius: 50%; /* pour un cercle parfait */
-    padding: 50px;
+.fa-briefcase{
+    color:#479F9F;
 }
 
 .fa-camera:hover{
     background-color: #479F9F;
 }
-
-.bolder{
-    font-weight: bolder;
+.fa-camera{
+    font-size: 60px;
+    border-radius: 50%; /* pour un cercle parfait */
+    padding: 10px;
 }
-.bold{
-    font-weight: bold;
-    font-size: 30px;
-}
-
-.squares{
+.squares {
     display: flex;
-
-    margin:auto;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 1rem;
 }
-.price{
+
+.price {
     text-align: center;
     color: #EFF5F5;
     border: solid 1px #479F9F;
     border-radius: 2%;
     width: 300px;
     background-color: #479F9F;
-    padding:1%;
+    padding: 1%;
 }
-.xpYears{
+
+.xpYears {
+    flex:1;
     text-align: center;
     border: solid 1px #479F9F;
     border-radius: 2%;
     width: 300px;
-    padding:1%;
+    padding: 1%;
 }
 
-.shadowline{
-    box-shadow: 0px 0px 10px #EB6440;
-}
-
-.location,.skills{
-    border:solid 1px #479F9F;
+.proposeMission {
+    display: flex;
+    width:100%;
+    color: #479F9F;
+    background-color: transparent;
+    border: 1px solid #479F9F;
     border-radius: 2%;
-    border-top: 10px solid #479F9F;
-    padding: 2%;
+    text-decoration: none;
 }
 
-.space{
+
+.parent{
     display:flex;
-    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.typeSkills{
-    column-count: 5;
+.enfant1{
+    display:block;
+    gap: 2rem;
 }
 
-.mtx30{
-    margin-top: 30px;
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.preferences,
-.description,
-.verification,
-.portfolio,
-.reputation,
-.experience,
-.language,
-.advice,
-.categories,
-.recommendations,
-.share-profil,
-.education{
-    margin-top: 30px;
-    border:solid 1px #479F9F;
-    border-radius: 2%;
-    padding: 2%;
+.column {
+    flex: 1;
+    padding: 10px;
 }
 
-.verified-back{
-    background-color: #EB6440;
-    padding: 20px;
-}
-
-.verified-grey{
-    background-color: #D6E4E5;
-    padding: 20px;
-}
-
-.bigdeal{
-
-}
-
-.profilBlock{
-  border: solid 1px #479F9F;
-}
