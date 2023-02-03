@@ -2,13 +2,10 @@
 
 namespace App\Controller;
 
-
-use App\Entity\User;
-use App\Form\ChangePasswordFormType;
 use App\Form\ChangePasswordType;
 use App\Form\EditAccountType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,9 +48,7 @@ class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/password/change", name="change_password")
-     */
+    #[Route('/password/change', name: 'change_password')]
     public function changePassword(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
 
@@ -78,28 +73,6 @@ class AccountController extends AbstractController
         ]);
     }
 
-//    #[Route('/account/password', name: 'app_account_password')]
-//       public function editRegister(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
-//       {
-//
-//           $user = $this->getUser();
-//           $reset->handleRequest($request);
-//           if ($reset->isSubmitted() && $reset->isValid()) {
-//               $oldPass = $reset->get('oldPassword')->getData();
-//               $newPass = $reset->get('newPassword')->getData();
-//               if (password_verify($oldPass, $user->getPassword())) { // on verifie que l'ancien mot de passe coresponde au nouveau
-//                   $user->setPassword($userPasswordHasher->hashPassword($user, $newPass)); // on hash le mot de passe et on l'associe a l'utilisateur
-//                   $doctrine->getManager()->flush(); // on l'enregistre
-//                   $this->addFlash('sucess', 'Votre mot de passe a bien été mis a jour !');
-//
-//                   return $this->redirectToRoute("app_account");
-//               }
-//
-//           return $this->render('account/password.html.twig', [
-//               'form' => $form->createView(),
-//           ]);
-//
-//       }
 
     #[Route('/account/delete', name: 'delete_account')]
     public function deleteAccount()
