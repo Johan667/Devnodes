@@ -1,4 +1,4 @@
-
+/* formulaire dynamique freelance */
     function nextStep(step) {
     for (let i = 1; i <= 5; i++) {
     if (i !== step) {

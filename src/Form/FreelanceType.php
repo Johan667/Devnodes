@@ -84,7 +84,6 @@ class FreelanceType extends AbstractType
                 'expanded' => true,
             ))
             ->add('xpYears', NumberType::class, [
-                'required' => true,
                 'attr' => [
                     'placeholder' => 'Veuillez entrer un chiffre',
                 ],
@@ -133,29 +132,32 @@ class FreelanceType extends AbstractType
             ))
             ->add('address', TextType::class, [
                 'label' => 'Adresse',
+                'required' => false,
             ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
+                'required' => false,
                 'attr' => [
                     'id' => 'city',
                 ]])
             ->add('country', CountryType::class, [
                 'label' => 'Pays',
+                'required' => false,
             ])
             ->add('codePostal', TextType::class, [
                 'label' => 'Code postal',
+                'required' => false,
             ])
 
             ->add('title', TextType::class, [
-                'label' => 'Titre de profil'
+                'label' => 'Titre de profil',
+                'required' => false,
             ])
             ->add('description', TextareaType::class, [
-                'required' => true,
                 'label' => 'Description de votre profil',
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Entrez votre tarif journalier',
-                'required' => true,
             ])
             ->add('remoteWork', ChoiceType::class, array(
                 'label'=> 'Ou aimez-vous travailler ?',
