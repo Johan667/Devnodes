@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Devnodes | Modifier mes informations{% endblock %}
+{% block title %}Modifier mes informations | Devnodes{% endblock %}
 
 
 {% block body %}
@@ -11,11 +11,10 @@
 
 
 <!-- Wrapper -->
-<div class="wrapper">
-    <div class="formEditRegister">
+<div class="wrapper" style="margin-left:10px; margin-right:10px;">
         {{ form_start(form) }}
         {{ form_widget(form) }}
+        <button type="submit">Modifier</button>
         {{ form_end(form) }}
-    </div>
 </div>
 {% endblock %}
