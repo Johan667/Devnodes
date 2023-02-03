@@ -13,199 +13,25 @@
                 <p class="lead">{{ app.user.title }}</p>
                 <i class="fa-solid fa-briefcase"></i> {{ app.user.remoteWork }}<br>
                 <i class="fa-solid fa-star"></i>(x) Advices
-                {#                <div class="squares">#}
-                {#                    <div class="price">#}
-                {#                        Price<br>#}
-                {#                        {{ app.user.price }} € per day#}
-                {#                    </div>#}
-                {#                    <div class="xpYears">#}
-                {#                        Experience<br>#}
-                {#                        {{ app.user.xpYears }} years#}
-                {#                    </div>#}
-                {#                </div>#}
             </div>
         </div>
         <div class="shadowline"><hr></div>
     </header>
-    <main>
+
         <!-- 14 blocs réponsifs de deux colonnes -->
         <div class="wrapper">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
-                <i class="fa-solid fa-pen-to-square"></i> Modifier mes informations
-            </button>
 
-            <div class="container-fluid bigdeal">
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3> Location and workplace preferences </h3>
-                        <!-- Bouton modal modifier la ville et remote work -->
-                        <i class="fa-solid fa-location-dot"></i> <b>Location</b><br>
-                        {{ app.user.city }}, {{ app.user.country }}<br>
-                        <i class="fa-solid fa-briefcase"></i> <b class="mtx30">{{ app.user.remoteWork }}</b><br>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Skills</h3>
-
-                        <div class="typeSkills">
-                            <div class="codingLanguages">
-                                <em>Languages</em><br>
-
-                                {% for codingLanguages in app.user.codingLanguages %}
-
-                                    {{ codingLanguages.nameCodingLanguage }}<br>
-                                {% endfor %}
-                            </div>
-                            <div class="framework">
-                                <em>Framework</em><br>
-                                {% for frameworks in app.user.frameworks %}
-                                    {{ frameworks.nameFramework }}<br>
-                                {% endfor %}
-                            </div>
-                            <div class="database">
-                                <em>Database</em><br>
-                                {% for dbs in app.user.dbs %}
-                                    {{ dbs.nameDb }}<br>
-                                {% endfor %}
-                            </div>
-                            <div class="methodology">
-                                <em>Methodology</em><br>
-                                {% for methodologies in app.user.methodologies %}
-                                    {{ methodologies.nameMethodology }}<br>
-                                {% endfor %}
-                            </div>
-                            <div class="versionControl">
-                                <em>Version Control</em><br>
-                                {% for versionControls in app.user.versionControls %}
-                                    {{ versionControls.nameVersionControl }}<br>
-                                {% endfor %}
-                            </div>
+                    <h2 class="text-center">Modifier mes informations</h2>
+                    <div class="group-btn">
+                        <div class="select-edit">
+                    <button class="step-button" data-step="1" onclick="nextStep(1)"><small>Informations de Base</small></button>
+                    <button class="step-button" data-step="2" onclick="nextStep(2)">Localisation</button>
+                    <button class="step-button" data-step="3" onclick="nextStep(3)">Compétences</button>
+                    <button class="step-button" data-step="4" onclick="nextStep(4)">Description</button>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Duration Preferences</h3>
-
-                        <i class="fa-solid fa-business-time"></i> {{ app.user.durationPreference }}
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Description</h3>
-                        {{ app.user.description }}
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Verifications</h3>
-                        {% if app.user.isVerified is  null %}
-                            <div class="verified-back"><i class="fa-solid fa-check"></i> Email verified
-                            </div>
-                        {% else %}
-                            <div class="verified-back"><i class="fa-solid fa-x"></i> Email not verified
-                            </div>
-                        {% endif %}
-                        <div class="verified-grey mt-3">
-                            <i class="fa-solid fa-scale-balanced"></i> Code of conduct not signed<br>
-                            <a href="{{ path('app_charts') }}">Read the  code of conduct</a>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Portfolio</h3>
-                        Please, enter your portfolio link
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Reputation</h3>
-                        <p>Share your github or linkedin profile</p>
-                        {#                    {% for share in app.user.share %}#}
-                        {#                        {{ share.link }}#}
-                        {#                    {% endfor %}#}
-                        <i class="fa-brands fa-github"></i><a href="#"></a><br>
-                        <i class="fa-brands fa-linkedin"></i><a href="#"></a><br>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Experiences</h3>
-                        {% for path in app.user.belong %}
-                            <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }})<br>
-
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Language</h3>
-                        {#                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal6">#}
-                        {#                            <i class="fa-solid fa-pen-to-square"></i>#}
-                        {#                        </button>#}
-                        {% for spokenLanguages in app.user.spokenLanguages %}
-                            {{ spokenLanguages.nameLanguage }}<br>
-                        {% endfor %}
-                        {% if app.user.spokenLanguages is null %}
-                            <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> Be sure to add your native language</div>
-                        {% endif %}
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Comment</h3>
-                        {% for comment in app.user.receivedComments %}
-                            {{ comment.content }}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Categories</h3>
-
-                        {% for workCategories in app.user.workCategories %}
-                            {{ workCategories.nameCategory }}<br>
-                        {% endfor %}
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>Recommendations</h3>
-                        <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> No recommendations yet</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3 class="text-center">Share your profile</h3>
-                        <p class="text-center">
-                            <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
-                        </p>
-                    </div>
-                    <div class="col-6 col-md-6 col-lg-6 profilBlock">
-                        <h3>School</h3>
-                        {% for school in app.user.belong %}
-                            <b>{{ school.diplomaTitle }}</b> {{ school.schoolName }} ({{ school.startDate |date("m/Y")}} - {{ school.endDate |date("m/Y")}})
-                            <br>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier mes informations</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <button class="step-button" data-step="1" onclick="nextStep(1)">1</button>
-                    <button class="step-button" data-step="2" onclick="nextStep(2)">2</button>
-                    <button class="step-button" data-step="3" onclick="nextStep(3)">3</button>
-                    <button class="step-button" data-step="4" onclick="nextStep(4)">4</button>
-                    <button class="step-button" data-step="5" onclick="nextStep(5)">5</button>
 
                     <div id="step1" class="active">
-
-                        <h3 class="text-center">Informations de base </h3>
                         <br>
                         {{ form_start(freelanceBase) }}
 
@@ -229,89 +55,51 @@
                         {{ form_widget(freelanceBase.xpYears) }}
                         {{ form_errors(freelanceBase.xpYears) }}
 
-                        <button id="nextStep1" onclick="nextStep(2)">Suivant</button>
+                        {{ form_end(freelanceBase) }}
 
                     </div>
 
-
-                    <!-- STEP 2 (Info catégorie de métier) -->
+                    <!-- STEP 2 (Info Localisation et préférence de travail) -->
 
                     <div id="step2">
 
                         <h3 class="text-center">Localisation et préférence de travail</h3>
-                        <br>
+                        {{ form_start(freelanceLocation) }}
 
+                        <p>Entrez votre ville</p>
 
+                        {{ form_widget(freelanceLocation.city) }}
+                        {{ form_errors(freelanceLocation.city) }}
 
-                        <button id="previousStep2" onclick="nextStep(1)">Precedent</button>
-                        <button id="nextStep2" onclick="nextStep(3)">Suivant</button>
+                        <p>reMote Work</p>
+                        {{ form_widget(freelanceLocation.remoteWork) }}
+                        {{ form_errors(freelanceLocation.remoteWork) }}
+
+                        {{ form_end(freelanceLocation) }}
                     </div>
 
                     <!-- STEP 3 (Compétences)-->
 
                     <div id="step3">
 
-                        <h3 class="text-center">Skills</h3>
-                        <br>
+                        {{ form_start(freelanceTechnology) }}
 
+                        <p>Sélectionner vos compétences</p>
 
+                        {{ form_end(freelanceTechnology) }}
 
-                        <button id="previousStep3" onclick="nextStep(2)">Precedent</button>
-                        <button id="nextStep3" onclick="nextStep(4)">Suivant</button>
                     </div>
 
-                    <!-- STEP 4 (Info de localisation) -->
+                    <!-- STEP 4 (Description) -->
 
                     <div id="step4">
+                        {{ form_start(freelanceDescription) }}
 
-                        <h3 class="text-center">Durée de travail</h3>
-
-                        <br>
-
-                        <br>
-                        <br>
-
-                        <br>
-
-                        <button id="previousStep4" onclick="nextStep(3)">Precedent</button>
-                        <button id="nextStep4" onclick="nextStep(5)">Suivant</button>
+                        {{ form_end(freelanceDescription) }}
                     </div>
-
-                    <!-- STEP 5 (Bio & PP) -->
-
-                    <div id="step5">
-
-                        <h3 class="text-center">Description</h3>
-                        <br>
-
-                        <br>
-
-                        <button id="previousStep5" onclick="nextStep(4)">Precedent</button>
-                        <br><br>
-
-                        <br>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Ok</button>
-                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
-{% block scripts %}
-<script>
-    function nextStep(step) {
-    for (let i = 1; i <= 5; i++) {
-    if (i !== step) {
-    document.getElementById(`step${i}`).style.display = "none";
-    } else {
-    document.getElementById(`step${i}`).style.display = "block";
-    }
-    }
-    }
-</script>
-{% endblock %}
 
