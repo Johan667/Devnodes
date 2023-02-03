@@ -6,7 +6,7 @@
 {% block body %}
 <!-- En tête titre -->
 <h1 class="text-center mt-3">Mon compte</h1>
-<p class="text-center">Bienvenue {{ app.user.firstname }}<br>
+<p class="text-center">Bienvenue {{ app.user.firstname }} {{ app.user.lastname }}<br>
     Ici vous trouverez toutes les informations relatives à votre compte
 
 </p>
@@ -14,7 +14,7 @@
 <br>
 
 <!-- Wrapper -->
-<div class="wrapper">
+<div class="wrapper" style="margin-left: 5px; margin-right: 5px">
 
     {% if is_granted('ROLE_ADMIN') %}
         {#} Si l'utilisateur à le rôle admin {#}
@@ -29,13 +29,14 @@
         </div>
         <div class="col-md-4">
             <div class="account-item"><a href="{{ path('app_account_modify') }}"><i class="fa-sharp fa-solid fa-circle-info"></i>
-                    Modifier mes information</a></div>
+                    Modifier mes informations</a></div>
         </div>
         <div class="col-md-4">
-            <div class="account-item"><a onclick="return confirm('Êtes-vous sûr de vouloir continuer ?')" href="{{ path('delete_account') }}"><i class="fa-solid fa-trash"></i>
+            <div class="account-item"><a onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')" href="{{ path('delete_account') }}"><i class="fa-solid fa-trash"></i>
                     Supprimer mon compte</a></div>
         </div>
     </div>
-
+</div>
+    <br>
 
 {% endblock %}
