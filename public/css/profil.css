@@ -73,7 +73,7 @@
 /** Show **/
 
 .shadowline{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     height: 1px;
     background-color: #ddd;
@@ -92,6 +92,15 @@ article{
     align-items: baseline;
     gap:5%;
     margin-bottom: 3%;
+}
+
+.fa-heart{
+    color:#479F9F;
+    font-size: 15px;
+}
+
+.fa-location-dot, .fa-person-walking{
+    color:#479F9F;
 }
 .blueh2{
     color:#479F9F;

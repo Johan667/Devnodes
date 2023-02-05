@@ -5,20 +5,21 @@
 {% block body %}
     <div class="wrapper">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
+        <hr>
         <div class="container">
             <div class="column"><i class="fa-solid fa-camera"></i></div>
             <div class="column">
-                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
+                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }} <i class="fa-regular fa-heart"></i></h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
-                <i class="fa-solid fa-briefcase"></i> {{ freelance.remoteWork }}<br>
-                <i class="fa-solid fa-star"></i>Avis
+                <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
+                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)
                 <div class="squares">
                     <div class="price">
                         Prix<br>
                         {{ freelance.price }} € par jours
                     </div>
                     <div class="xpYears">
-                        Experience<br>
+                        Expérience<br>
                         {{ freelance.xpYears }} an
                     </div>
                 </div>
@@ -40,11 +41,10 @@
 <main>
     <article>
         <section id="blok-left">
-            <h2 class="blueh2">Localisation</h2>
-            <p>{{ freelance.city }}, {{ freelance.country }}</p>
+            <h2 class="blueh2">Localisation et Deplacements</h2>
+            <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
 
-            <h2 class="blueh2">Préférence de travail</h2>
-            <p class="textInfo">Je travail à/en<span> {{ freelance.remoteWork }}.</span></p>
+            <p class="textInfo"><i class="fa-solid fa-person-walking"></i><span> {{ freelance.remoteWork }}.</span></p>
         </section>
         <section id="blok-right">
             <div class="touche">
@@ -59,49 +59,49 @@
 
     <div id="skills">
         <div id="galerie">
-            <h4 class="blueh2"><em>Language de Programmation</em></h4><br>
-        {% for codingLanguages in app.user.codingLanguages %}
+            <h4 class="blueh2">Language de Programmation</h4><br>
+        {% for codingLanguages in freelance.codingLanguages %}
 
-            {{ codingLanguages.nameCodingLanguage }}<br>
+           <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
 
         {% endfor %}
 
         </div>
         <div id="galerie2">
 
-            <h4><em>Base de donnée</em></h4><br>
-                {% for dbs in app.user.dbs %}
-                    {{ dbs.nameDb }}<br>
+            <h4 class="blueh2">Base de donnée</h4><br>
+                {% for dbs in freelance.dbs %}
+                    <div class="text-center">{{ dbs.nameDb }}</div><br>
                 {% endfor %}
         </div>
         <div id="galerie3">
 
-            <h4><em>Framework</em></h4><br>
-            {% for frameworks in app.user.frameworks %}
-                {{ frameworks.nameFramework }}<br>
+            <h4 class="blueh2">Framework</h4><br>
+            {% for frameworks in freelance.frameworks %}
+                <div class="text-center">{{ frameworks.nameFramework }}</div><br>
             {% endfor %}
         </div>
         <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <h4><em>Voir les autres</em></h4>
+            <h4 class="blueh2">Voir les autres</h4>
         </button>
 
     </div>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
-                <em>Methodology</em><br>
-                {% for methodologies in app.user.methodologies %}
-                    {{ methodologies.nameMethodology }}<br>
+                Methodology<br>
+                {% for methodologies in freelance.methodologies %}
+                    <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
                 {% endfor %}
 
             <em>Version Control</em><br>
-            {% for versionControls in app.user.versionControls %}
-                {{ versionControls.nameVersionControl }}<br>
+            {% for versionControls in freelance.versionControls %}
+                <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
             {% endfor %}
 
         </div>
     </div>
     <article id="experience">
-        <h2 class="blueh2 text-center">Experiences</h2>
+        <h2 class="blueh2 text-center">Expériences</h2>
 
         <div class="experience-block">
             {% for path in freelance.belong %}
@@ -118,7 +118,7 @@
     <article id="com">
         <section id="blok-left">
             <h2 class="blueh2 mb-2">Langues</h2>
-            Je parles :
+            Je parle :
             {% for spokenLanguages in freelance.spokenLanguages %}
                 {{ spokenLanguages.nameLanguage }},
             {% endfor %}
@@ -170,7 +170,15 @@
 
         </section>
         <section id="blok-right">
-                    <h2 class="blueh2 mb-3 text-center">Mes différents sites </h2>
+                    <h2 class="blueh2 mb-3 text-center">Influence</h2>
+
+            {% if social is null %}
+              <div class="text-center">  {{ freelance.firstname }}, n'a pas encore entré ses divers réalisations </div>
+            {% else %}
+            {% for soc in social %}
+            {{ soc }}
+            {% endfor %}
+            {% endif %}
 
         </section>
     </article>

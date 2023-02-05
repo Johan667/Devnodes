@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Freelance;
+use App\Entity\Mission;
+use App\Entity\Social;
 use App\Entity\User;
 use App\Form\DescriptionProfilType;
 use App\Form\DurationPrefType;
@@ -70,10 +73,16 @@ class ProfilController extends AbstractController
     public function show($id): Response
     {
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
+        $mission = $this->entityManager->getRepository(Mission::class)->find(['id'=>$freelance]);
+        $commentaire = $this->entityManager->getRepository(Comment::class)->find(['id'=>$freelance]);
+        $social = $this->entityManager->getRepository(Social::class)->find(['id'=>$freelance]);
 
 
         return $this->render('profil/show.html.twig',[
         'freelance'=>$freelance,
+            'mission'=>$mission,
+            'commentaire'=>$commentaire,
+            'social'=>$social,
             ]);
     }
 
