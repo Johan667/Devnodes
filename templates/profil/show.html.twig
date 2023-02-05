@@ -36,48 +36,144 @@
 
     <!-- fin header -->
 
-    <div class="shadowline"><hr></div>
-    <div class="container-wrapper">
-        <div class="row">
-            <div class="col-4">
-                Bloc 1
+    <div class="shadowline"></div>
+<main>
+    <article>
+        <section id="blok-left">
+            <h2 class="blueh2">Localisation</h2>
+            <p>{{ freelance.city }}, {{ freelance.country }}</p>
+
+            <h2 class="blueh2">Préférence de travail</h2>
+            <p class="textInfo">Je travail à/en<span> {{ freelance.remoteWork }}.</span></p>
+        </section>
+        <section id="blok-right">
+            <div class="touche">
+                <div>
+                    <h2 class="blueh2">Description</h2>
+                    <p class="textInfo">{{ freelance.biographie  }}</p>
+                </div>
             </div>
-            <div class="col-6">
-                Bloc 2
-            </div>
+
+        </section>
+    </article>
+
+    <div id="skills">
+        <div id="galerie">
+            <h4 class="blueh2"><em>Language de Programmation</em></h4><br>
+        {% for codingLanguages in app.user.codingLanguages %}
+
+            {{ codingLanguages.nameCodingLanguage }}<br>
+
+        {% endfor %}
+
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 3
-            </div>
-            <div class="col-6">
-                Bloc 4
-            </div>
+        <div id="galerie2">
+
+            <h4><em>Base de donnée</em></h4><br>
+                {% for dbs in app.user.dbs %}
+                    {{ dbs.nameDb }}<br>
+                {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 5
-            </div>
-            <div class="col-6">
-                Bloc 6
-            </div>
+        <div id="galerie3">
+
+            <h4><em>Framework</em></h4><br>
+            {% for frameworks in app.user.frameworks %}
+                {{ frameworks.nameFramework }}<br>
+            {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 7
-            </div>
-            <div class="col-6">
-                Bloc 8
-            </div>
+        <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <h4><em>Voir les autres</em></h4>
+        </button>
+
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+                <em>Methodology</em><br>
+                {% for methodologies in app.user.methodologies %}
+                    {{ methodologies.nameMethodology }}<br>
+                {% endfor %}
+
+            <em>Version Control</em><br>
+            {% for versionControls in app.user.versionControls %}
+                {{ versionControls.nameVersionControl }}<br>
+            {% endfor %}
+
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 9
-            </div>
-            <div class="col-6">
-                Bloc 10
-            </div>
+    </div>
+    <article id="experience">
+        <h2 class="blueh2 text-center">Experiences</h2>
+
+        <div class="experience-block">
+            {% for path in freelance.belong %}
+                {% set startDate = path.startDate %}
+                {% set endDate = path.endDate %}
+                {% set duration = endDate.diff(startDate) %}
+
+                <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }}) - ({{ startDate|date('m-Y') }} - {{ endDate|date('m-Y') }}) {{ duration.format('%m mois') }}<br>
+                <div id="path-description">{{ path.description }}</div>
+                <hr>
+            {% endfor %}
         </div>
-</div>
+    </article>
+    <article id="com">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2">Langues</h2>
+            Je parles :
+            {% for spokenLanguages in freelance.spokenLanguages %}
+                {{ spokenLanguages.nameLanguage }},
+            {% endfor %}
+
+            <h2 class="blueh2 mb-2 mt-2">Verifications</h2>
+
+            {% if freelance.isVerified is  null %}
+                <div class="verified-back">
+                    <i class="fa-solid fa-check"></i> Email verifié
+                </div>
+            {% else %}
+                <div class="verified-back"><i class="fa-solid fa-x"></i> Email non vérifié
+                </div>
+            {% endif %}
+            <div class="verified-grey mt-3">
+                <i class="fa-solid fa-scale-balanced"></i> Code de conduite signé<br>
+                <a href="{{ path('app_charts') }}">Lire le code de conduite</a>
+            </div>
+
+
+        </section>
+        <section id="blok-right">
+                <div>
+                    <div id="comment">
+                        <h2 class="blueh2 mb-3">Commentaires</h2>
+
+                        <div class="comment">
+                        {% for comment in freelance.receivedComments %}
+                           <p>" {{ comment.content }} "<br>
+                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
+                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                </div>
+        </section>
+    </article>
+    <article id="social">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2 text-center">Partagez mon profil</h2>
+            <p class="text-center">
+                <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
+            </p>
+
+        </section>
+        <section id="blok-right">
+                    <h2 class="blueh2 mb-3 text-center">Mes différents sites </h2>
+
+        </section>
+    </article>
+</main>
 
 {% endblock %}
