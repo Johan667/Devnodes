@@ -16,6 +16,8 @@ class ResultBDRController extends AbstractController
     {
         $query = $request->query->get('q');
         $city = $request->query->get('city');
+
+        $user = $this->getUser();
         /*$freelances = $repository->findSearch([
             'q' => $query,
             'city' => $city
@@ -33,6 +35,7 @@ class ResultBDRController extends AbstractController
 
         return $this->render('result_bdr/index.html.twig', [
             'freelances' => $freelances ?? null,
+            'user' => $user ?? null,
         ]);
     }
 

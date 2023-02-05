@@ -11,5 +11,8 @@
 
 <!-- Wrapper -->
 <div class="wrapper">
+    {% for freelance in favorites %}
+        <h1>{{freelance.firstname}}</h1>
+    {% endfor %}
 </div>
 {% endblock %}
