@@ -82,6 +82,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: CodingLanguage::class, inversedBy: 'users')]
     private Collection $testi;
 
+    #[ORM\ManyToMany(targetEntity: Freelance::class, inversedBy: 'users')]
+    private Collection $favoriteFreelance;
+
 
     public function __construct()
     {
@@ -92,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->comments = new ArrayCollection();
         $this->receivedComments = new ArrayCollection();
         $this->registerDate = new \DateTime();
+        $this->favoriteFreelance = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -442,6 +446,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTesti(CodingLanguage $testi): self
     {
         $this->testi->removeElement($testi);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Freelance>
+     */
+    public function getFavoriteFreelance(): Collection
+    {
+        return $this->favoriteFreelance;
+    }
+
+    public function addFavoriteFreelance(Freelance $favoriteFreelance): self
+    {
+        if (!$this->favoriteFreelance->contains($favoriteFreelance)) {
+            $this->favoriteFreelance->add($favoriteFreelance);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteFreelance(Freelance $favoriteFreelance): self
+    {
+        $this->favoriteFreelance->removeElement($favoriteFreelance);
 
         return $this;
     }

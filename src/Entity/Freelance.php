@@ -80,6 +80,9 @@ class Freelance extends User
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $biographie = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteFreelance')]
+    private Collection $users;
+
 
     public function __construct()
     {
@@ -94,6 +97,7 @@ class Freelance extends User
         $this->codingLanguages = new ArrayCollection();
         $this->missions = new ArrayCollection();
         $this->dbs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -514,6 +518,33 @@ class Freelance extends User
     public function setBiographie(?string $biographie): self
     {
         $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFavoriteFreelance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavoriteFreelance($this);
+        }
 
         return $this;
     }
