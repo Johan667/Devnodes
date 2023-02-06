@@ -34,7 +34,7 @@ class FreelanceFixtures extends Fixture
 
         $password = $this->encoder->hashPassword(new Freelance(), 'password');
         $faker = Faker::create('fr_FR');
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < 50; $i++) {
             $freelancer = new Freelance();
             $freelancer
                 ->setEmail($faker->email())
