@@ -29,11 +29,14 @@ class TechnologyType extends AbstractType
 
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($options['freelance']);
         $codingLanguages = $freelance->getCodingLanguages();
+        $framework = $freelance->getFrameworks();
+        $frameworkArray = $framework->toArray();
         $codingLanguagesArray = $codingLanguages->toArray();
 
         $builder
             ->add('coding_language', EntityType::class, [
                 'class' => CodingLanguage::class,
+                'required'=>false,
                 'multiple' => true,
                 'choice_label' => 'name_coding_language',
                 'preferred_choices' => function ($choice, $key, $value) use ($codingLanguagesArray) {
@@ -42,26 +45,31 @@ class TechnologyType extends AbstractType
             ])
             ->add('framework', EntityType::class, [
                 'class' => Framework::class,
+                'required'=>false,
                 'multiple' => true,
-
                 'choice_label' => 'name_framework',
+                'preferred_choices' => function ($choice, $key, $value) use ($frameworkArray) {
+                    return in_array($choice, $frameworkArray);
+                },
             ])
             ->add('database', EntityType::class, [
+                'required'=>false,
                 'class' => Db::class,
                 'multiple' => true,
 
                 'choice_label' => 'name_db',
             ])
             ->add('methodology', EntityType::class, [
+                'required'=>false,
                 'class' => Methodology::class,
                 'multiple' => true,
 
                 'choice_label' => 'name_methodology',
             ])
             ->add('version_control', EntityType::class, [
+                'required'=>false,
                 'class' => VersionControl::class,
                 'multiple' => true,
-
                 'choice_label' => 'name_version_control',
             ]);
     }
