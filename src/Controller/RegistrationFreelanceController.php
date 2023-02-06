@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\CodingLanguage;
 use App\Entity\Freelance;
+use App\Entity\User;
 use App\Form\FreelanceType;
 use App\Repository\FreelanceRepository;
 use App\Security\AppCustomAuthenticator;
@@ -33,18 +35,21 @@ class RegistrationFreelanceController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $freelance= new Freelance();
+        $user = new User();
         $form = $this->createForm(FreelanceType::class, $freelance);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $freelance->setRoles((array)"ROLE_FREELANCE");
-            // encode the plain password
+
             $freelance->setPassword(
                 $userPasswordHasher->hashPassword(
                     $freelance,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
+
+
 
             $entityManager->persist($freelance);
             $entityManager->flush();

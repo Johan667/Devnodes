@@ -3,221 +3,185 @@
 {% block title %}{{ freelance.firstname  }} {{ freelance.lastname }}, {{ freelance.title }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-    <div class="row headerProfil">
+    <div class="wrapper">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
-        <div class="col-3">
-            <div class="round-border">
-            <i class="fa-solid fa-camera"></i>
+        <hr>
+        <div class="container">
+            <div class="column"><i class="fa-solid fa-camera"></i></div>
+            <div class="column">
+                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }} <i class="fa-regular fa-heart"></i></h1>
+                <h2 class="bold">{{ freelance.title }}</h2>
+                <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
+{#                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)#}
+                <div class="squares">
+                    <div class="price">
+                        Prix<br>
+                        {{ freelance.price }} € par jours
+                    </div>
+                    <div class="xpYears">
+                        Expérience<br>
+                        {{ freelance.xpYears }} an
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                {% if app.user %}
+                    <button class="btn btn-success mt-2 proposeMission"><a href="{{ path('create_mission', { id : freelance.id })}}" class="btn1">Proposer une mission</a></button>
+                {% else %}
+                    <button class="btn btn-success mt-2 proposeMission"><a href="{{ path('app_login') }}">S'inscrire pour proposer une mission</a></button>
+                {% endif %}
             </div>
         </div>
-        <div class="col-6">
-            <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
-            <h2 class="bold">{{ freelance.title }}</h2>
-            <i class="fa-solid fa-briefcase"></i> {{ freelance.remoteWork }}<br>
-            <i class="fa-solid fa-star"></i>(x) Advices
-            <div class="squares">
-                <div class="price">
-                    Price<br>
-                    {{ freelance.price }} € per day
-                </div>
-                <div class="xpYears">
-                    Experience<br>
-                    {{ freelance.xpYears }} years
+
+    </div>
+
+    <!-- fin header -->
+
+    <div class="shadowline"></div>
+<main>
+    <article>
+        <section id="blok-left">
+            <h2 class="blueh2">Localisation et Deplacements</h2>
+            <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
+
+            <p class="textInfo"><i class="fa-solid fa-person-walking"></i><span> {{ freelance.remoteWork }}.</span></p>
+        </section>
+        <section id="blok-right">
+            <div class="touche">
+                <div>
+                    <h2 class="blueh2">Description</h2>
+                    <p class="textInfo">{{ freelance.biographie  }}</p>
                 </div>
             </div>
+
+        </section>
+    </article>
+
+    <div id="skills">
+        <div id="galerie">
+            <h4 class="blueh2">Language de Programmation</h4><br>
+        {% for codingLanguages in freelance.codingLanguages %}
+
+           <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
+
+        {% endfor %}
+
         </div>
-        <div class="col-3">
-            <i class="fa-sharp fa-solid fa-circle"></i> Disponibility<br>
-            {% if app.user %}
-                <button class="btn btn-success mt-2 proposeMission"><a href="{{ path('create_mission', { id : freelance.id })}}" class="btn1">Proposer une mission</a></button>
-            {% else %}
-                <button class="btn btn-success mt-2 proposeMission"><a href="{{ path('app_login') }}">Veuillez vous connecter pour proposer une mission</a></button>
-            {% endif %}
+        <div id="galerie2">
+
+            <h4 class="blueh2">Base de donnée</h4><br>
+                {% for dbs in freelance.dbs %}
+                    <div class="text-center">{{ dbs.nameDb }}</div><br>
+                {% endfor %}
+        </div>
+        <div id="galerie3">
+
+            <h4 class="blueh2">Framework</h4><br>
+            {% for frameworks in freelance.frameworks %}
+                <div class="text-center">{{ frameworks.nameFramework }}</div><br>
+            {% endfor %}
+        </div>
+        <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <h4 class="blueh2">Voir les autres</h4>
+        </button>
+
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+                Methodology<br>
+                {% for methodologies in freelance.methodologies %}
+                    <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
+                {% endfor %}
+
+            <em>Version Control</em><br>
+            {% for versionControls in freelance.versionControls %}
+                <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
+            {% endfor %}
+
         </div>
     </div>
-</div>
-<!-- fin header -->
+    <article id="experience">
+        <h2 class="blueh2 text-center">Expériences</h2>
 
-<div class="shadowline"><hr></div>
+        <div class="experience-block">
+            {% for path in freelance.belong %}
+                {% set startDate = path.startDate %}
+                {% set endDate = path.endDate %}
+                {% set duration = endDate.diff(startDate) %}
 
-<div class="wrapper">
-    <div class="row">
-        <!-- Location & Skills -->
-        <div class="space">
-            <div class="col-4 location">
-                <h3 class="text-center"> Location and workplace preferences </h3>
-                <i class="fa-solid fa-location-dot"></i> <b>Location</b><br>
-                {{ freelance.city }}, {{ freelance.country }}<br>
-                <i class="fa-solid fa-briefcase"></i> <b class="mtx30">{{ freelance.remoteWork }}</b><br>
-            </div>
-            <div class="col-8 skills">
-                <h3>Skills </h3>
-                <div class="typeSkills">
-                    <div class="codingLanguages">
-                        <em><b>Languages</b></em><br>
-                        {% for codingLanguages in freelance.codingLanguages %}
-                            {{ codingLanguages.nameCodingLanguage }}<br>
-                        {% endfor %}
-                    </div>
-                    <div class="framework">
-                        <em><b>Framework</b></em><br>
-                        {% for frameworks in freelance.frameworks %}
-                            {{ frameworks.nameFramework }}<br>
-                        {% endfor %}
-                    </div>
-                    <div class="database">
-                        <em><b>Database</b></em><br>
-                        {% for dbs in freelance.dbs %}
-                            {{ dbs.nameDb }}<br>
-                        {% endfor %}
-                    </div>
-                    <div class="methodology">
-                        <em><b>Methodology</b></em><br>
-                        {% for methodologies in freelance.methodologies %}
-                            {{ methodologies.nameMethodology }}<br>
-                        {% endfor %}
-                    </div>
-                    <div class="versionControl">
-                        <em><b>Version Control</b></em><br>
-                        {% for versionControls in freelance.versionControls %}
-                            {{ versionControls.nameVersionControl }}<br>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+                <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }}) - ({{ startDate|date('m-Y') }} - {{ endDate|date('m-Y') }}) {{ duration.format('%m mois') }}<br>
+                <div id="path-description">{{ path.description }}</div>
+                <hr>
+            {% endfor %}
         </div>
-        <!-- fin location & skills -->
+    </article>
+    <article id="com">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2">Langues</h2>
+            Je parle :
+            {% for spokenLanguages in freelance.spokenLanguages %}
+                {{ spokenLanguages.nameLanguage }},
+            {% endfor %}
 
-        <!-- preference & description -->
-        <div class="row">
-            <div class="space">
-                <div class="col-4 preferences">
-                    <h3 class="text-center">Duration Preferences</h3>
-                    <i class="fa-solid fa-business-time"></i> {{ freelance.durationPreference }}
+            <h2 class="blueh2 mb-2 mt-2">Verifications</h2>
+
+            {% if freelance.isVerified is  null %}
+                <div class="verified-back">
+                    <i class="fa-solid fa-check"></i> Email verifié
                 </div>
-                <div class="col-8 description">
-                    <h3>Description</h3>
-                    {{ freelance.description }}
+            {% else %}
+                <div class="verified-back"><i class="fa-solid fa-x"></i> Email non vérifié
                 </div>
+            {% endif %}
+            <div class="verified-grey mt-3">
+                <i class="fa-solid fa-scale-balanced"></i> Code de conduite signé<br>
+                <a href="{{ path('app_charts') }}">Lire le code de conduite</a>
             </div>
-        </div>
-        <!-- fin preference & description -->
 
-        <!-- verification & portfolio -->
-        <div class="row">
-            <div class="space">
-                <div class="col-4 verification">
-                    <h3 class="text-center">Verifications</h3>
-                    {% if freelance.isVerified is  null %}
-                        <div class="verified-back"><i class="fa-solid fa-check"></i> Email verified
-                        </div>
-                    {% else %}
-                        <div class="verified-back"><i class="fa-solid fa-x"></i> Email not verified
-                        </div>
-                    {% endif %}
-                    <div class="verified-grey mt-3">
-                        <i class="fa-solid fa-scale-balanced"></i> Code of conduct not signed<br>
-                        <a href="{{ path('app_charts') }}">Read the  code of conduct</a>
-                    </div>
-                </div>
-                <div class="col-8 portfolio">
-                    <h3>Portfolio</h3>
-                    Please, enter your portfolio link
-                </div>
 
-        </div>
-        </div>
-        <!-- fin verification & portfolio -->
+        </section>
+        <section id="blok-right">
+                <div>
+                    <div id="comment">
+                        <h2 class="blueh2 mb-3">Commentaires</h2>
 
-        <!-- réputation & experience -->
-
-        <div class="row">
-            <div class="space">
-                <div class="col-4 reputation">
-                    <h3 class="text-center">Reputation</h3>
-                    <p>Share your github or linkedin profile</p>
-                                        {% for share in freelance.share %}
-                                            {{ share.link }}
-                                        {% endfor %}
-                    <i class="fa-brands fa-github"></i><a href="#"></a><br>
-                    <i class="fa-brands fa-linkedin"></i><a href="#"></a><br>
-                </div>
-                <div class="col-8 experience">
-                    <h3>Experiences</h3>
-                    {% for path in freelance.belong %}
-                        <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }})<br>
-                        <br>
-                        <br>
-                    {% endfor %}
-
-                </div>
-            </div>
-            <!-- fin réputation & experience-->
-
-            <!-- Language & advices -->
-            <div class="row">
-                <div class="space">
-                    <div class="col-4 language">
-                        <h3 class="text-center">Language</h3>
-                        {% for spokenLanguages in freelance.spokenLanguages %}
-                            {{ spokenLanguages.nameLanguage }}<br>
-                        {% endfor %}
-                        {% if freelance.spokenLanguages is null %}
-                            <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> Be sure to add your native language</div>
-                        {% endif %}
-                    </div>
-                    <div class="col-8 advice">
-                        <h3>Comment</h3>
+                        <div class="comment">
                         {% for comment in freelance.receivedComments %}
-                            {{ comment.content }}
+                           <p>" {{ comment.content }} "<br>
+                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
+                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                            <hr>
                         {% endfor %}
-
-
-
                     </div>
+
                 </div>
-                <!-- fin language & advices -->
+                </div>
+        </section>
+    </article>
+    <article id="social">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2 text-center">Partagez mon profil</h2>
+            <p class="text-center">
+                <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
+            </p>
 
-                <!-- Categories & Recommendations -->
+        </section>
+        <section id="blok-right">
+                    <h2 class="blueh2 mb-3 text-center">Influence</h2>
 
-                <div class="row">
-                    <div class="space">
-                        <div class="col-4 categories">
-                            <h3 class="text-center">Categories</h3>
+            {% if social is null %}
+              <div class="text-center">  {{ freelance.firstname }}, n'a pas encore entré ses divers réalisations </div>
+            {% else %}
+            {% for soc in social %}
+            {{ soc }}
+            {% endfor %}
+            {% endif %}
 
-                            {% for workCategories in freelance.workCategories %}
-                                {{ workCategories.nameCategory }}<br>
-                            {% endfor %}
-                        </div>
-                        <div class="col-8 recommendations">
-                            <h3>Recommendations</h3>
-                            <div class="verified-back"><i class="fa-solid fa-circle-exclamation"></i> No recommendations yet</div>
-                        </div>
-                    </div>
-                    <!-- fin categories & recommendation -->
+        </section>
+    </article>
+</main>
 
-                    <!-- share profil & education -->
-                    <div class="row">
-                        <div class="space">
-                            <div class="col-4 share-profil">
-                                <h3 class="text-center">My Social Links</h3>
-                                <p class="text-center">
-                                    <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                                    <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
-                                </p>
-                                            <p>Developpement de la fonctionnalité en cours</p><br>
-                            </div>
-                            <div class="col-8 education">
-                                <h3>School</h3>
-                                {% for school in freelance.belong %}
-                                    <b>{{ school.diplomaTitle }}</b> {{ school.schoolName }} ({{ school.startDate |date("m/Y")}} - {{ school.endDate |date("m/Y")}})
-                                    <br>
-                                {% endfor %}
-
-                            </div>
-                        </div>
-                    </div>
-                    {% endblock %}
+{% endblock %}

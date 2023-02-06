@@ -1,26 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
-{% endblock %}
+{% block title %}Inscription | Devnodes {% endblock %}
 
 {% block body %}
 	{% for flash_error in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<div class="wrapper">
-		<h1 class="text-center">Inscription</h1>
-		<p class="text-center">Vous êtes a la recherche d'un Freelance ?</p>
+			<h1 class="text-center">Inscription</h1>
+			<p class="text-center">Vous êtes a la recherche d'un Freelance ?</p>
 
-	<hr>
-<div class="formRegister">
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-	{{ form_row(registrationForm.agreeTerms) }}
-	{{ form_end(registrationForm) }}
-</div>
-	</div>
+			<hr>
+		<div class="registerClient" style="padding-left: 5rem; padding-right: 5rem;">
+			{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.firstname) }}
+			{{ form_row(registrationForm.lastname) }}
+			{{ form_row(registrationForm.denominationCompany) }}
+			{{ form_row(registrationForm.siretCompany) }}
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.password) }}
+			{{ form_row(registrationForm.agreeTerms) }}
+			<button style="width:200px;" type="submit">S'inscrire</button>
+			{{ form_end(registrationForm) }}
+		</div>
+
 {% endblock %}

@@ -3,19 +3,25 @@
 namespace App\Form;
 
 use App\Entity\Freelance;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DescriptionProfilType extends AbstractType
+class LanguageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
 
-            ->add('description', TextareaType::class)
+            ->add('spokenLanguages', EntityType::class, array(
+                'class' => 'App\Entity\spokenLanguage',
+                'choice_label' => 'name_language',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+            ->add('submit',SubmitType::class)
 
         ;
     }

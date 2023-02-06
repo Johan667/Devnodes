@@ -54,18 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $tvaCompany = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilPicture = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $coverPicture = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $phone = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $registerDate = null;
 
@@ -91,6 +79,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'received', targetEntity: Comment::class)]
     private Collection $receivedComments;
 
+    #[ORM\ManyToMany(targetEntity: CodingLanguage::class, inversedBy: 'users')]
+    private Collection $testi;
+
+    #[ORM\ManyToMany(targetEntity: Freelance::class, inversedBy: 'users')]
+    private Collection $favoriteFreelance;
+
+
     public function __construct()
     {
         $this->sent = new ArrayCollection();
@@ -99,6 +94,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->missions = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->receivedComments = new ArrayCollection();
+        $this->registerDate = new \DateTime();
+        $this->favoriteFreelance = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -215,66 +212,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSiretCompany(?string $siretCompany): self
     {
         $this->siretCompany = $siretCompany;
-
-        return $this;
-    }
-
-    public function getTvaCompany(): ?string
-    {
-        return $this->tvaCompany;
-    }
-
-    public function setTvaCompany(?string $tvaCompany): self
-    {
-        $this->tvaCompany = $tvaCompany;
-
-        return $this;
-    }
-
-    public function getProfilPicture(): ?string
-    {
-        return $this->profilPicture;
-    }
-
-    public function setProfilPicture(?string $profilPicture): self
-    {
-        $this->profilPicture = $profilPicture;
-
-        return $this;
-    }
-
-    public function getCoverPicture(): ?string
-    {
-        return $this->coverPicture;
-    }
-
-    public function setCoverPicture(?string $coverPicture): self
-    {
-        $this->coverPicture = $coverPicture;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
 
         return $this;
     }
@@ -488,4 +425,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CodingLanguage>
+     */
+    public function getTesti(): Collection
+    {
+        return $this->testi;
+    }
+
+    public function addTesti(CodingLanguage $testi): self
+    {
+        if (!$this->testi->contains($testi)) {
+            $this->testi->add($testi);
+        }
+
+        return $this;
+    }
+
+    public function removeTesti(CodingLanguage $testi): self
+    {
+        $this->testi->removeElement($testi);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Freelance>
+     */
+    public function getFavoriteFreelance(): Collection
+    {
+        return $this->favoriteFreelance;
+    }
+
+    public function addFavoriteFreelance(Freelance $favoriteFreelance): self
+    {
+        if (!$this->favoriteFreelance->contains($favoriteFreelance)) {
+            $this->favoriteFreelance->add($favoriteFreelance);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteFreelance(Freelance $favoriteFreelance): self
+    {
+        $this->favoriteFreelance->removeElement($favoriteFreelance);
+
+        return $this;
+    }
+
+
 }

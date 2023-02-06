@@ -18,7 +18,7 @@
             <div class="col-10 cardsFreelance">
                 <div class="resultat">
                     {% for freelance in freelances %}
-                        {% include 'result_bdr/_card.html.twig' with {freelance: freelance} only %}
+                        {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
                     {% endfor %}
                 </div>
             </div>

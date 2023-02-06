@@ -28,22 +28,19 @@ class FreelanceFixtures extends Fixture
             ->setLastname('al-Kebsi')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->encoder->hashPassword($freelancer, 'admint'))
-            ->setPhone('0769553504')
-            ->setDescription('SuperBadr')
             ->setPrice(500)
         ;
         $manager->persist($freelancer);
 
         $password = $this->encoder->hashPassword(new Freelance(), 'password');
         $faker = Faker::create('fr_FR');
-        for ($i=0; $i < 500; $i++) {
+        for ($i=0; $i < 5; $i++) {
             $freelancer = new Freelance();
             $freelancer
                 ->setEmail($faker->email())
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)
-                ->setPhone($faker->phoneNumber)
-                ->setDescription($faker->sentences(3, true))
+                ->setBiographie($faker->sentences(3, true))
                 ->setPassword($password)
                 ->setPrice(($faker->randomDigitNotNull)*100)
                 ->setTitle("Best freelancer world")

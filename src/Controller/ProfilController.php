@@ -2,10 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Freelance;
+use App\Entity\Mission;
+use App\Entity\Social;
 use App\Entity\User;
 use App\Form\DescriptionProfilType;
+use App\Form\DurationPrefType;
 use App\Form\EditHeaderProfilType;
+use App\Form\LanguageType;
+use App\Form\LocationRemoteType;
 use App\Form\TechnologyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,57 +33,57 @@ class ProfilController extends AbstractController
     {
         /** @var Freelance $user */
         $user = $this->getUser();
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$this->getUser()]);
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$user]);
 
-        // Formulaires
+        $forms = [
+            'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
+            'tech' => $this->createForm(TechnologyType::class),
+            'loc' => $this->createForm(LocationRemoteType::class, $freelance),
+            'dur' => $this->createForm(DurationPrefType::class, $freelance),
+            'desc' => $this->createForm(DescriptionProfilType::class, $freelance),
+            'lang' => $this->createForm(LanguageType::class, $freelance),
+        ];
 
-        $freelanceBase = $this->createForm(EditHeaderProfilType::class, $freelance);
-        $freelanceTechnology = $this->createForm(TechnologyType::class);
-        $freelanceDescription = $this->createForm(DescriptionProfilType::class,$freelance);
+        foreach ($forms as $form) {
+            $form->handleRequest($request);
+        }
 
-        $freelanceBase->handleRequest($request);
-        $freelanceDescription->handleRequest($request);
-
-        // Traitement
-
-        if ($freelanceBase->isSubmitted() && $freelanceBase->isValid() ||
-            $freelanceTechnology->isSubmitted() && $freelanceTechnology->isValid() ||
-            $freelanceDescription->isSubmitted() && $freelanceDescription->isValid())
-
-        {
-
+        if (array_reduce($forms, function ($isSubmitted, $form) {
+            return $isSubmitted || ($form->isSubmitted() && $form->isValid());
+        }, false)) {
             $this->entityManager->persist($freelance);
             $this->entityManager->flush();
-
 
             $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
             return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('profil/index.html.twig', [
-            'freelanceBase' => $freelanceBase->createView(),
-            'freelanceTechnology' => $freelanceTechnology->createView(),
-            'freelanceDescription' => $freelanceDescription->createView(),
+            'freelanceBase' => $forms['base']->createView(),
+            'freelanceDescription' => $forms['desc']->createView(),
+            'freelanceLocation' => $forms['loc']->createView(),
+            'freelanceDuration' => $forms['dur']->createView(),
+            'freelanceLanguage' => $forms['lang']->createView(),
+            'freelanceTechnology' => $forms['tech']->createView(),
         ]);
     }
+
 
     #[Route('/profil/{id}', name: 'app_profil_show')]
     public function show($id): Response
     {
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
+        $mission = $this->entityManager->getRepository(Mission::class)->find(['id'=>$freelance]);
+        $commentaire = $this->entityManager->getRepository(Comment::class)->find(['id'=>$freelance]);
+        $social = $this->entityManager->getRepository(Social::class)->find(['id'=>$freelance]);
 
 
         return $this->render('profil/show.html.twig',[
         'freelance'=>$freelance,
+            'mission'=>$mission,
+            'commentaire'=>$commentaire,
+            'social'=>$social,
             ]);
     }
 
-    #[Route('/profil/test', name: 'app_profil_test')]
-    public function test(): Response
-    {
-
-        return $this->render('profil/test.html.twig',[
-
-        ]);
-    }
 }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FreelanceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FreelanceRepository::class)]
@@ -73,6 +74,15 @@ class Freelance extends User
     #[ORM\ManyToMany(targetEntity: Db::class, mappedBy: 'freelanceDb')]
     private Collection $dbs;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $biographie = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteFreelance')]
+    private Collection $users;
+
 
     public function __construct()
     {
@@ -87,6 +97,7 @@ class Freelance extends User
         $this->codingLanguages = new ArrayCollection();
         $this->missions = new ArrayCollection();
         $this->dbs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -482,6 +493,57 @@ class Freelance extends User
     {
         if ($this->dbs->removeElement($db)) {
             $db->removeFreelanceDb($this);
+        }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getBiographie(): ?string
+    {
+        return $this->biographie;
+    }
+
+    public function setBiographie(?string $biographie): self
+    {
+        $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFavoriteFreelance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavoriteFreelance($this);
         }
 
         return $this;

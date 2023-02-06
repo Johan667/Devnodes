@@ -53,8 +53,9 @@
 /* Mon compte */
 
 /* Mon compte */
-.account-item {
 
+
+.account-item {
     background-color: #479F9F;
     padding: 75px;
     text-align: center;
@@ -102,3 +103,19 @@
     padding-bottom: 14px;
     box-shadow: #EFF5F5 -8px 2px 11px;
 }
+
+
+/** edit profil **/
+.group-btn{
+    margin-top: 1rem;
+    display:flex;
+    justify-content: center;
+}
+.step-button{
+    padding:1rem;
+    width:200px;
+
+}
+
+
+
