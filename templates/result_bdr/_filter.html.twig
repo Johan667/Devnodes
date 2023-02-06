@@ -1,0 +1,10 @@
+{{ form_start(form, {'attr':{'class':'customSearch'}}) }}
+<div class="btnSearch">
+            <span class="icon-form">
+                <i class="fa-solid fa-location-dot mt-2"></i>
+                {{ form_row(form.codingLanguages, {'attr':{'class':'btnSearch'}}) }}
+            </span>
+</div>
+
+<button class="btn4" type="submit">Filtrer</button>
+{{ form_end(form) }}
