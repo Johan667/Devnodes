@@ -51,7 +51,6 @@ class ProfilController extends AbstractController
         foreach ($forms as $form) {
             $form->handleRequest($request);
         }
-
         $formNames = ['base','tech', 'loc', 'dur', 'desc', 'lang'];
 
         foreach ($formNames as $formName) {
@@ -66,20 +65,37 @@ class ProfilController extends AbstractController
             }
 
             if ($formName === 'tech') {
-                $coding = $form->getData()['coding_language'];
-                $framework = $form->getData()['framework'];
-                $db = $form->getData()['database'];
-                $methodology = $form->getData()['methodology'];
-                $version = $form->getData()['version_control'];
-
-                $freelance->addCodingLanguage($coding);
-                $freelance->addFramework($framework);
-                $freelance->addDb($db);
-                $freelance->addMethodology($methodology);
-                $freelance->addVersionControl($version);
+                if($coding =! null) {
+                    $coding = $form->getData()['coding_language'];
+                    foreach ($coding as $code) {
+                        $freelance->addCodingLanguage($code);
+                    }
+                }
+                if($framework =! null) {
+                    $framework = $form->getData()['framework'];
+                    foreach ($framework as $frame) {
+                        $freelance->addFramework($frame);
+                    }
+                }
+                if($db =! null) {
+                    $db = $form->getData()['database'];
+                    foreach ($db as $d) {
+                        $freelance->addDb($d);
+                    }
+                }
+                if($methodology =! null) {
+                    $methodology = $form->getData()['methodology'];
+                    foreach ($methodology as $method) {
+                        $freelance->addMethodology($method);
+                    }
+                }
+                if($versionning =! null) {
+                    $versionning = $form->getData()['version_control'];
+                    foreach ($versionning as $version) {
+                        $freelance->addVersionControl($version);
+                    }
+                }
             }
-
-            $form->persist($freelance);
         }
 
         $this->entityManager->flush();
