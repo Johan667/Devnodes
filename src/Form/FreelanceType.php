@@ -153,7 +153,7 @@ class FreelanceType extends AbstractType
                 'label' => 'Titre de profil',
                 'required' => false,
             ])
-            ->add('description', TextareaType::class, [
+            ->add('biographie', TextareaType::class, [
                 'label' => 'Description de votre profil',
             ])
             ->add('price', NumberType::class, [
@@ -176,7 +176,6 @@ class FreelanceType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ))
-            ->add('phone', TelType::class)
             ->add('submit', SubmitType::class)
         ;
     }

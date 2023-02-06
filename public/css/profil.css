@@ -18,13 +18,12 @@
     flex-wrap: wrap;
     margin: auto;
     margin-top: 1rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .price {
     text-align: center;
     color: #EFF5F5;
-    border: solid 1px #479F9F;
-    border-radius: 2%;
     width: 300px;
     background-color: #479F9F;
     padding: 1%;
@@ -33,8 +32,6 @@
 .xpYears {
     flex:1;
     text-align: center;
-    border: solid 1px #479F9F;
-    border-radius: 2%;
     width: 300px;
     padding: 1%;
 }
@@ -65,10 +62,126 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding:20px;
 }
 
 .column {
-    flex: 1;
+    display:block;
     padding: 10px;
+}
+
+/** Show **/
+
+.shadowline{
+    width: 100%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    background-color: white;
+    max-width: 1200px;
+    margin:auto;
+}
+
+article{
+    display:flex;
+    align-items: baseline;
+    gap:5%;
+    margin-bottom: 3%;
+}
+
+.fa-heart{
+    color:#479F9F;
+    font-size: 15px;
+}
+
+.fa-location-dot, .fa-person-walking{
+    color:#479F9F;
+}
+.blueh2{
+    color:#479F9F;
+    font-size: 24px;
+}
+
+
+#blok-right{
+    padding:2%;
+    width: 66%;
+    border: 1px solid #D6E4E5;
+    border-radius: 9px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#blok-left{
+    padding:2%;
+    width: 33%;
+    border: 1px solid #D6E4E5;
+    border-radius: 9px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+#blok-right .touche{
+    display: flex;
+}
+
+.textInfo{
+    margin-top: 7.52px;
+}
+
+/** Gallery Skills **/
+#skills{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding:2%;
+    border: 1px solid #D6E4E5;
+    border-radius: 9px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#galerie,#galerie2,#galerie3{
+    height: 100%;
+}
+
+.btn-collapse{
+    background-color: white;
+    color:black;
+}
+
+#experience{
+    margin-top: 3%;
+    padding:2%;
+    border: 1px solid #D6E4E5;
+    border-radius: 9px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+.middle{
+    margin: auto;
+}
+
+.verified-back{
+    background-color: #EB6440;
+    padding: 2%;
+    width:70%
+}
+
+.verified-grey{
+    background-color: #D6E4E5;
+    padding: 2%;
+    width:70%
+}
+
+.comment{
+    width:90%;
+}
+.comment :nth-child(3){
+    flex-direction: row-reverse;
+    text-align: right;
 }
 

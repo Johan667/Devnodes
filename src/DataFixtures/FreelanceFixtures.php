@@ -34,12 +34,13 @@ class FreelanceFixtures extends Fixture
 
         $password = $this->encoder->hashPassword(new Freelance(), 'password');
         $faker = Faker::create('fr_FR');
-        for ($i=0; $i < 500; $i++) {
+        for ($i=0; $i < 5; $i++) {
             $freelancer = new Freelance();
             $freelancer
                 ->setEmail($faker->email())
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)
+                ->setBiographie($faker->sentences(3, true))
                 ->setPassword($password)
                 ->setPrice(($faker->randomDigitNotNull)*100)
                 ->setTitle("Best freelancer world")

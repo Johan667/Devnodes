@@ -5,20 +5,21 @@
 {% block body %}
     <div class="wrapper">
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
+        <hr>
         <div class="container">
             <div class="column"><i class="fa-solid fa-camera"></i></div>
             <div class="column">
-                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
+                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }} <i class="fa-regular fa-heart"></i></h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
-                <i class="fa-solid fa-briefcase"></i> {{ freelance.remoteWork }}<br>
-                <i class="fa-solid fa-star"></i>Avis
+                <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
+{#                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)#}
                 <div class="squares">
                     <div class="price">
                         Prix<br>
                         {{ freelance.price }} € par jours
                     </div>
                     <div class="xpYears">
-                        Experience<br>
+                        Expérience<br>
                         {{ freelance.xpYears }} an
                     </div>
                 </div>
@@ -36,48 +37,151 @@
 
     <!-- fin header -->
 
-    <div class="shadowline"><hr></div>
-    <div class="container-wrapper">
-        <div class="row">
-            <div class="col-4">
-                Bloc 1
+    <div class="shadowline"></div>
+<main>
+    <article>
+        <section id="blok-left">
+            <h2 class="blueh2">Localisation et Deplacements</h2>
+            <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
+
+            <p class="textInfo"><i class="fa-solid fa-person-walking"></i><span> {{ freelance.remoteWork }}.</span></p>
+        </section>
+        <section id="blok-right">
+            <div class="touche">
+                <div>
+                    <h2 class="blueh2">Description</h2>
+                    <p class="textInfo">{{ freelance.biographie  }}</p>
+                </div>
             </div>
-            <div class="col-6">
-                Bloc 2
-            </div>
+
+        </section>
+    </article>
+
+    <div id="skills">
+        <div id="galerie">
+            <h4 class="blueh2">Language de Programmation</h4><br>
+        {% for codingLanguages in freelance.codingLanguages %}
+
+           <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
+
+        {% endfor %}
+
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 3
-            </div>
-            <div class="col-6">
-                Bloc 4
-            </div>
+        <div id="galerie2">
+
+            <h4 class="blueh2">Base de donnée</h4><br>
+                {% for dbs in freelance.dbs %}
+                    <div class="text-center">{{ dbs.nameDb }}</div><br>
+                {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 5
-            </div>
-            <div class="col-6">
-                Bloc 6
-            </div>
+        <div id="galerie3">
+
+            <h4 class="blueh2">Framework</h4><br>
+            {% for frameworks in freelance.frameworks %}
+                <div class="text-center">{{ frameworks.nameFramework }}</div><br>
+            {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 7
-            </div>
-            <div class="col-6">
-                Bloc 8
-            </div>
+        <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <h4 class="blueh2">Voir les autres</h4>
+        </button>
+
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+                Methodology<br>
+                {% for methodologies in freelance.methodologies %}
+                    <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
+                {% endfor %}
+
+            <em>Version Control</em><br>
+            {% for versionControls in freelance.versionControls %}
+                <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
+            {% endfor %}
+
         </div>
-        <div class="row">
-            <div class="col-4">
-                Bloc 9
-            </div>
-            <div class="col-6">
-                Bloc 10
-            </div>
+    </div>
+    <article id="experience">
+        <h2 class="blueh2 text-center">Expériences</h2>
+
+        <div class="experience-block">
+            {% for path in freelance.belong %}
+                {% set startDate = path.startDate %}
+                {% set endDate = path.endDate %}
+                {% set duration = endDate.diff(startDate) %}
+
+                <b>{{ path.title }}</b> ({{ path.city }}, {{ path.country }}) - ({{ startDate|date('m-Y') }} - {{ endDate|date('m-Y') }}) {{ duration.format('%m mois') }}<br>
+                <div id="path-description">{{ path.description }}</div>
+                <hr>
+            {% endfor %}
         </div>
-</div>
+    </article>
+    <article id="com">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2">Langues</h2>
+            Je parle :
+            {% for spokenLanguages in freelance.spokenLanguages %}
+                {{ spokenLanguages.nameLanguage }},
+            {% endfor %}
+
+            <h2 class="blueh2 mb-2 mt-2">Verifications</h2>
+
+            {% if freelance.isVerified is  null %}
+                <div class="verified-back">
+                    <i class="fa-solid fa-check"></i> Email verifié
+                </div>
+            {% else %}
+                <div class="verified-back"><i class="fa-solid fa-x"></i> Email non vérifié
+                </div>
+            {% endif %}
+            <div class="verified-grey mt-3">
+                <i class="fa-solid fa-scale-balanced"></i> Code de conduite signé<br>
+                <a href="{{ path('app_charts') }}">Lire le code de conduite</a>
+            </div>
+
+
+        </section>
+        <section id="blok-right">
+                <div>
+                    <div id="comment">
+                        <h2 class="blueh2 mb-3">Commentaires</h2>
+
+                        <div class="comment">
+                        {% for comment in freelance.receivedComments %}
+                           <p>" {{ comment.content }} "<br>
+                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
+                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                </div>
+        </section>
+    </article>
+    <article id="social">
+        <section id="blok-left">
+            <h2 class="blueh2 mb-2 text-center">Partagez mon profil</h2>
+            <p class="text-center">
+                <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
+            </p>
+
+        </section>
+        <section id="blok-right">
+                    <h2 class="blueh2 mb-3 text-center">Influence</h2>
+
+            {% if social is null %}
+              <div class="text-center">  {{ freelance.firstname }}, n'a pas encore entré ses divers réalisations </div>
+            {% else %}
+            {% for soc in social %}
+            {{ soc }}
+            {% endfor %}
+            {% endif %}
+
+        </section>
+    </article>
+</main>
 
 {% endblock %}

@@ -27,20 +27,17 @@ class UserFixture extends Fixture
             ->setLastname('Kebsi')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->encoder->hashPassword($user, 'admint'))
-
-
         ;
         $manager->persist($user);
 
         $password = $this->encoder->hashPassword(new user(), 'password');
         $faker = Faker::create('fr_FR');
-        for ($i=0; $i < 500; $i++) {
+        for ($i=0; $i < 5; $i++) {
             $user = new User();
             $user
                 ->setEmail($faker->email())
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)
-
                 ->setPassword($password)
                 ;
             $manager->persist($user);
