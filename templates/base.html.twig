@@ -36,6 +36,11 @@
                     <a class="btn3" href="{{ path('admin') }}">Dashboard</a>
                 </li>
                 {% endif %}
+                {% if is_granted('ROLE_FREELANCE') %}
+                    <li>
+                        <a class="btn1" href="{{ path('app_profil') }}">Profil</a>
+                    </li>
+                {% endif %}
 
                 {% if app.user %}
                 {% if is_granted('ROLE_USER') %}
@@ -45,11 +50,6 @@
                 <li>
                     <a class="btn1" href="{{ path('app_message_index') }}">Messagerie</a>
                 </li>
-                    {% if is_granted('ROLE_FREELANCE') %}
-                        <li>
-                            <a class="btn1" href="{{ path('app_profil') }}">Profil</a>
-                        </li>
-                    {% endif %}
                     <li>
                         <a class="btn1" href="{{ path('missions') }}">Missions</a>
                     </li>
