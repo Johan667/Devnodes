@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CodingLanguage;
 use App\Entity\Comment;
 use App\Entity\Freelance;
 use App\Entity\Mission;
@@ -31,13 +32,16 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(Request $request): Response
     {
-        /** @var Freelance $user */
         $user = $this->getUser();
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id'=>$user]);
+        /** @var Freelance $freelance */
+
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
 
         $forms = [
             'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
-            'tech' => $this->createForm(TechnologyType::class),
+            'tech' => $this->createForm(TechnologyType::class, null, [
+                'freelance' => $freelance
+            ]),
             'loc' => $this->createForm(LocationRemoteType::class, $freelance),
             'dur' => $this->createForm(DurationPrefType::class, $freelance),
             'desc' => $this->createForm(DescriptionProfilType::class, $freelance),
@@ -48,19 +52,46 @@ class ProfilController extends AbstractController
             $form->handleRequest($request);
         }
 
-        if (array_reduce($forms, function ($isSubmitted, $form) {
-            return $isSubmitted || ($form->isSubmitted() && $form->isValid());
-        }, false)) {
-            $this->entityManager->persist($freelance);
-            $this->entityManager->flush();
+        $formNames = ['base','tech', 'loc', 'dur', 'desc', 'lang'];
 
-            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
-            return $this->redirectToRoute('app_profil');
+        foreach ($formNames as $formName) {
+            if (!isset($forms[$formName])) {
+                continue;
+            }
+
+            $form = $forms[$formName];
+
+            if (!$form->isSubmitted() || !$form->isValid()) {
+                continue;
+            }
+
+            if ($formName === 'tech') {
+                $coding = $form->getData()['coding_language'];
+                $framework = $form->getData()['framework'];
+                $db = $form->getData()['database'];
+                $methodology = $form->getData()['methodology'];
+                $version = $form->getData()['version_control'];
+
+                $freelance->addCodingLanguage($coding);
+                $freelance->addFramework($framework);
+                $freelance->addDb($db);
+                $freelance->addMethodology($methodology);
+                $freelance->addVersionControl($version);
+            }
+
+            $form->persist($freelance);
         }
+
+        $this->entityManager->flush();
+
+
+//            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
+//            return $this->redirectToRoute('app_profil');
+
 
         return $this->render('profil/index.html.twig', [
             'freelanceBase' => $forms['base']->createView(),
-            'freelanceDescription' => $forms['desc']->createView(),
+            'freelanceBiographie' => $forms['desc']->createView(),
             'freelanceLocation' => $forms['loc']->createView(),
             'freelanceDuration' => $forms['dur']->createView(),
             'freelanceLanguage' => $forms['lang']->createView(),
