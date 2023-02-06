@@ -13,6 +13,14 @@
     border-radius: 50%; /* pour un cercle parfait */
     padding: 10px;
 }
+.width800{
+    max-width: 800px;
+}
+.input-skills{
+        max-width: 500px;
+        margin:auto;
+}
+
 .squares {
     display: flex;
     flex-wrap: wrap;

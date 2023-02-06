@@ -28,10 +28,20 @@ class TechnologyType extends AbstractType
     {
 
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($options['freelance']);
+
         $codingLanguages = $freelance->getCodingLanguages();
         $framework = $freelance->getFrameworks();
-        $frameworkArray = $framework->toArray();
+        $database = $freelance->getDbs();
+        $methodology = $freelance->getMethodologies();
+        $version = $freelance->getVersionControls();
+
+        /** Transformer les get en tableau   */
+
         $codingLanguagesArray = $codingLanguages->toArray();
+        $frameworkArray = $framework->toArray();
+        $databaseArray = $database->toArray();
+        $methodologyArray = $methodology->toArray();
+        $versionArray = $version->toArray();
 
         $builder
             ->add('coding_language', EntityType::class, [
@@ -56,21 +66,28 @@ class TechnologyType extends AbstractType
                 'required'=>false,
                 'class' => Db::class,
                 'multiple' => true,
-
                 'choice_label' => 'name_db',
+                'preferred_choices' => function ($choice, $key, $value) use ($databaseArray) {
+                    return in_array($choice, $databaseArray);
+                },
             ])
             ->add('methodology', EntityType::class, [
                 'required'=>false,
                 'class' => Methodology::class,
                 'multiple' => true,
-
                 'choice_label' => 'name_methodology',
+                'preferred_choices' => function ($choice, $key, $value) use ($methodologyArray) {
+                    return in_array($choice, $methodologyArray);
+                },
             ])
             ->add('version_control', EntityType::class, [
                 'required'=>false,
                 'class' => VersionControl::class,
                 'multiple' => true,
                 'choice_label' => 'name_version_control',
+                'preferred_choices' => function ($choice, $key, $value) use ($versionArray) {
+                    return in_array($choice, $versionArray);
+                },
             ]);
     }
 
