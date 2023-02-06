@@ -8,11 +8,30 @@
 <h1 class="text-center mt-3">Mes freelances favoris</h1>
 
 <br>
-
+{% if favorites %}
+        <div class="wrapper_resultat">
+                <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-10 cardsFreelance">
+                                <div class="resultat">
+                                        {% for freelance in favorites %}
+                                                {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="pagination" style="float:right">
+                        {{ knp_pagination_render(favorites) }}
+                </div>
+        </div>
+{% else %}
+        <h1>You don't have any selected freelances, we suggest you start searching for ones <a href="/">over here</a></h1>
+{% endif %}
 <!-- Wrapper -->
-<div class="wrapper">
-    {% for freelance in favorites %}
-        <h1>{{freelance.firstname}}</h1>
-    {% endfor %}
-</div>
+{#<div class="wrapper">#}
+{#    {% for freelance in favorites %}#}
+{#        <h1>{{freelance.firstname}}</h1>#}
+{#    {% endfor %}#}
+{#</div>#}
 {% endblock %}

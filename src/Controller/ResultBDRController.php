@@ -17,7 +17,7 @@ class ResultBDRController extends AbstractController
         $query = $request->query->get('q');
         $city = $request->query->get('city');
 
-        $user = $this->getUser();
+        $user = $this->getUser() ?? null;
         /*$freelances = $repository->findSearch([
             'q' => $query,
             'city' => $city

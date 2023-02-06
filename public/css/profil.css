@@ -93,10 +93,9 @@ article{
     gap:5%;
     margin-bottom: 3%;
 }
-
-.fa-heart{
-    color:#479F9F;
-    font-size: 15px;
+.btnFavProfile:hover{
+    color: red;
+    cursor: pointer;
 }
 
 .fa-location-dot, .fa-person-walking{

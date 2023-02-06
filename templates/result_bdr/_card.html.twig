@@ -6,8 +6,10 @@
         <h3>{{ freelance.price }}€/jour</h3>
         <p class="card-text">{{ freelance.title }}</p>
         <div class="viewProfil">
-        <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fas' : 'far' }} fa-heart btnFav" onclick="toggleFavorite({{ freelance.id }})"></i>
-        <a href="{{ path('app_profil_show', {'id': freelance.id })}}" class="btn6"><i class="fa-solid fa-eye"></i></a>
+        {% if user|default %}
+            <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid' : 'fa-regular' }} fa-heart btnFav" onclick="toggleFavorite({{ freelance.id }})"></i>
+        {% endif %}
+            <a href="{{ path('app_profil_show', {'id': freelance.id })}}" class="btn6"><i class="fa-solid fa-eye"></i></a>
         </div>
     </div>
 </div>
