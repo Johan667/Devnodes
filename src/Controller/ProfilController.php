@@ -77,13 +77,15 @@ class ProfilController extends AbstractController
         $commentaire = $this->entityManager->getRepository(Comment::class)->find(['id'=>$freelance]);
         $social = $this->entityManager->getRepository(Social::class)->find(['id'=>$freelance]);
 
+        $user = $this->getUser() ?? null;
 
         return $this->render('profil/show.html.twig',[
         'freelance'=>$freelance,
             'mission'=>$mission,
             'commentaire'=>$commentaire,
             'social'=>$social,
-            ]);
+            'user'=>$user,
+        ]);
     }
 
 }

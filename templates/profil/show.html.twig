@@ -9,7 +9,11 @@
         <div class="container">
             <div class="column"><i class="fa-solid fa-camera"></i></div>
             <div class="column">
-                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }} <i class="fa-regular fa-heart"></i></h1>
+                <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}
+                    {% if user|default %}
+                        <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid' : 'fa-regular' }} fa-heart btnFavProfile" onclick="toggleFavorite({{ freelance.id }})"></i>
+                    {% endif %}
+                </h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
 {#                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)#}

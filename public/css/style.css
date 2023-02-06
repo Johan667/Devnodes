@@ -293,7 +293,7 @@ nav .navbar ul {
 }
 .btnFav:hover{
   cursor: pointer;
-  color: blue;
+  color: red;
 }
 
 
