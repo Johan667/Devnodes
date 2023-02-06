@@ -17,24 +17,6 @@ class MessageType extends AbstractType
         $builder
             ->add('content', TextType::class, [
                 'label' => 'Content'
-            ])
-            ->add('datetime', DateTimeType::class, [
-                'label' => 'Date and Time'
-            ])
-            ->add('sender', EntityType::class, [
-                'class' => 'App\Entity\User',
-                'choice_label' => 'email',
-                'label' => 'Sender'
-            ])
-            ->add('recipient', EntityType::class, [
-                'class' => 'App\Entity\User',
-                'choice_label' => 'email',
-                'label' => 'Recipient'
-            ])
-            ->add('mission', EntityType::class, [
-                'class' => 'App\Entity\Mission',
-                'choice_label' => 'title',
-                'label' => 'Mission'
             ]);
     }
 

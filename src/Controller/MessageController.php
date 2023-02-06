@@ -19,7 +19,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class MessageController extends AbstractController
 {
     #[Route('/mission/{id}/messages')]
-    public function messages(Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry)
+    public function messages(Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry, Request $request)
     {
         $messages = $messageRepository->findByMissionId($mission->getId());
         $currentUser = $this->getUser();
@@ -28,17 +28,35 @@ class MessageController extends AbstractController
             $mission->getReceiveMission()
         ];
 
+        $message = new Message();
+        
+        $form = $this->createForm(MessageType::class, $message);
+        $reciever = null;
+        
         foreach ($users as $user) {
             if($user != $this->getUser()){
                 $reciever = $user;
             }
+        }
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message
+                ->setSender($currentUser)
+                ->setRecipient($reciever)
+                ->setMission($mission)
+                ->setDatetime(new \DateTimeImmutable());
+            $messageRepository->save($message);
+        }
+        
         return $this->render('message/index.html.twig', [
             'mission' => $mission,
             'messages' => $messages,
+            'form' => $form->createView()
         ]); 
 
-        }
+    }
 
         //TODO: take the reciever ID from the Missions and compare it to the currentUser, if it's not the same, that will be the reciever.
         
@@ -50,7 +68,7 @@ class MessageController extends AbstractController
     
         // afficher les messages et le formulaire sous les messages
         
-    }   
+      
 
     #[Route('/message', name: 'app_message_index', methods: ['GET'])]
     public function index(MessageRepository $messageRepository): Response
