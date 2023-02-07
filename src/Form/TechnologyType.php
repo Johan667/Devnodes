@@ -46,6 +46,7 @@ class TechnologyType extends AbstractType
         $builder
             ->add('coding_language', EntityType::class, [
                 'class' => CodingLanguage::class,
+                'label'=>'Langage de programmation',
                 'required'=>false,
                 'multiple' => true,
                 'choice_label' => 'name_coding_language',
@@ -55,6 +56,7 @@ class TechnologyType extends AbstractType
             ])
             ->add('framework', EntityType::class, [
                 'class' => Framework::class,
+                'label'=>'Framework',
                 'required'=>false,
                 'multiple' => true,
                 'choice_label' => 'name_framework',
@@ -65,6 +67,7 @@ class TechnologyType extends AbstractType
             ->add('database', EntityType::class, [
                 'required'=>false,
                 'class' => Db::class,
+                'label'=>'Base de donnée',
                 'multiple' => true,
                 'choice_label' => 'name_db',
                 'preferred_choices' => function ($choice, $key, $value) use ($databaseArray) {
@@ -73,6 +76,7 @@ class TechnologyType extends AbstractType
             ])
             ->add('methodology', EntityType::class, [
                 'required'=>false,
+                'label'=>'Methodologie',
                 'class' => Methodology::class,
                 'multiple' => true,
                 'choice_label' => 'name_methodology',
@@ -82,6 +86,7 @@ class TechnologyType extends AbstractType
             ])
             ->add('version_control', EntityType::class, [
                 'required'=>false,
+                'label'=>'Contrôle de version',
                 'class' => VersionControl::class,
                 'multiple' => true,
                 'choice_label' => 'name_version_control',
