@@ -18,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
 // TODO : une route /mission/{id}/messages 
 class MessageController extends AbstractController
 {
-    #[Route('/mission/{id}/messages')]
+    #[Route('/mission/{id}/messages', methods: ['GET', 'POST'])]
     public function messages(Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry, Request $request)
     {
         $messages = $messageRepository->findByMissionId($mission->getId());
@@ -47,7 +47,9 @@ class MessageController extends AbstractController
                 ->setRecipient($reciever)
                 ->setMission($mission)
                 ->setDatetime(new \DateTimeImmutable());
-            $messageRepository->save($message);
+            $messageRepository->save($message, true);
+
+            return $this->redirectToRoute('missions', [], Response::HTTP_SEE_OTHER);
         }
         
         return $this->render('message/index.html.twig', [
