@@ -106,14 +106,13 @@ article{
     cursor: pointer;
 }
 
-.fa-location-dot, .fa-person-walking{
+.fa-person-walking{
     color:#479F9F;
 }
 .blueh2{
     color:#479F9F;
     font-size: 24px;
 }
-
 
 #blok-right{
     padding:2%;
