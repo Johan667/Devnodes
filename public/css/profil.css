@@ -13,6 +13,14 @@
     border-radius: 50%; /* pour un cercle parfait */
     padding: 10px;
 }
+.width800{
+    max-width: 800px;
+}
+.input-skills{
+        max-width: 500px;
+        margin:auto;
+}
+
 .squares {
     display: flex;
     flex-wrap: wrap;
@@ -98,14 +106,13 @@ article{
     cursor: pointer;
 }
 
-.fa-location-dot, .fa-person-walking{
+.fa-person-walking{
     color:#479F9F;
 }
 .blueh2{
     color:#479F9F;
     font-size: 24px;
 }
-
 
 #blok-right{
     padding:2%;

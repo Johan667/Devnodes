@@ -16,7 +16,11 @@
                 </h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
-{#                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)#}
+                {% if mission is not null %}
+                    {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)
+                {% else %}
+                    {{ freelance.firstname }} n'a réaliser aucune mission pour le moment
+                {% endif %}
                 <div class="squares">
                     <div class="price">
                         Prix<br>
@@ -128,13 +132,14 @@
             {% endfor %}
 
             <h2 class="blueh2 mb-2 mt-2">Verifications</h2>
+            {% if freelance.isVerified %}
 
-            {% if freelance.isVerified is  null %}
                 <div class="verified-back">
-                    <i class="fa-solid fa-check"></i> Email verifié
+                    <i class="fas fa-check"></i> Email vérifié
                 </div>
             {% else %}
-                <div class="verified-back"><i class="fa-solid fa-x"></i> Email non vérifié
+                <div class="verified-back">
+                    <i class="fas fa-times"></i> Email non vérifié
                 </div>
             {% endif %}
             <div class="verified-grey mt-3">

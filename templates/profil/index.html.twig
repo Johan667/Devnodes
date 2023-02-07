@@ -7,7 +7,9 @@
     <header>
         <!-- En-tête de profil -->
         <div class="container">
-            <div class="column"><i class="fa-solid fa-camera"></i></div>
+            <div class="column">
+                <i class="fa-solid fa-camera"></i>
+            </div>
             <div class="column">
                 <h1 class="bolder">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
                 <h2 class="bold">{{ app.user.title }}</h2>
@@ -24,105 +26,105 @@
                     </div>
                 </div>
             </div>
+
             <div class="column">
-
-            </div>
-        <div class="shadowline"><hr></div>
-    </header>
-
-    <hr>
-    <br>
-
-        <!-- 14 blocs réponsifs de deux colonnes -->
-        <div class="wrapper">
-
-
-                    <h2 class="text-center">Modifier mes informations</h2>
-
-                    <div class="group-btn">
-                        <div class="select-edit">
-                    <button class="step-button" data-step="1" onclick="nextStep(1)"><small>Informations de Base</small></button>
-                    <button class="step-button" data-step="2" onclick="nextStep(2)">Localisation</button>
-                    <button class="step-button" data-step="3" onclick="nextStep(3)">Compétences</button>
-                    <button class="step-button" data-step="4" onclick="nextStep(4)">Description</button>
-                        </div>
-                    </div>
-
-                    <div id="step1" class="active">
-                        <br>
-                        {{ form_start(freelanceBase) }}
-
-                        <p>Entrez un titre pour votre profil</p>
-
-                        {{ form_widget(freelanceBase.title) }}
-                        {{ form_errors(freelanceBase.title) }}
-
-                        <p>Entrez un prix à la journée</p>
-
-                        {{ form_widget(freelanceBase.price) }}
-                        {{ form_errors(freelanceBase.price) }}
-
-                        <p>Travaillez-vous de chez vous ? à distance ?</p>
-
-                        {{ form_widget(freelanceBase.remoteWork) }}
-                        {{ form_errors(freelanceBase.remoteWork) }}
-
-                        <p>Depuis combien de temps êtes vous dans le domaine ?</p>
-
-                        {{ form_widget(freelanceBase.xpYears) }}
-                        {{ form_errors(freelanceBase.xpYears) }}
-
-                        <button type="submit">Modifier</button>
-                        {{ form_end(freelanceBase) }}
-
-                    </div>
-
-                    <!-- STEP 2 (Info Localisation et préférence de travail) -->
-
-                    <div id="step2">
-
-                        <h3 class="text-center">Localisation et préférence de travail</h3>
-                        {{ form_start(freelanceLocation) }}
-
-                        <p>Entrez votre ville</p>
-
-                        {{ form_widget(freelanceLocation.city) }}
-                        {{ form_errors(freelanceLocation.city) }}
-
-                        <p>reMote Work</p>
-                        {{ form_widget(freelanceLocation.remoteWork) }}
-                        {{ form_errors(freelanceLocation.remoteWork) }}
-
-                        <button type="submit">Modifier</button>
-
-                        {{ form_end(freelanceLocation) }}
-                    </div>
-
-                    <!-- STEP 3 (Compétences)-->
-
-                    <div id="step3">
-
-                        {{ form_start(freelanceTechnology) }}
-
-                        <p>Sélectionner vos compétences</p>
-
-                        <button type="submit">Modifier</button>
-
-                        {{ form_end(freelanceTechnology) }}
-
-                    </div>
-
-                    <!-- STEP 4 (Description) -->
-
-                    <div id="step4">
-                        {{ form_start(freelanceDescription) }}
-
-                        {{ form_widget(freelanceDescription) }}
-                        <button type="submit">Modifier</button>
-                    </div>
             </div>
         </div>
+
+    </header>
+
+    <br>
+
+    <!-- 14 blocs réponsifs de deux colonnes -->
+    <div class="wrapper">
+
+        <h2 class="text-center">Modifier mes informations</h2>
+
+        <div class="group-btn">
+            <div class="select-edit">
+                <button class="step-button" data-step="1" onclick="nextStep(1)"><small>Informations de Base</small>
+                </button>
+                <button class="step-button" data-step="2" onclick="nextStep(2)">Localisation</button>
+                <button class="step-button" data-step="3" onclick="nextStep(3)">Compétences</button>
+                <button class="step-button" data-step="4" onclick="nextStep(4)">Description</button>
+            </div>
+        </div>
+
+        <div id="step1" class="active">
+            <br>
+            {{ form_start(freelanceBase) }}
+
+            <p>Entrez un titre pour votre profil</p>
+
+            {{ form_widget(freelanceBase.title) }}
+            {{ form_errors(freelanceBase.title) }}
+
+            <p>Entrez un prix à la journée</p>
+
+            {{ form_widget(freelanceBase.price) }}
+            {{ form_errors(freelanceBase.price) }}
+
+            <p>Travaillez-vous de chez vous ? à distance ?</p>
+
+            {{ form_widget(freelanceBase.remoteWork) }}
+            {{ form_errors(freelanceBase.remoteWork) }}
+
+            <p>Depuis combien de temps êtes vous dans le domaine ?</p>
+
+            {{ form_widget(freelanceBase.xpYears) }}
+            {{ form_errors(freelanceBase.xpYears) }}
+
+            <button type="submit">Modifier</button>
+            {{ form_end(freelanceBase) }}
+
+        </div>
+
+        <!-- STEP 2 (Info Localisation et préférence de travail) -->
+
+        <div id="step2">
+
+            <h3 class="text-center">Localisation et préférence de travail</h3>
+            {{ form_start(freelanceLocation) }}
+
+            <p>Entrez votre ville</p>
+
+            {{ form_widget(freelanceLocation.city) }}
+            {{ form_errors(freelanceLocation.city) }}
+
+            <p>Remote Work</p>
+            {{ form_widget(freelanceLocation.remoteWork) }}
+            {{ form_errors(freelanceLocation.remoteWork) }}
+
+            <button type="submit">Modifier</button>
+
+            {{ form_end(freelanceLocation) }}
+        </div>
+
+        <!-- STEP 3 (Compétences)-->
+
+        <div id="step3">
+
+            {{ form_start(freelanceTechnology) }}
+
+            <p>Paramétrer mes compétences</p>
+
+            <button type="submit">Modifier</button>
+
+            {{ form_end(freelanceTechnology) }}
+        </div>
+
+
+        <!-- STEP 4 (Description) -->
+
+        <div id="step4">
+            <p>Vous en quelques mots</p>
+            {{ form_start(freelanceBiographie) }}
+
+            {{ form_widget(freelanceBiographie) }}
+            <button type="submit">Modifier</button>
+        </div>
     </div>
+
 {% endblock %}
 
 

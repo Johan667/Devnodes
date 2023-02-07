@@ -15,7 +15,7 @@ class DescriptionProfilType extends AbstractType
     {
         $builder
 
-            ->add('description', TextareaType::class)
+            ->add('biographie', TextareaType::class)
 
         ;
     }
