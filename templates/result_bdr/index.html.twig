@@ -5,27 +5,27 @@
 {% block body %}
 
 {#    {% include 'home/_filter.html.twig' with {form: searchFreelance} only %}#}
-    <h1 class="text-center">Résulat de votre recherche</h1>
+    <h1 class=" mt-5 text-center">Résulat de votre recherche</h1>
+    <hr>
 
-    <div class="wrapper_resultat">
-        <div class="row">
-            <div class="col-2">
-                <div id="sidebar">
-                    <h2>Filtres</h2>
+    <div class="mt-5 wrapper_resultat">
 
-                    <hr>
-                </div>
-            </div>
-            <div class="col-10 cardsFreelance">
-                <div class="resultat">
-                    {% for freelance in freelances %}
-                        {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
-                    {% endfor %}
-                </div>
-            </div>
+        <div class="filtre">
+            <h4>Filtres</h4>
+            {% include 'result_bdr/_filter.html.twig' with {form: searchFreelance2} only %}
+        </div>
+        <hr>
+
+        <div class="resultat">
+            {% for freelance in freelances %}
+                {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
+            {% endfor %}
+        </div>
+
     </div>
+
     <div class="pagination" style="float:right">
         {{ knp_pagination_render(freelances) }}
     </div>
-    </div>
+
 {% endblock %}
