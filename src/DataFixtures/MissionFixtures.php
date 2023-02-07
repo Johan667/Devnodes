@@ -31,7 +31,7 @@ class MissionFixtures extends Fixture
         $usersLength = count($users)-1;
         $freelancersLength = count($users)-1;
 
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < 100; $i++) {
             $userRandomKey = rand(0, $usersLength);
             $freelancersRandomKey = rand(0, $freelancersLength);
 
@@ -44,7 +44,7 @@ class MissionFixtures extends Fixture
                 ->setReceiveMission($freelancer)
                 ->setTitle($faker->words(3, true))
                 ->setObject($faker->words(5, true))
-                ->setStartDate($faker->dateTime)
+                ->setStartDate(new \DateTimeImmutable())
                 ->setDescription($faker->sentences(4, true))
                 ->setFrenquency("whatever you want it to be LOL")
                 ;
