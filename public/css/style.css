@@ -225,15 +225,28 @@ nav .navbar ul {
 
 /* --- RESULTAT BDR --- */
 
-.wrapper_resultat{
-  display:flex;
-  margin : 50px;
-  gap: 10px;
+@media screen and (max-width: 880px) {
+  .wrapper_resultat {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .resultat{
+    justify-content: center;
+  }
 }
 
-.filtre{
-  background-color: red;
+.wrapper_resultat{
+  display: flex;
+  gap: 25px;
+  margin: 10px;
 }
+
+.btnSearch2{
+  width: 250px;
+  justify-items: baseline;
+}
+
 
 .resultat{
   display:flex;

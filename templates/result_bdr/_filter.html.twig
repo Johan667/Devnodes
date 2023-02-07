@@ -1,10 +1,6 @@
-{{ form_start(form, {'attr':{'class':'customSearch'}}) }}
-<div class="btnSearch">
-            <span class="icon-form">
-                <i class="fa-solid fa-location-dot mt-2"></i>
-                {{ form_row(form.codingLanguages, {'attr':{'class':'btnSearch'}}) }}
-            </span>
-</div>
-
-<button class="btn4" type="submit">Filtrer</button>
+{{ form_start(form, {'attr':{'class':'filtre'}}) }}
+    <div class="btnSearch2">Language de programmation {{ form_row(form.language) }}</div>
+    <div class="btnSearch2">Framework {{ form_row(form.framework) }}</div>
+    <div class="btnSearch2">Ville {{ form_row(form.city) }}</div>
+    <button class="btnSearch2" type="submit">Rechercher</button>
 {{ form_end(form) }}

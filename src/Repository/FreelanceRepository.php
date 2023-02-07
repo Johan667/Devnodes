@@ -27,16 +27,23 @@ class FreelanceRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère les événement en lien avec une recherche
+     * Récupère les freelances en lien avec une recherche
      * @return Freelance[]
      */
     public function findSearch(array $parameters): Query //parameters est le tableau
     {
         $qb = $this->createQueryBuilder('f');
         // fait une requête sur l'entité 'F' : 'FREELANCE'
+
+
+
         if (!empty($parameters['language'])) {
             $qb->andWhere('c.id LIKE :id')
                 ->setParameter('id', "%{$parameters['language']}%");
+        }
+        if (!empty($parameters['framework'])) {
+            $qb->andWhere('fw.id LIKE :id')
+                ->setParameter('id', "%{$parameters['framework']}%");
         }
 
         if (!empty($parameters['city'])) {
@@ -45,8 +52,11 @@ class FreelanceRepository extends ServiceEntityRepository
         }
 
         $qb->leftJoin('f.codingLanguages', 'c');
+        $qb->leftJoin('f.frameworks', 'fw');
         //dd($qb->getDQL());
         // requete bdd
+
+
 
         return $qb->getQuery();
             //->getResult(); //retourne le tableau des résultats
