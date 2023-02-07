@@ -17,7 +17,9 @@
                 <h2 class="bold">{{ freelance.title }}</h2>
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
                 {% if mission is not null %}
-                {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)
+                    {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)
+                {% else %}
+                    {{ freelance.firstname }} n'a réaliser aucune mission pour le moment
                 {% endif %}
                 <div class="squares">
                     <div class="price">
