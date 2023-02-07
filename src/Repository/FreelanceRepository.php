@@ -2,10 +2,13 @@
 
 namespace App\Repository;
 
-use App\Entity\Freelance;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Query;
+use App\Entity\Freelance;
+use App\Entity\CodingLanguage;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Freelance>
@@ -17,8 +20,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FreelanceRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManagerInterface $em, ManagerRegistry $registry)
     {
+        $this->em = $em;
         parent::__construct($registry, Freelance::class);
     }
 
@@ -28,25 +32,43 @@ class FreelanceRepository extends ServiceEntityRepository
      */
     public function findSearch(array $parameters): Query //parameters est le tableau
     {
-        $qb = $this->createQueryBuilder('F');
+        $qb = $this->createQueryBuilder('f');
         // fait une requête sur l'entité 'F' : 'FREELANCE'
-
-        if ($parameters['q'] !== null) {
-            // si le titre est différent de null une fois submit, on le cherche içi :
-            $qb->andWhere('F.title LIKE :title')
-                ->setParameter('title', "%{$parameters['q']}%");
-            // lie 'q' du tableau $parameter au title de la table user // bindParamPDO
+        if (!empty($parameters['language'])) {
+            $qb->andWhere('c.id LIKE :id')
+                ->setParameter('id', "%{$parameters['language']}%");
         }
 
-        if ($parameters['city'] !== null) {
-           $qb->andWhere('F.city = :city')
+        if (!empty($parameters['city'])) {
+            $qb->andWhere('f.city = :city')
                 ->setParameter('city', $parameters['city']);
         }
 
+        $qb->leftJoin('f.codingLanguages', 'c');
+        //dd($qb->getDQL());
         // requete bdd
 
         return $qb->getQuery();
             //->getResult(); //retourne le tableau des résultats
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findSearch2(array $parameters): Query
+    {
+
+        $qb = $this->createQueryBuilder('f');
+        $qb->join('f.codingLanguages', 'c');
+
+        if (!empty($parameters['language'])) {
+            $qb->andWhere('c.nameCodingLanguage LIKE :name')
+                ->setParameter('name', "%{$parameters['language']}%");
+        }
+
+
+        return $qb->getQuery();
+        //->getResult(); //retourne le tableau des résultats
     }
 
     /**
