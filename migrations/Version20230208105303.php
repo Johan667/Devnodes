@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230206125744 extends AbstractMigration
+final class Version20230208105303 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -28,7 +28,7 @@ final class Version20230206125744 extends AbstractMigration
         $this->addSql('CREATE TABLE framework (id INT AUTO_INCREMENT NOT NULL, name_framework VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE framework_freelance (framework_id INT NOT NULL, freelance_id INT NOT NULL, INDEX IDX_AE0D189737AECF72 (framework_id), INDEX IDX_AE0D1897E8DF656B (freelance_id), PRIMARY KEY(framework_id, freelance_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE freelance (id INT NOT NULL, title VARCHAR(100) DEFAULT NULL, location VARCHAR(255) DEFAULT NULL, country VARCHAR(255) DEFAULT NULL, address VARCHAR(255) DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, code_postal VARCHAR(20) DEFAULT NULL, price INT NOT NULL, duration_preference VARCHAR(255) DEFAULT NULL, remote_work VARCHAR(255) DEFAULT NULL, xp_years VARCHAR(100) DEFAULT NULL, picture VARCHAR(255) DEFAULT NULL, biographie LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, sender_id INT NOT NULL, recipient_id INT NOT NULL, content LONGTEXT DEFAULT NULL, datetime DATETIME NOT NULL, INDEX IDX_B6BD307FF624B39D (sender_id), INDEX IDX_B6BD307FE92F8F78 (recipient_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, sender_id INT NOT NULL, recipient_id INT NOT NULL, mission_id INT NOT NULL, content LONGTEXT DEFAULT NULL, datetime DATETIME NOT NULL, INDEX IDX_B6BD307FF624B39D (sender_id), INDEX IDX_B6BD307FE92F8F78 (recipient_id), INDEX IDX_B6BD307FBE6CAE90 (mission_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE methodology (id INT AUTO_INCREMENT NOT NULL, name_methodology VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE methodology_freelance (methodology_id INT NOT NULL, freelance_id INT NOT NULL, INDEX IDX_115C1D5ED22DC3B (methodology_id), INDEX IDX_115C1D5EE8DF656B (freelance_id), PRIMARY KEY(methodology_id, freelance_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mission (id INT AUTO_INCREMENT NOT NULL, send_mission_id INT DEFAULT NULL, receive_mission_id INT DEFAULT NULL, title VARCHAR(150) NOT NULL, object VARCHAR(255) DEFAULT NULL, start_date DATE NOT NULL, is_read TINYINT(1) DEFAULT NULL, description LONGTEXT DEFAULT NULL, add_file VARCHAR(255) DEFAULT NULL, state VARCHAR(255) DEFAULT NULL, frenquency VARCHAR(255) DEFAULT NULL, INDEX IDX_9067F23CA16D3CEB (send_mission_id), INDEX IDX_9067F23C73176E35 (receive_mission_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -60,6 +60,7 @@ final class Version20230206125744 extends AbstractMigration
         $this->addSql('ALTER TABLE freelance ADD CONSTRAINT FK_48ABC675BF396750 FOREIGN KEY (id) REFERENCES `user` (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE message ADD CONSTRAINT FK_B6BD307FF624B39D FOREIGN KEY (sender_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE message ADD CONSTRAINT FK_B6BD307FE92F8F78 FOREIGN KEY (recipient_id) REFERENCES `user` (id)');
+        $this->addSql('ALTER TABLE message ADD CONSTRAINT FK_B6BD307FBE6CAE90 FOREIGN KEY (mission_id) REFERENCES mission (id)');
         $this->addSql('ALTER TABLE methodology_freelance ADD CONSTRAINT FK_115C1D5ED22DC3B FOREIGN KEY (methodology_id) REFERENCES methodology (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE methodology_freelance ADD CONSTRAINT FK_115C1D5EE8DF656B FOREIGN KEY (freelance_id) REFERENCES freelance (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE mission ADD CONSTRAINT FK_9067F23CA16D3CEB FOREIGN KEY (send_mission_id) REFERENCES `user` (id)');
@@ -98,6 +99,7 @@ final class Version20230206125744 extends AbstractMigration
         $this->addSql('ALTER TABLE freelance DROP FOREIGN KEY FK_48ABC675BF396750');
         $this->addSql('ALTER TABLE message DROP FOREIGN KEY FK_B6BD307FF624B39D');
         $this->addSql('ALTER TABLE message DROP FOREIGN KEY FK_B6BD307FE92F8F78');
+        $this->addSql('ALTER TABLE message DROP FOREIGN KEY FK_B6BD307FBE6CAE90');
         $this->addSql('ALTER TABLE methodology_freelance DROP FOREIGN KEY FK_115C1D5ED22DC3B');
         $this->addSql('ALTER TABLE methodology_freelance DROP FOREIGN KEY FK_115C1D5EE8DF656B');
         $this->addSql('ALTER TABLE mission DROP FOREIGN KEY FK_9067F23CA16D3CEB');

@@ -7,9 +7,11 @@
         <h3>{{ freelance.price }}€/jour</h3>
         <p class="card-text">{{ freelance.title }}</p>
         <div class="viewProfil">
+            {% if app.user %}
             {% if not is_granted('ROLE_FREELANCE') %}
             <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid text-danger' : 'fa-regular text-danger' }} fa-heart" onclick="toggleFavorite({{ freelance.id }})"></i>
         {% endif %}
+            {% endif %}
             <a  class="text-dark" href="{{ path('app_profil_show', {'id': freelance.id })}} "><i class="fa-solid fa-eye"></i></a>
         </div>
     </div>

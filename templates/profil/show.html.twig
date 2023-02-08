@@ -12,9 +12,9 @@
                 <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
-                {% if mission == true %}
+                {% if mission is not empty %}
 
-                    {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i> ({{ commentaire.id | length }} Avis)
+                    {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
                 {% else %}
                     {{ freelance.firstname }} n'a réaliser aucune mission pour le moment
                 {% endif %}
@@ -36,7 +36,7 @@
                         <h5 class="mt-2">Mettre en favoris <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid text-danger' : 'fa-regular text-danger' }} fa-heart" onclick="toggleFavorite({{ freelance.id }})"></i></h5>
                     {% endif %}
                 {% else %}
-                    <button class="btn btn-success mt-2 proposeMission"><a href="{{ path('app_login') }}">S'inscrire pour proposer une mission</a></button>
+                    <button class="proposeMission"><a href="{{ path('app_register') }}">S'inscrire pour proposer une mission</a></button>
                 {% endif %}
             </div>
         </div>
