@@ -2,22 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Message;
 use App\Entity\Mission;
-use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
 use App\Repository\MissionRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\Persistence\ManagerRegistry;
 
 // TODO : une route /mission/{id}/messages 
 class MessageController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/mission/{id}/messages', methods: ['GET', 'POST'])]
     public function messages(Mission $mission, MessageRepository $messageRepository, ManagerRegistry $managerRegistry, Request $request)
     {
@@ -73,10 +81,13 @@ class MessageController extends AbstractController
       
 
     #[Route('/message', name: 'app_message_index', methods: ['GET'])]
-    public function index(MessageRepository $messageRepository): Response
+    public function index(): Response
     {
+        $user = $this->getUser();
+        $messages = $this->entityManager->getRepository(Message::class)->find(['id' => $user]);
+
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll(),
+            'messages' => $messages,
         ]);
     }
 
