@@ -16,9 +16,11 @@ use App\Form\LocationRemoteType;
 use App\Form\TechnologyType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfilController extends AbstractController
 {
@@ -30,7 +32,7 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/profil', name: 'app_profil')]
-    public function index(Request $request): Response
+    public function index(Request $request, SluggerInterface $slugger): Response
     {
         $user = $this->getUser();
         /** @var Freelance $freelance */
@@ -62,6 +64,24 @@ class ProfilController extends AbstractController
 
             if (!$form->isSubmitted() || !$form->isValid()) {
                 continue;
+            }
+
+
+            $picture = $form->get('picture')->getData();
+
+            if ($picture) {
+                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
+
+                try {
+                    $picture->move(
+                        $this->getParameter('picture'),
+                        $newFilename
+                    );
+                } catch (FileException $error) {
+                }
+                $freelance->setPicture($newFilename);
             }
 
             if ($formName === 'tech') {
