@@ -47,11 +47,18 @@
 .proposeMission {
     display: flex;
     width:100%;
-    color: #479F9F;
-    background-color: transparent;
-    border: 1px solid #479F9F;
+    color: #ffffff;
+    background-color: #EB6440;
     border-radius: 2%;
     text-decoration: none;
+}
+
+.proposeMission:hover {
+    background-color: rgba(235, 100, 64, 0.87);
+}
+.proposeMission a:hover{
+    text-decoration: none;
+    color: white;
 }
 
 
@@ -93,6 +100,10 @@ main {
     background-color: white;
     max-width: 1200px;
     margin:auto;
+}
+
+.bolder{
+    font-family: 'JetBrains Mono', 'sans-serif';
 }
 
 article{

@@ -28,7 +28,6 @@ class ResultBDRController extends AbstractController
             'q' => $query,
             'city' => $city
         ]);*/
-
         // les profils paginé
         $freelances = $paginator->paginate(
             $repository->findSearch([

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Devnodes | Mes Favoris{% endblock %}
+{% block title %}Devnodes | Favoris{% endblock %}
 
 
 {% block body %}
@@ -8,16 +8,19 @@
 <h1 class="text-center mt-3">Mes freelances favoris</h1>
 
 <br>
-{% if favorites %}
         <div class="wrapper_resultat">
                 <div class="row">
                         <div class="col-2">
                         </div>
                         <div class="col-10 cardsFreelance">
+                                {% if favorites is not empty %}
                                 <div class="resultat">
                                         {% for freelance in favorites %}
                                                 {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
                                         {% endfor %}
+                                        {% else %}
+                                        Aucun favoris
+                                        {% endif %}
                                 </div>
                         </div>
                 </div>
@@ -25,9 +28,6 @@
                         {{ knp_pagination_render(favorites) }}
                 </div>
         </div>
-{% else %}
-        <h1>You don't have any selected freelances, we suggest you start searching for ones <a href="/">over here</a></h1>
-{% endif %}
 <!-- Wrapper -->
 {#<div class="wrapper">#}
 {#    {% for freelance in favorites %}#}

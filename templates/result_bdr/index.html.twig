@@ -17,10 +17,15 @@
         <hr>
 
         <div class="resultat">
+            {% if freelances is not empty %}
             {% for freelance in freelances %}
                 {% include 'result_bdr/_card.html.twig' with {freelance: freelance, user: user} only %}
             {% endfor %}
+            {% else %}
+            Aucun profil, contactez directement le meilleur : MR.SLAOUI
+            {% endif %}
         </div>
+
 
     </div>
 
