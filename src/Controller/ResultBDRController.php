@@ -22,6 +22,7 @@ class ResultBDRController extends AbstractController
     {
         $query = $request->query->get('language');
         $city = $request->query->get('city');
+        $framework = $request->query->get('framework');
 
         $user = $this->getUser() ?? null;
         /*$freelances = $repository->findSearch([
@@ -32,7 +33,8 @@ class ResultBDRController extends AbstractController
         $freelances = $paginator->paginate(
             $repository->findSearch([
                 'language' => $query,
-                'city' => $city
+                'city' => $city,
+                'framework' => $framework
             ]),
             $request->query->getInt('page', 1),
             12
