@@ -43,10 +43,12 @@
                 {% endif %}
 
                 {% if app.user %}
+                {% if not is_granted('ROLE_FREELANCE') %}
+                    <li>
+                        <a class="btn1" href="{{ path('app_favorite') }}">Favoris</a>
+                    </li>
+                {% endif %}
                 {% if is_granted('ROLE_USER') %}
-                <li>
-                    <a class="btn1" href="{{ path('app_favorite') }}">Favoris</a>
-                </li>
                 <li>
                     <a class="btn1" href="{{ path('app_message_index') }}">Messagerie</a>
                 </li>
