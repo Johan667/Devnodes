@@ -39,6 +39,17 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByMissionId($missionId): array
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->andWhere('m.mission = :mission')
+            ->setParameter('mission', $missionId)
+            ->getQuery()
+            ;
+
+        return $qb->execute();
+    }
+
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */

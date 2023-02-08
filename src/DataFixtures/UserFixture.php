@@ -32,7 +32,7 @@ class UserFixture extends Fixture
 
         $password = $this->encoder->hashPassword(new user(), 'password');
         $faker = Faker::create('fr_FR');
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < 100; $i++) {
             $user = new User();
             $user
                 ->setEmail($faker->email())
