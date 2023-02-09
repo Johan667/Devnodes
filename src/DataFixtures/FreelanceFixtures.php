@@ -40,6 +40,7 @@ class FreelanceFixtures extends Fixture
                 ->setEmail($faker->email())
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)
+                ->setPicture($faker->randomElement(['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.png', 'img7.png']))
                 ->setBiographie($faker->sentences(3, true))
                 ->setPassword($password)
                 ->setPrice(($faker->randomDigitNotNull)*100)
