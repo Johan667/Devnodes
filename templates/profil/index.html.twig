@@ -8,8 +8,11 @@
         <!-- En-tête de profil -->
         <div class="container">
             <div class="column">
-{#                <i class="fa-solid fa-camera"></i>#}
-                <img src="{{ asset('uploads/photoprofil/' ~ app.user.picture) }}" alt="Photo de profil">
+                {% if app.user.picture %}
+                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ app.user.picture) }}" alt="Photo de profil">
+                {% else %}
+                    <i class="fa-solid fa-camera"></i>
+                {% endif %}
             </div>
             <div class="column">
                 <h1 class="bolder">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
@@ -60,6 +63,8 @@
             {{ form_widget(freelanceBase.picture) }}
             {{ form_errors(freelanceBase.picture) }}
 
+            <a class="text-danger" href="{{ path('delete_photo_profil', {'id': app.user.id } ) }}">Supprimer la photo</a>
+            <br> <br>
             <p>Entrez un titre pour votre profil</p>
 
             {{ form_widget(freelanceBase.title) }}

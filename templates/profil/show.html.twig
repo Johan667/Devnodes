@@ -7,7 +7,16 @@
         <!-- Header (photo, titre, prix, disponibilité, experience. -->
         <hr>
         <div class="container">
-            <div class="column"><i class="fa-solid fa-camera"></i></div>
+
+            <div class="column">
+
+                {% if freelance.picture %}
+                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ freelance.picture) }}" alt="Photo de profil">
+                {% else %}
+                    <i class="fa-solid fa-camera"></i>
+                {% endif %}
+
+            </div>
             <div class="column">
                 <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
@@ -36,7 +45,7 @@
                         <h5 class="mt-2">Mettre en favoris <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid text-danger' : 'fa-regular text-danger' }} fa-heart" onclick="toggleFavorite({{ freelance.id }})"></i></h5>
                     {% endif %}
                 {% else %}
-                    <button class="proposeMission"><a href="{{ path('app_register') }}">S'inscrire pour proposer une mission</a></button>
+                    <button class="proposeMission"><a href="{{ path('app_register') }}">Proposer une mission</a></button>
                 {% endif %}
             </div>
         </div>

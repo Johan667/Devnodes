@@ -155,4 +155,19 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    /**
+     * supprimer la photo de profil
+     * @Route("/profil/delete/{id}", name="delete_photo_profil")
+     */
+    public function delete(Freelance $freelance)
+    {
+        $oldFile = $freelance->getPicture();
+        if($oldFile) {
+            unlink($this->getParameter('picture') . '/' . $oldFile);
+        }
+
+
+        return $this->redirectToRoute('app_profil');
+    }
+
 }
