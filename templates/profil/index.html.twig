@@ -46,16 +46,17 @@
 
         <div class="group-btn">
             <div class="select-edit">
-                <button class="step-button" data-step="1" onclick="nextStep(1)"><small>Informations de Base</small>
+                <button class="step-button" data-step="1" onclick="nextStep(1)"><small> <i class="fa-sharp fa-solid fa-circle-info"></i> Informations de Base</small>
                 </button>
-                <button class="step-button" data-step="2" onclick="nextStep(2)">Localisation</button>
-                <button class="step-button" data-step="3" onclick="nextStep(3)">Compétences</button>
-                <button class="step-button" data-step="4" onclick="nextStep(5)">x compétence</button>
-                <button class="step-button" data-step="4" onclick="nextStep(4)">Description</button>
+                <button class="step-button" data-step="2" onclick="nextStep(2)"><i class="fa-solid fa-location-dot"></i> Localisation</button>
+                <button class="step-button" data-step="3" onclick="nextStep(3)"><i class="fa-solid fa-plus"></i> Compétences</button>
+                <button class="step-button" data-step="4" onclick="nextStep(5)"><i class="fa-solid fa-trash"></i> Compétence</button>
+                <button class="step-button" data-step="4" onclick="nextStep(4)"><i class="fa-sharp fa-solid fa-comment"></i> Description</button>
             </div>
         </div>
 
         <div id="step1" class="active">
+            <div id="myForm">
             <br>
             {{ form_start(freelanceBase) }}
 
@@ -88,13 +89,13 @@
 
             <button type="submit">Modifier</button>
             {{ form_end(freelanceBase) }}
-
+            </div>
         </div>
 
         <!-- STEP 2 (Info Localisation et préférence de travail) -->
 
         <div id="step2">
-
+            <div id="myForm">
             <h3 class="text-center">Localisation et préférence de travail</h3>
             {{ form_start(freelanceLocation) }}
 
@@ -110,6 +111,7 @@
             <button type="submit">Modifier</button>
 
             {{ form_end(freelanceLocation) }}
+            </div>
         </div>
 
         <!-- STEP 3 (Compétences)-->
