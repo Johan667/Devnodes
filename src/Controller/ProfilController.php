@@ -40,6 +40,8 @@ class ProfilController extends AbstractController
 
         $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
 
+        $code = $freelance->getCodingLanguages();
+
         $forms = [
             'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
             'tech' => $this->createForm(TechnologyType::class, null, [
@@ -53,8 +55,25 @@ class ProfilController extends AbstractController
 
         /** Parti supprimer une compétence */
 
+        $user = $this->getUser();
+        $form = $this->createForm(EditHeaderProfilType::class, $user);
+        $form->handleRequest($request);
+        $picture = $form->get('picture')->getData();
 
+        if ($picture) {
+            $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
 
+            try {
+                $picture->move(
+                    $this->getParameter('picture'),
+                    $newFilename
+                );
+            } catch (FileException $error) {
+            }
+            $freelance->setPicture($newFilename);
+        }
         /** fin parti supprimer une compétence */
 
         foreach ($forms as $form) {
@@ -73,23 +92,6 @@ class ProfilController extends AbstractController
                 continue;
             }
 
-            $picture = $form->get('picture')->getData();
-
-            if ($picture) {
-                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
-
-                try {
-                    $picture->move(
-                        $this->getParameter('picture'),
-                        $newFilename
-                    );
-                } catch (FileException $error) {
-                }
-                $freelance->setPicture($newFilename);
-            }
-
             if ($formName === 'tech') {
                 if($coding =! null) {
                     $coding = $form->getData()['coding_language'];
@@ -103,12 +105,14 @@ class ProfilController extends AbstractController
                         $freelance->addFramework($frame);
                     }
                 }
+
                 if($db =! null) {
                     $db = $form->getData()['database'];
                     foreach ($db as $d) {
                         $freelance->addDb($d);
                     }
                 }
+
                 if($methodology =! null) {
                     $methodology = $form->getData()['methodology'];
                     foreach ($methodology as $method) {
@@ -123,6 +127,7 @@ class ProfilController extends AbstractController
                 }
             }
         }
+
 
         $this->entityManager->flush();
 
@@ -139,6 +144,7 @@ class ProfilController extends AbstractController
             'freelanceLanguage' => $forms['lang']->createView(),
             'freelanceTechnology' => $forms['tech']->createView(),
             'freelance'=>$freelance,
+            'code'=>$code,
         ]);
     }
 
@@ -176,5 +182,92 @@ class ProfilController extends AbstractController
 
         return $this->redirectToRoute('app_profil');
     }
+
+    #[Route('/profil/delete/coding/language/{id}', name: 'profil_delete_coding')]
+    public function deleteCoding($id): Response
+    {
+        $user = $this->getUser();
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        foreach ($freelance->getCodingLanguages() as $code) {
+            $freelance->removeCodingLanguage($code);
+        }
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+
+    }
+    #[Route('/profil/delete/framework/{id}', name: 'profil_delete_framework')]
+    public function deleteFramework($id): Response
+    {
+        $user = $this->getUser();
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        foreach ($freelance->getFrameworks() as $framework) {
+            $freelance->removeFramework($framework);
+        }
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+
+    }
+    #[Route('/profil/delete/database/{id}', name: 'profil_delete_database')]
+    public function deleteDb($id): Response
+    {
+        $user = $this->getUser();
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        foreach ($freelance->getDbs() as $db) {
+            $freelance->removeDb($db);
+        }
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+
+    }
+    #[Route('/profil/delete/version/{id}', name: 'profil_delete_version')]
+    public function deleteVersion($id): Response
+    {
+        $user = $this->getUser();
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        foreach ($freelance->getVersionControls() as $version) {
+            $freelance->removeVersionControl($version);
+        }
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+
+    }
+    #[Route('/profil/delete/methodology/{id}', name: 'profil_delete_methodology')]
+    public function deleteMethodology($id): Response
+    {
+        $user = $this->getUser();
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        foreach ($freelance->getMethodologies() as $methodology) {
+            $freelance->removeVersionControl($methodology);
+        }
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+
+    }
+
 
 }
