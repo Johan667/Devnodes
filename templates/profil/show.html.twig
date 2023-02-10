@@ -25,16 +25,16 @@
 
                     {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
                 {% else %}
-                    {{ freelance.firstname }} n'a réaliser aucune mission pour le moment
+                    {{ freelance.firstname }} n'a réalisé aucune mission pour le moment
                 {% endif %}
                 <div class="squares">
                     <div class="price">
                         Prix<br>
-                        {{ freelance.price }} € par jours
+                        {{ freelance.price }}€ par/j
                     </div>
                     <div class="xpYears">
                         Expérience<br>
-                        {{ freelance.xpYears }} an
+                        {{ freelance.xpYears }} an(s)
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
 <main>
     <article>
         <section id="blok-left">
-            <h2 class="blueh2">Localisation et Deplacements</h2>
+            <h2 class="blueh2">Localisation et Déplacement</h2>
             <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
 
             <p class="textInfo"><i class="fa-solid fa-person-walking"></i><span> {{ freelance.remoteWork }}.</span></p>

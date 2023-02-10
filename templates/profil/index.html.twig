@@ -22,11 +22,11 @@
                 <div class="squares">
                     <div class="price">
                         Prix<br>
-                        {{ app.user.price }} € par jours
+                        {{ app.user.price }}€ par/j
                     </div>
                     <div class="xpYears">
-                        Experience<br>
-                        {{ app.user.xpYears }} an
+                        Expérience<br>
+                        {{ app.user.xpYears }} an(s)
                     </div>
                 </div>
             </div>
@@ -46,11 +46,11 @@
 
         <div class="group-btn">
             <div class="select-edit">
-                <button class="step-button" data-step="1" onclick="nextStep(1)"><small> <i class="fa-sharp fa-solid fa-circle-info"></i> Informations de Base</small>
+                <button class="step-button" data-step="1" onclick="nextStep(1)"><small> <i class="fa-sharp fa-solid fa-circle-info"></i> Informations de base</small>
                 </button>
                 <button class="step-button" data-step="2" onclick="nextStep(2)"><i class="fa-solid fa-location-dot"></i> Localisation</button>
                 <button class="step-button" data-step="3" onclick="nextStep(3)"><i class="fa-solid fa-plus"></i> Compétences</button>
-                <button class="step-button" data-step="4" onclick="nextStep(5)"><i class="fa-solid fa-trash"></i> Compétence</button>
+                <button class="step-button" data-step="4" onclick="nextStep(5)"><i class="fa-solid fa-trash"></i> Compétences</button>
                 <button class="step-button" data-step="4" onclick="nextStep(4)"><i class="fa-sharp fa-solid fa-comment"></i> Description</button>
             </div>
         </div>
@@ -67,22 +67,17 @@
 
             <a class="text-danger" href="{{ path('delete_photo_profil', {'id': app.user.id } ) }}">Supprimer la photo</a>
             <br> <br>
-            <p>Entrez un titre pour votre profil</p>
+            <p>Titre du profil</p>
 
             {{ form_widget(freelanceBase.title) }}
             {{ form_errors(freelanceBase.title) }}
 
-            <p>Entrez un prix à la journée</p>
+            <p>Prix à la journée</p>
 
             {{ form_widget(freelanceBase.price) }}
             {{ form_errors(freelanceBase.price) }}
 
-            <p>Travaillez-vous de chez vous ? à distance ?</p>
-
-            {{ form_widget(freelanceBase.remoteWork) }}
-            {{ form_errors(freelanceBase.remoteWork) }}
-
-            <p>Depuis combien de temps êtes vous dans le domaine ?</p>
+            <p>Depuis combien de temps êtes-vous dans le domaine ?</p>
 
             {{ form_widget(freelanceBase.xpYears) }}
             {{ form_errors(freelanceBase.xpYears) }}
@@ -104,9 +99,11 @@
             {{ form_widget(freelanceLocation.city) }}
             {{ form_errors(freelanceLocation.city) }}
 
-            <p>Remote Work</p>
-            {{ form_widget(freelanceLocation.remoteWork) }}
-            {{ form_errors(freelanceLocation.remoteWork) }}
+                <p>Travaillez-vous chez vous ? à distance ?</p>
+
+                {{ form_widget(freelanceLocation.remoteWork) }}
+                {{ form_errors(freelanceLocation.remoteWork) }}
+                <br>
 
             <button type="submit">Modifier</button>
 
