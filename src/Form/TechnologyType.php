@@ -6,7 +6,6 @@ use App\Entity\Framework;
 use App\Entity\Db;
 use App\Entity\Freelance;
 use App\Entity\Methodology;
-use App\Entity\User;
 use App\Entity\VersionControl;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\CodingLanguage;
+use App\Entity\Db;
+use App\Entity\Framework;
 use App\Entity\Freelance;
 use App\Entity\User;
 use App\Form\FreelanceType;
+use App\Form\RegistrationFormType;
+use App\Form\RegistrationFreelanceType;
 use App\Repository\FreelanceRepository;
 use App\Security\AppCustomAuthenticator;
 use App\Security\EmailVerifier;
@@ -34,38 +38,24 @@ class RegistrationFreelanceController extends AbstractController
     #[Route('/register/freelance', name: 'app_register_freelance')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
-        $freelance= new Freelance();
-        $user = new User();
-        $form = $this->createForm(FreelanceType::class, $freelance);
+        $freelance = new Freelance();
+        $form = $this->createForm(RegistrationFreelanceType::class, $freelance);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $freelance->setRoles((array)"ROLE_FREELANCE");
+            $email = $form->get('email')->getData();
+            $freelance->setEmail($email);
 
+            // encode the plain password
             $freelance->setPassword(
                 $userPasswordHasher->hashPassword(
                     $freelance,
                     $form->get('password')->getData()
                 )
             );
-
-
-
             $entityManager->persist($freelance);
             $entityManager->flush();
-
-            $this->redirectToRoute('app_login');
-
-            // generate a signed url and email it to the user
-            //    $this->emailVerifier->sendEmailConfirmation('app_verify_email', $freelance,
-            //        (new TemplatedEmail())
-            //            ->from(new Address('admin@le.com', 'Look Escort'))
-            //            ->to($freelance->getEmail())
-            //            ->subject('Please Confirm your Email')
-            //            ->htmlTemplate('registration/confirmation_email.html.twig')
-            //    );
-            // do anything else you need here, like send an email
-
             return $userAuthenticator->authenticateUser(
                 $freelance,
                 $authenticator,
@@ -74,9 +64,12 @@ class RegistrationFreelanceController extends AbstractController
         }
 
         return $this->render('registration_freelance/index.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
+
+
+
 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, FreelanceRepository $freelanceRepository): Response
