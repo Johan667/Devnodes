@@ -23,12 +23,6 @@ class EditHeaderProfilType extends AbstractType
             ])
             ->add('title',TextType::class)
             ->add('price',NumberType::class)
-            ->add('remoteWork', ChoiceType::class, [
-                'choices' => [
-                    'Remote Work' => 'Remote Work',
-                    'No Remote work' => 'No Remote work',
-                ]
-            ])
             ->add('xpYears',NumberType::class)
         ;
     }

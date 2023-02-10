@@ -20,14 +20,13 @@ class LocationRemoteType extends AbstractType
                 'label' => 'city',
                 'attr' => ['id' => 'city'],
             ])
-            ->add('remoteWork', ChoiceType::class, array(
-                'choices' => array(
-                    'Yes' => true,
-                    'No' => false,
-                ),
-                'expanded' => true,
-                'multiple' => false
-            ))
+            ->add('remoteWork', ChoiceType::class, [
+                'label' => 'Préférence',
+                'choices' => [
+                    'A distance' => 'A distance',
+                    'Sur place' => 'Sur place',
+                ]
+            ])
 
         ;
     }
