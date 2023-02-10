@@ -6,8 +6,17 @@
 
 {% block body %}
 
-    <h1 class="text-center mt-3">Missions</h1>
-    <hr>
+
+    <div class="group-btn">
+        <div class="select-edit">
+            {% if is_granted('ROLE_FREELANCE') %}
+            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission reçu </button>
+            {% endif %}
+            <button class="step-button" data-step="2" onclick="nextStep(2)">Mission envoyé</button>
+        </div>
+    </div>
+
+<div id="step1" class="active">
 
     {% if is_granted('ROLE_FREELANCE') %}
 
@@ -38,7 +47,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <b>Début de mission souhaité : {{ mission.startDate|date("d/m/Y")}}</b><br><br>
+                            <b>Date : {{ mission.startDate|date("d/m/Y")}}</b><br><br>
 
                             Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
                             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
@@ -50,6 +59,9 @@
                             <hr>
                             <b>Description de la mission :</b><br>
                             <p>{{ mission.description }}</p>
+                            <hr>
+                            <b>Fichier :</b><br>
+                            {{ mission.addFile }}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
@@ -62,11 +74,12 @@
 
         {% endfor %}
     {% endif %}
+</div>
+
+<div id="step2">
 
 
     {% for mission in missionSend %}
-
-
         <div class="card col-9 ms-5 mb-2">
             <div class="card-header text-end">
                 {{ mission.startDate|date("d/m/Y") }}
@@ -82,6 +95,8 @@
         </div>
 
     {% endfor %}
+
+</div>
 
 
 {% endblock %}
