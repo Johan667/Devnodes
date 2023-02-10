@@ -31,7 +31,7 @@ class MissionFixtures extends Fixture
         $usersLength = count($users)-1;
         $freelancersLength = count($users)-1;
 
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $userRandomKey = rand(0, $usersLength);
             $freelancersRandomKey = rand(0, $freelancersLength);
 
