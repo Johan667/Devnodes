@@ -61,7 +61,10 @@
                             <p>{{ mission.description }}</p>
                             <hr>
                             <b>Fichier :</b><br>
-                            {{ mission.addFile }}
+
+                            <a target="_blank" href="{{ asset('uploads/fichiermission/' ~ mission.addFile) }}">
+                                <img style="width:80px;" src="../img/pdf.png" alt="Image description">
+                            </a>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
