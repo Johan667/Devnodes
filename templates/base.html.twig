@@ -52,9 +52,10 @@
                 <li>
                     <a class="btn1" href="{{ path('app_message_index') }}">Messagerie</a>
                 </li>
-                    <li>
-                        <a class="btn1" href="{{ path('missions') }}">Missions</a>
-                    </li>
+                <li>
+                   <a class="btn1" href="{{ path('missions') }}" id="mission-link">Missions</a>
+                    {{ render_esi(controller('App\\Controller\\MissionController::bulle')) }}
+                </li>
                 <li>
                     <a class="btn1" href="{{ path('app_account') }}">Compte</a>
                 </li>
@@ -164,7 +165,6 @@
         <script src="{{ asset('js/autocompletion.js') }}"></script>
         <script src="{{ asset('js/registerFreelance.js') }}"></script>
         <script src="{{ asset('js/favorite.js') }}"></script>
-        <script src="{{ asset('js/deleteSkills.js') }}"></script>
         <script src="https://kit.fontawesome.com/81ab4e445e.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
                 integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
