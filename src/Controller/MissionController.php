@@ -28,10 +28,12 @@ class MissionController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
-        $missions = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
+        $missionsReceive = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
+        $missionsSend = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission'=>$this->getUser()]);
 
         return $this->render('mission/index.html.twig', [
-            'missions'=>$missions,
+            'missionsReceive'=>$missionsReceive,
+            'missionSend' => $missionsSend
         ]);
     }
 
@@ -61,12 +63,12 @@ class MissionController extends AbstractController
 
     }
         #[Route('/delete/mission/{id}', name: 'delete_mission')]
-        public function delete(Request $request, $id): Response
+        public function delete(Request $request, Mission $mission): Response
         {
-            $mission = $this->entityManager->getRepository(Mission::class)->findOneById($id);
 
                 $this->entityManager->remove($mission);
-                $this->entityManager->flush($mission);
+                $this->entityManager->flush();
+                $this->addFlash("message", "Mission supprimée.");
 
             return $this->redirectToRoute('missions');
         }
