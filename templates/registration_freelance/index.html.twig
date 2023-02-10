@@ -3,163 +3,104 @@
 {% block title %}Devnodes | Inscription{% endblock %}
 
 {% block body %}
+    <h1 class="text-center">Inscription du freelance</h1>
+    <p class="text-center">Ici vous entrez vos informations de base</p>
 
-    <div class="wrapper" style="width: 50rem">
-
-        {{ form_start(registrationForm, {'id': 'MyForm'}) }}
-
-        <!-- STEP 1 (Infos de base connexion)-->
-
+    <div id="myForm" style="width:1000px">
         <div id="step1" class="active">
+            {{ form_start(form) }}
+            <h2 class="text-center"> Etape 1/3</h2>
+            <div class="form-group">
+                {{ form_label(form.email, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre adresse email ici'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
 
-            <h3>Etape 1/5</h3>
-            <br>
+            <div class="form-group">
+                {{ form_label(form.password.first, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.password.first, {'attr': {'class': 'form-control input-full'}}) }}
+                {{ form_errors(form.password.first) }}
+            </div>
 
-            {{ form_label(registrationForm.email) }}
-            {{ form_widget(registrationForm.email) }}
-            {{ form_errors(registrationForm.email) }}
-
-            <br>
-
-            {{ form_label(registrationForm.firstname) }}
-            {{ form_widget(registrationForm.firstname) }}
-            {{ form_errors(registrationForm.firstname) }}
-
-            {{ form_label(registrationForm.lastname) }}
-            {{ form_widget(registrationForm.lastname) }}
-            {{ form_errors(registrationForm.lastname) }}
-
-            {{ form_widget(registrationForm.password) }}
-            {{ form_errors(registrationForm.password) }}
-
-
-            <button id="nextStep1" onclick="nextStep(2)">Suivant</button>
-
+            <div class="form-group">
+                {{ form_label(form.password.second, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.password.second, {'attr': {'class': 'form-control input-full'}}) }}
+                {{ form_errors(form.password.second) }}
+            </div>
+                <button id="nextStep1" onclick="nextStep(2)">Suivant</button>
         </div>
-
-
-        <!-- STEP 2 (Info catégorie de métier) -->
 
         <div id="step2">
+            <h2 class="text-center"> Etape 2/3</h2>
 
-            <h3>Etape 2/5</h3>
-            <br>
+            <div class="form-group">
+                {{ form_label(form.firstname, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom ici'}}) }}
+                {{ form_errors(form.firstname) }}
+            </div>
 
-            <h6>Quel est votre métier ? </h6><br>
-            {{ form_widget(registrationForm.workCategories)}}
-            {{ form_errors(registrationForm.workCategories) }}
+            <div class="form-group">
+                {{ form_label(form.lastname, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom ici'}}) }}
+                {{ form_errors(form.lastname) }}
+            </div>
 
-            <br><br>
+            <div class="form-group">
+                {{ form_label(form.address, null, {'label_attr': {'class': 'control-label'}}) }} - Optionnel
+                {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.address) }}
+            </div>
 
-            <h6>Combien d'années d'expérience avez-vous dans votre domaine ? </h6><br>
-            {{ form_widget(registrationForm.xpYears) }}
-            {{ form_errors(registrationForm.xpYears) }}
+            <div class="form-group">
+                {{ form_label(form.city, null, {'label_attr': {'class': 'control-label'}}) }} - Optionnel
+                {{ form_widget(form.city, {'attr': {'class': 'form-control', 'id': 'city'}}) }}
+                {{ form_errors(form.city) }}
+            </div>
 
-            <button id="previousStep2" onclick="nextStep(1)">Precedent</button>
-            <button id="nextStep2" onclick="nextStep(3)">Suivant</button>
+            <div class="form-group">
+                {{ form_label(form.codePostal, null, {'label_attr': {'class': 'control-label'}}) }} - Optionnel
+                {{ form_widget(form.codePostal, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.codePostal) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.country, null, {'label_attr': {'class': 'control-label'}}) }} - Optionnel
+                {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.country) }}
+            </div>
+
+            <button id="previousStep2" onclick="nextStep(1)">Previous</button>
+            <button id="nextStep2" onclick="nextStep(3)">Next</button>
         </div>
-
-        <!-- STEP 3 (Compétences)-->
 
         <div id="step3">
+            <h2 class="text-center"> Etape 3/3</h2>
+            <div class="form-group">
+                {{ form_label(form.title, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
 
-            <h3>Etape 3/5</h3>
-            <br>
+            <div class="form-group">
+                {{ form_label(form.price, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.price) }}
+            </div>
 
-            {{ form_label(registrationForm.codingLanguages) }}
-            {{ form_widget(registrationForm.codingLanguages) }}
-            {{ form_errors(registrationForm.codingLanguages) }}
+            <div class="form-group">
+                {{ form_label(form.xpYears, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.xpYears, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.xpYears) }}
+            </div>
 
-            {{ form_label(registrationForm.dbs) }}
-            {{ form_widget(registrationForm.dbs) }}
-            {{ form_errors(registrationForm.dbs) }}
-
-            {{ form_label(registrationForm.frameworks) }}
-            {{ form_widget(registrationForm.frameworks) }}
-            {{ form_errors(registrationForm.frameworks) }}
-
-            {{ form_label(registrationForm.versionControls) }}
-            {{ form_widget(registrationForm.versionControls) }}
-            {{ form_errors(registrationForm.versionControls) }}
-
-            {{ form_label(registrationForm.methodologies) }}
-            {{ form_widget(registrationForm.methodologies) }}
-            {{ form_errors(registrationForm.methodologies) }}
-
-            {{ form_label(registrationForm.platforms) }}
-            {{ form_widget(registrationForm.platforms) }}
-            {{ form_errors(registrationForm.platforms) }}
-
-            <button id="previousStep3" onclick="nextStep(2)">Precedent</button>
-            <button id="nextStep3" onclick="nextStep(4)">Suivant</button>
+            <div class="form-group">
+                {{ form_label(form.biographie, null, {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.biographie, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.biographie) }}
+            </div>
+            <button id="previousStep3" onclick="nextStep(2)">Previous</button>
+            <button type="submit"> Enregistrer</button>
+            {{ form_end(form) }}
         </div>
-
-        <!-- STEP 4 (Info de localisation) -->
-
-        <div id="step4">
-
-            <h3>Etape 4/5</h3>
-
-            <br>
-            Toutes les informations de l'étape 4 sont nécessaires pour l'abonnement et reste confidentielles.
-            <br>
-            <br>
-
-            {{ form_label(registrationForm.address) }} -optionnel
-            {{ form_widget(registrationForm.address) }}
-            {{ form_errors(registrationForm.address) }}
-
-            {{ form_label(registrationForm.city) }} -optionnel
-            {{ form_widget(registrationForm.city) }}
-            {{ form_errors(registrationForm.city) }}
-
-            {{ form_label(registrationForm.codePostal) }} -optionnel
-            {{ form_widget(registrationForm.codePostal) }}
-            {{ form_errors(registrationForm.codePostal) }}
-
-            {{ form_label(registrationForm.country) }} -optionnel
-            {{ form_widget(registrationForm.country) }}
-            {{ form_errors(registrationForm.country) }}
-            <br>
-
-            <button id="previousStep4" onclick="nextStep(3)">Precedent</button>
-            <button id="nextStep4" onclick="nextStep(5)">Suivant</button>
-        </div>
-
-        <!-- STEP 5 (Bio & PP) -->
-
-        <div id="step5">
-
-            <h3>Etape 5/5</h3>
-            <br>
-
-            {{ form_label(registrationForm.title) }}
-            {{ form_widget(registrationForm.title) }}
-            {{ form_errors(registrationForm.title) }}
-
-            {{ form_label(registrationForm.biographie) }}
-            {{ form_widget(registrationForm.biographie) }}
-            {{ form_errors(registrationForm.biographie) }}
-
-            {{ form_label(registrationForm.price) }}
-            {{ form_widget(registrationForm.price) }}
-            {{ form_errors(registrationForm.price) }}
-
-            {{ form_label(registrationForm.remoteWork) }}
-            {{ form_widget(registrationForm.remoteWork)}}
-            {{ form_errors(registrationForm.remoteWork) }}
-
-            {{ form_label(registrationForm.spokenLanguages) }}
-            {{ form_widget(registrationForm.spokenLanguages) }}
-            {{ form_errors(registrationForm.spokenLanguages) }}
-
-            <br>
-
-            <button id="previousStep5" onclick="nextStep(4)">Precedent</button>
-            <br><br>
-            {{ form_end(registrationForm) }}
-            <br>
-        </div>
-
     </div>
 {% endblock %}

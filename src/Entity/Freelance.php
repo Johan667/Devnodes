@@ -86,6 +86,7 @@ class Freelance extends User
 
     public function __construct()
     {
+        parent::__construct();
         $this->belong = new ArrayCollection();
         $this->freelanceCategory = new ArrayCollection();
         $this->workCategories = new ArrayCollection();
@@ -99,6 +100,7 @@ class Freelance extends User
         $this->dbs = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
+
 
 
     public function getTitle(): ?string
