@@ -50,6 +50,7 @@
                 </button>
                 <button class="step-button" data-step="2" onclick="nextStep(2)">Localisation</button>
                 <button class="step-button" data-step="3" onclick="nextStep(3)">Compétences</button>
+                <button class="step-button" data-step="4" onclick="nextStep(5)">x compétence</button>
                 <button class="step-button" data-step="4" onclick="nextStep(4)">Description</button>
             </div>
         </div>
@@ -119,26 +120,9 @@
 
             <p>Paramétrer mes compétences</p>
             <button type="submit">Modifier</button>
-            {{ dump(freelanceTechnology.children) }}
             {{ form_end(freelanceTechnology) }}
 
-            {% for choice in freelanceTechnology.children.coding_language.vars.preferred_choices %}
-                {{ choice.value }}
-            {% endfor %}
 
-
-{#            {{ form_start(freelanceTechnology) }}#}
-
-{#            <p>Paramétrer mes compétences</p>#}
-
-{#            {{ form_label(freelanceTechnology) }}#}
-{#            {{ form_widget(freelanceTechnology) }}#}
-{#            {{ form_errors(freelanceTechnology) }}#}
-
-
-{#            <button type="submit">Modifier</button>#}
-
-{#            {{ form_end(freelanceTechnology) }}#}
         </div>
 
 
@@ -152,6 +136,55 @@
             <button type="submit">Modifier</button>
             {{ form_end(freelanceBiographie) }}
         </div>
+        <div id="step5">
+            <h2 class="text-center mb-3">Supprimer une compétence</h2>
+            <h3 class="text-center">Language de programmation</h3>
+            {% for codingLanguage in freelance.codingLanguages %}
+                {{ codingLanguage.nameCodingLanguage }} <a href="{{ path('profil_delete_coding', {'id': codingLanguage.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {% endfor %}
+            {% if freelance.codingLanguages is empty %}
+                <p class="text-center">Aucune sélection pour cette compétence</p>
+            {% endif %}
+            <br>
+            <hr>
+            <br>
+            <h3 class="text-center">Framework</h3>
+            {% for framework in freelance.frameworks %}
+                {{ framework.nameFramework }} <a href="{{ path('profil_delete_framework', {'id': framework.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {% endfor %}
+            {% if freelance.frameworks is empty %}
+                <p class="text-center">Aucune sélection pour cette compétence</p>
+            {% endif %}
+            <br>
+            <hr>
+            <br>
+            <h3 class="text-center">Base de donnée </h3>
+            {% for db in freelance.dbs %}
+                {{ db.nameDb }} <a href="{{ path('profil_delete_framework', {'id': db.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {% endfor %}
+            {% if freelance.dbs is empty %}
+                <p class="text-center">Aucune sélection pour cette compétence</p>
+            {% endif %}
+            <br>
+            <hr>
+            <br>
+            <h3 class="text-center">Methodologie </h3>
+            {% for methodology in freelance.methodologies %}
+            {{ methodology.nameMethodology }} <a href="{{ path('profil_delete_methodology', {'id': methodology.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {% endfor %}
+            {% if freelance.methodologies is empty %}
+                <p class="text-center">Aucune sélection pour cette compétence</p>
+            {% endif %}
+            <br>
+            <hr>
+            <br>
+            <h3 class="text-center">Versionning</h3>
+            {% for version in freelance.versionControls %}
+                {{ version.nameVersionControl }} <a href="{{ path('profil_delete_version', {'id': version.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {% endfor %}
+            {% if freelance.versionControls is empty %}
+                <p class="text-center">Aucune sélection pour cette compétence</p>
+            {% endif %}
         </div>
 
     </div>
