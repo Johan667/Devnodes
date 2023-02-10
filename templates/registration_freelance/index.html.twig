@@ -69,8 +69,8 @@
                 {{ form_errors(form.country) }}
             </div>
 
-            <button id="previousStep2" onclick="nextStep(1)">Previous</button>
-            <button id="nextStep2" onclick="nextStep(3)">Next</button>
+            <button id="previousStep2" onclick="nextStep(1)">Precedent</button>&nbsp;&nbsp;
+            <button id="nextStep2" onclick="nextStep(3)">Suivant</button>
         </div>
 
         <div id="step3">
@@ -98,7 +98,7 @@
                 {{ form_widget(form.biographie, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.biographie) }}
             </div>
-            <button id="previousStep3" onclick="nextStep(2)">Previous</button>
+            <button id="previousStep3" onclick="nextStep(2)">Precedent</button>
             <button type="submit"> Enregistrer</button>
             {{ form_end(form) }}
         </div>
