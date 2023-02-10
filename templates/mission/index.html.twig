@@ -9,7 +9,7 @@
     <h1 class="text-center mt-3">Missions</h1>
     <hr>
 
-    {% if missionsReceive %}
+    {% if is_granted('ROLE_FREELANCE') %}
 
     {% for mission in missionsReceive %}>
 
@@ -61,15 +61,8 @@
             </div>
 
         {% endfor %}
-
-    {% else %}
-
-        Aucune mission pour le moment.
-
     {% endif %}
 
-
-    {% if missionSend %}
 
     {% for mission in missionSend %}
 
@@ -80,7 +73,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ mission.title }}</h5>
-                Mission envoyée à <b>{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</b><br><br>
+                Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
                 <b>Description de la mission :</b><br>
                 <p>{{ mission.description }}</p>
                 <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
@@ -90,10 +83,5 @@
 
     {% endfor %}
 
-    {% else %}
-
-        Aucune mission pour le moment.
-
-    {% endif %}
 
 {% endblock %}
