@@ -8,6 +8,7 @@ use App\Entity\Freelance;
 use App\Entity\Mission;
 use App\Entity\Social;
 use App\Entity\User;
+use App\Form\DeleteSkillsType;
 use App\Form\DescriptionProfilType;
 use App\Form\DurationPrefType;
 use App\Form\EditHeaderProfilType;
@@ -50,6 +51,12 @@ class ProfilController extends AbstractController
             'lang' => $this->createForm(LanguageType::class, $freelance),
         ];
 
+        /** Parti supprimer une compétence */
+
+
+
+        /** fin parti supprimer une compétence */
+
         foreach ($forms as $form) {
             $form->handleRequest($request);
         }
@@ -65,7 +72,6 @@ class ProfilController extends AbstractController
             if (!$form->isSubmitted() || !$form->isValid()) {
                 continue;
             }
-
 
             $picture = $form->get('picture')->getData();
 
@@ -132,6 +138,7 @@ class ProfilController extends AbstractController
             'freelanceDuration' => $forms['dur']->createView(),
             'freelanceLanguage' => $forms['lang']->createView(),
             'freelanceTechnology' => $forms['tech']->createView(),
+            'freelance'=>$freelance,
         ]);
     }
 

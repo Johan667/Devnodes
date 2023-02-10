@@ -112,16 +112,33 @@
         </div>
 
         <!-- STEP 3 (Compétences)-->
-
+        <div id="myForm">
         <div id="step3">
 
             {{ form_start(freelanceTechnology) }}
 
             <p>Paramétrer mes compétences</p>
-
             <button type="submit">Modifier</button>
-
+            {{ dump(freelanceTechnology.children) }}
             {{ form_end(freelanceTechnology) }}
+
+            {% for choice in freelanceTechnology.children.coding_language.vars.preferred_choices %}
+                {{ choice.value }}
+            {% endfor %}
+
+
+{#            {{ form_start(freelanceTechnology) }}#}
+
+{#            <p>Paramétrer mes compétences</p>#}
+
+{#            {{ form_label(freelanceTechnology) }}#}
+{#            {{ form_widget(freelanceTechnology) }}#}
+{#            {{ form_errors(freelanceTechnology) }}#}
+
+
+{#            <button type="submit">Modifier</button>#}
+
+{#            {{ form_end(freelanceTechnology) }}#}
         </div>
 
 
@@ -133,7 +150,10 @@
 
             {{ form_widget(freelanceBiographie) }}
             <button type="submit">Modifier</button>
+            {{ form_end(freelanceBiographie) }}
         </div>
+        </div>
+
     </div>
 
 {% endblock %}
