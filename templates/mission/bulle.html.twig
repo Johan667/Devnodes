@@ -1,0 +1,11 @@
+{% if missionCount %}
+    {% if is_granted('ROLE_FREELANCE') %}
+<span class="badge rounded-pill text-bg-danger">{{ missionCount }}</span>
+{% endif %}
+{% endif %}
+{% if missionCount2 %}
+    {% if is_granted('ROLE_USER') %}
+        <span class="badge rounded-pill text-bg-danger">{{ missionCount2 }}</span>
+    {% endif %}
+{% endif %}
+
