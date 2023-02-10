@@ -5,46 +5,29 @@
 
 
 {% block body %}
-    <!-- En tête titre -->
-    <h1 class="text-center mt-3">Mes missions</h1>
-    <p class="text-center mt-3"> Ici vous pouvez voir et modifier toutes les informations relatives à vos missions.</p>
-    <br>
 
-    <!-- Wrapper -->
-    <div class="wrapper">
+    <h1 class="text-center mt-3">Missions</h1>
+    <hr>
 
-        {% for mission in missions %}
+    {% if is_granted('ROLE_FREELANCE') %}
 
-            <div class="headTitle">
-                <div><b>{{ mission.title }}</b></div>
-                <div>{{ mission.startDate|date("d/m/Y") }}</div>
-                <br>
-            </div>
+    {% for mission in missionsReceive %}>
 
+
+    <div class="card col-9 ms-5 mb-2">
+        <div class="card-header text-end">
+            {{ mission.startDate|date("d/m/Y") }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ mission.title }}</h5>
             Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
-            Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
             Email : <b>{{ mission.sendMission.email }}</b><br>
-
-            <div class="footerMission">
-                Statut de la mission : <span class="stateMission">{{ mission.state }}</span>
-                <div class="grp-btnn mb-3">
-                    <button type="button" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-message"></i>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal{{ mission.id }}"
-                    >
-                            <i class="fa-solid fa-eye"></i>
-                         Voir
-                    </button>
-                    <a href="{{path('delete_mission', {'id': mission.id } )}}"type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Supprimer</a>
-                    <br>
-                </div>
-            </div>
-            <br>
-            <hr>
+            Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
+            <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
+            <button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button>
+            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
+        </div>
+    </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal{{ mission.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,7 +44,7 @@
                             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
                             Email : <b>{{ mission.sendMission.email }}</b><br>
 
-                        <hr><br>
+                        <hr>
 
                             <b>Objet de la mission :</b> <p>{{ mission.object }}</p>
                             <hr>
@@ -71,15 +54,34 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
                             <button type="button" class="btn btn-danger">Refuser</button>
-                            <button type="button" class="btn btn-secondary">Contacter le client</button>
+                            <button type="button" class="btn btn-secondary">Contacter</button>
                         </div>
                     </div>
                 </div>
             </div>
 
         {% endfor %}
+    {% endif %}
 
 
-    </div>
+    {% for mission in missionSend %}
+
+
+        <div class="card col-9 ms-5 mb-2">
+            <div class="card-header text-end">
+                {{ mission.startDate|date("d/m/Y") }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ mission.title }}</h5>
+                Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
+                <b>Description de la mission :</b><br>
+                <p>{{ mission.description }}</p>
+                <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
+                <a href="{{path('delete_mission', {'id': mission.id } )}}"type="button" class="btn btn-danger text-end"><i class="fa-solid fa-trash"></i> Supprimer</a>
+            </div>
+        </div>
+
+    {% endfor %}
+
 
 {% endblock %}

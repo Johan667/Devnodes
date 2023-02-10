@@ -17,21 +17,23 @@ class MissionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('object', TextType::class)
+            ->add('title', TextType::class, [
+                'label' => 'Titre de la mission',
+                'required' => true,
+                    ]
+                )
             ->add('frenquency', ChoiceType::class, array(
+                'label' => 'Votre projet est urgent ?',
                 'choices'  => array(
-                    'daily' => 'daily',
-                    'weekly' => 'weekly',
-                    'monthly' => 'monthly',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
                 ),
             ))
             ->add('description', TextareaType::class)
             ->add('addFile', FileType::class, array(
+                'label' => 'Vous pouvez ajouter un fichier -optionnel',
                 'required' => false
             ))
-
-            ->add('submit', SubmitType::class)
 
         ;
     }
