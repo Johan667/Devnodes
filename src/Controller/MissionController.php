@@ -8,9 +8,11 @@ use App\Form\MissionType;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class MissionController extends AbstractController
 {
@@ -38,14 +40,31 @@ class MissionController extends AbstractController
     }
 
     #[Route('/create/mission', name: 'create_mission')]
-    public function create(Request $request): Response
+    public function create(Request $request, SluggerInterface $slugger): Response
     {
         $mission = new Mission;
         $form = $this->createForm(MissionType::class, $mission);
-
         $form->handleRequest($request);
+        $addFile = $form->get('addFile')->getData();
+
+        if ($addFile) {
+            $originalFilename = pathinfo($addFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $addFile->guessExtension();
+
+            try {
+                $addFile->move(
+                    $this->getParameter('addFile'),
+                    $newFilename
+                );
+            } catch (FileException $error) {
+            }
+            $mission->setAddFile($newFilename);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $mission->setSendMission($this->getUser());
             $freelance = $this->entityManager->getRepository(Freelance::class)->find(['id'=>$request->get('id')]);
             $mission->setReceiveMission($freelance);
