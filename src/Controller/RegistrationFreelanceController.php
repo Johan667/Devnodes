@@ -44,6 +44,7 @@ class RegistrationFreelanceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $freelance->setRoles(["ROLE_FREELANCE"]);
             $email = $form->get('email')->getData();
             $freelance->setEmail($email);
 

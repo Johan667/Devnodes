@@ -99,7 +99,7 @@ class TechnologyType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => null,
-            'freelance' => null
+            'freelance' => null,
         ]);
     }
 }
