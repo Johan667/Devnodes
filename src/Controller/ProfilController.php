@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Entity\CodingLanguage;
 use App\Entity\Comment;
+use App\Entity\Db;
+use App\Entity\Framework;
 use App\Entity\Freelance;
+use App\Entity\Methodology;
 use App\Entity\Mission;
 use App\Entity\Social;
 use App\Entity\User;
+use App\Entity\VersionControl;
 use App\Form\CommentType;
 use App\Form\DeleteSkillsType;
 use App\Form\DescriptionProfilType;
@@ -208,92 +212,54 @@ class ProfilController extends AbstractController
 
         return $this->redirectToRoute('app_profil');
     }
+    private function deleteSkill(int $id, string $repositoryClass, string $removeMethod): Response
+    {
+        $user = $this->getUser();
+
+        /** @var Freelance $freelance */
+        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
+
+        /** Prendra le nom du repository lié au skills */
+        $skill = $this->entityManager->getRepository($repositoryClass)->find($id);
+
+        /** Remove le skills via le repository sélectionner */
+        $freelance->$removeMethod($skill);
+
+        $this->entityManager->persist($freelance);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_profil');
+    }
 
     #[Route('/profil/delete/coding/language/{id}', name: 'profil_delete_coding')]
     public function deleteCoding($id): Response
     {
-        $user = $this->getUser();
-        /** @var Freelance $freelance */
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
-
-        foreach ($freelance->getCodingLanguages() as $code) {
-            $freelance->removeCodingLanguage($code);
-        }
-
-        $this->entityManager->persist($freelance);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_profil');
-
+        // Prend en parametre de la fonction , l'id du skills, la classe et la méthode via la classe
+        return $this->deleteSkill($id, CodingLanguage::class, 'removeCodingLanguage');
     }
+
     #[Route('/profil/delete/framework/{id}', name: 'profil_delete_framework')]
     public function deleteFramework($id): Response
     {
-        $user = $this->getUser();
-        /** @var Freelance $freelance */
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
-
-        foreach ($freelance->getFrameworks() as $framework) {
-            $freelance->removeFramework($framework);
-        }
-
-        $this->entityManager->persist($freelance);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_profil');
-
+        return $this->deleteSkill($id, Framework::class, 'removeFramework');
     }
+
     #[Route('/profil/delete/database/{id}', name: 'profil_delete_database')]
     public function deleteDb($id): Response
     {
-        $user = $this->getUser();
-        /** @var Freelance $freelance */
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
-
-        foreach ($freelance->getDbs() as $db) {
-            $freelance->removeDb($db);
-        }
-
-        $this->entityManager->persist($freelance);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_profil');
-
+        return $this->deleteSkill($id, Db::class, 'removeDb');
     }
+
     #[Route('/profil/delete/version/{id}', name: 'profil_delete_version')]
     public function deleteVersion($id): Response
     {
-        $user = $this->getUser();
-        /** @var Freelance $freelance */
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
-
-        foreach ($freelance->getVersionControls() as $version) {
-            $freelance->removeVersionControl($version);
-        }
-
-        $this->entityManager->persist($freelance);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_profil');
-
+        return $this->deleteSkill($id, VersionControl::class, 'removeVersionControl');
     }
+
     #[Route('/profil/delete/methodology/{id}', name: 'profil_delete_methodology')]
     public function deleteMethodology($id): Response
     {
-        $user = $this->getUser();
-        /** @var Freelance $freelance */
-        $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
-
-        foreach ($freelance->getMethodologies() as $methodology) {
-            $freelance->removeVersionControl($methodology);
-        }
-
-        $this->entityManager->persist($freelance);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_profil');
-
+        return $this->deleteSkill($id, Methodology::class, 'removeMethodology');
     }
-
 
 }
