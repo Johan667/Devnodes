@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,29 @@ class CommentRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+    
+    public function findLatest($limit, User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($limit)
+            ->andWhere('c.received = :userId')
+            ->setParameter(':userId', $user->getId())
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findRest($offset, User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->setFirstResult($offset)
+            ->andWhere('c.received = :userId')
+            ->setParameter(':userId', $user->getId())
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 //    /**
