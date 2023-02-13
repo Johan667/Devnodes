@@ -1,57 +1,78 @@
-.container {
-    max-width: 1170px;
-    margin: 0 auto;
-  }
-  
-  .messaging {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .inbox_msg {
-    background: #f8f8f8;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0px 0px 5px 0px #ccc;
-  }
-  
-  .outgoing_msg {
-    overflow: hidden;
-    margin: 26px 0 26px;
-  }
-  
-  .sent_msg {
-    float: right;
-    background: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 0px 5px 0px #ccc;
-  }
-  
-  .incoming_msg {
-    overflow: hidden;
-    margin: 26px 0 26px;
-  }
-  
-  .received_msg {
-    display: inline-block;
-    padding: 0 0 0 10px;
-    vertical-align: top;
-    width: 92%;
-  }
-  
-  .received_withd_msg p {
-    background: #ebebeb;
-    color: #646464;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 0px 5px 0px #ccc;
-  }
-  
-  .time_date {
-    font-size: 12px;
-    color: #ccc;
-  }
-  
+.message-container {
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.message-received, .message-send {
+  max-width: 80%;
+}
+
+.message-received {
+  float: left;
+  clear: both;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message-send {
+  float: right;
+  clear: both;
+  background-color: #00b0ff;;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message-content {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.message-datetime {
+  font-size: 14px;
+  color: #0e0e0e;
+  margin-bottom: 5px;
+}
+
+.message-sender, .message-recipient {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-container {
+  align-items: center;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  margin-right: 1rem;
+}
+
+.submit-message[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-message[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.fas.fa-paper-plane {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}

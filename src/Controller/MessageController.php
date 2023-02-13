@@ -42,6 +42,10 @@ class MessageController extends AbstractController
         $currentUser = $this->getUser();
         $recipient = $mission->getSendMission() === $currentUser ? $mission->getReceiveMission() : $mission->getSendMission();
 
+        $messageReceive = $this->entityManager->getRepository(Message::class)->findBy(['recipient'=>$this->getUser()]);
+        $messageSend = $this->entityManager->getRepository(Message::class)->findBy(['sender'=>$this->getUser()]);
+
+
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
 
@@ -56,11 +60,15 @@ class MessageController extends AbstractController
             $messageRepository->save($message, true);
 
             return $this->redirectToRoute('missions', [], Response::HTTP_SEE_OTHER);
+        
+
         }
 
         return $this->render('message/index.html.twig', [
             'mission' => $mission,
             'messages' => $messages,
+            'messageReceive' => $messageReceive,
+            'messageSend' => $messageSend,
             'form' => $form->createView()
         ]);
     }
@@ -69,7 +77,7 @@ class MessageController extends AbstractController
     public function index(MessageRepository $messageRepository): Response
     {
         $user = $this->getUser();
-        $messages = $messageRepository->findByUserId($user->getId());
+        $messages = $messageRepository->findByUserId();
 
         return $this->render('message/index.html.twig', [
             'messages' => $messages,
@@ -77,7 +85,7 @@ class MessageController extends AbstractController
     }
 
     #[Route('/mission/{id}/messages/new', name: 'app_message_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MessageRepository $messageRepository): Response
+    public function new(Request $request, MessageRepository $messageRepository)
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
