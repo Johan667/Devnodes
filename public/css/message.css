@@ -1,0 +1,57 @@
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  
+  .messaging {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .inbox_msg {
+    background: #f8f8f8;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px 0px #ccc;
+  }
+  
+  .outgoing_msg {
+    overflow: hidden;
+    margin: 26px 0 26px;
+  }
+  
+  .sent_msg {
+    float: right;
+    background: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px 0px #ccc;
+  }
+  
+  .incoming_msg {
+    overflow: hidden;
+    margin: 26px 0 26px;
+  }
+  
+  .received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+  }
+  
+  .received_withd_msg p {
+    background: #ebebeb;
+    color: #646464;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px 0px #ccc;
+  }
+  
+  .time_date {
+    font-size: 12px;
+    color: #ccc;
+  }
+  

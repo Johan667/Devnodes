@@ -1,38 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Message index{% endblock %}
+{% block title %}Message index
+{% endblock %}
 
 {% block body %}
-    <h1>Message index</h1>
+	<h1>Message index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Datetime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td>{{ message.id }}</td>
-                <td>{{ message.content }}</td>
-                <td>{{ message.datetime ? message.datetime|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('app_message_edit', {'id': message.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {# {{ include('message/_form.html.twig') }} #}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Content</th>
+				<th>Datetime</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for message in messages %}
+				<tr>
+					<td>{{ message.id }}</td>
+					<td>{{ message.content }}</td>
+					<td>{{ message.datetime ? message.datetime|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						{# <a href="{{ path('app_message_show', {'id': message.id}) }}">show</a>
+						<a href="{{ path('app_message_edit', {'id': message.id}) }}">edit</a> #}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{# {{ include('message/_form.html.twig') }} #}
 
-    <a href="{{ path('app_message_new') }}">Create new</a>
-{% endblock %}
+	<a href="{{ path('app_message_new') }}">Create new</a>
+
+	<div class="container">
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="mesgs">
+        <div class="msg_history">
+          {% for message in messages %}
+
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>{{ message.content }}</p>
+                <span class="time_date">Sent at {{ message.datetime|date('Y-m-d H:i:s') }}</span>
+              </div>
+            </div>
+
+            <div class="incoming_msg">
+              <div class="incoming_msg_img">
+                {% if app.user.picture %}
+                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ app.user.picture) }}" alt="Photo de profil">
+                {% else %}
+                    <i class="fa-solid fa-camera"></i>
+                {% endif %}
+              </div>
+            </div>
+          {% else %}
+            <p>No messages found</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	{% endblock %}
+
