@@ -168,8 +168,25 @@
                            <p>" {{ comment.content }} "<br>
                                <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
                                    écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                                {% if app.user is same as(comment.comments) %}
+                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer</a>
+                                {% endif %}
                             <hr>
                         {% endfor %}
+                        {% if app.user %}
+                            {{ form_start(commentForm) }}
+                            {{ form_end(commentForm) }}
+                        {% endif %}
+                        <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Afficher plus
+                        </button>
+                        </p>
+                        <div class="collapse" id="collapseExample" style="">
+                        <div class="card card-body">
+                            MORE COMMENTS HERE
+                        </div>
+                        </div>
+
                     </div>
 
                 </div>
