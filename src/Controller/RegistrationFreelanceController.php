@@ -2,13 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\CodingLanguage;
-use App\Entity\Db;
-use App\Entity\Framework;
 use App\Entity\Freelance;
-use App\Entity\User;
-use App\Form\FreelanceType;
-use App\Form\RegistrationFormType;
 use App\Form\RegistrationFreelanceType;
 use App\Repository\FreelanceRepository;
 use App\Security\AppCustomAuthenticator;
@@ -18,7 +12,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -27,14 +20,6 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationFreelanceController extends AbstractController
 {
-
-    private $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
-    {
-        $this->emailVerifier = $emailVerifier;
-    }
-
     #[Route('/register/freelance', name: 'app_register_freelance')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -57,11 +42,14 @@ class RegistrationFreelanceController extends AbstractController
             );
             $entityManager->persist($freelance);
             $entityManager->flush();
-            return $userAuthenticator->authenticateUser(
+            $userAuthenticator->authenticateUser(
                 $freelance,
                 $authenticator,
                 $request
             );
+            return $this->redirectToRoute('app_profil', [], 302, [
+                'onload' => 'alert("Bravo, il suffit maintenant de remplir vos compétences et autres informations")'
+            ]);
         }
 
         return $this->render('registration_freelance/index.html.twig', [
