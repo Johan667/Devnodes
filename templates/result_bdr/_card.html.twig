@@ -2,7 +2,7 @@
     {% if freelance.picture %}
         <img style="height: 200px; object-fit: cover" src="{{ asset('uploads/photoprofil/' ~ freelance.picture) }}" alt="Photo de profil">
     {% else %}
-        <div class="display-3 text-center"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="display-3 text-center"><i style="height: 200px; object-fit: cover" class="fa-solid fa-laptop-code"></i></div>
     {% endif %}
     <div class="card-body">
         <h5 class="card-title">{{ freelance.firstname }} {{ freelance.lastname }}</h5>
