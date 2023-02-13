@@ -164,29 +164,37 @@
                         <h2 class="blueh2 mb-3">Commentaires</h2>
 
                         <div class="comment">
-                        {% for comment in freelance.receivedComments %}
+                        {% for comment in firstCommentaires %}
                            <p>" {{ comment.content }} "<br>
                                <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
                                    écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
                                 {% if app.user is same as(comment.comments) %}
-                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer</a>
+                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
                                 {% endif %}
                             <hr>
                         {% endfor %}
-                        {% if app.user %}
-                            {{ form_start(commentForm) }}
-                            {{ form_end(commentForm) }}
-                        {% endif %}
-                        <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseExample">
                             Afficher plus
                         </button>
                         </p>
-                        <div class="collapse" id="collapseExample" style="">
-                        <div class="card card-body">
-                            MORE COMMENTS HERE
+                        <div class="collapse" id="collapseComments" style="">
+                            <div class="card card-body">
+                                {% for comment in restCommentaires %}
+                           <p>" {{ comment.content }} "<br>
+                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
+                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                                {% if app.user is same as(comment.comments) %}
+                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
+                                {% endif %}
+                            <hr>
+                        {% endfor %}
+                            </div>
+                            
                         </div>
-                        </div>
-
+                        {% if app.user %}
+                                {{ form_start(commentForm) }}
+                                {{ form_end(commentForm) }}
+                            {% endif %}
                     </div>
 
                 </div>

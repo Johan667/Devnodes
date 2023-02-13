@@ -16,6 +16,7 @@ use App\Form\EditHeaderProfilType;
 use App\Form\LanguageType;
 use App\Form\LocationRemoteType;
 use App\Form\TechnologyType;
+use App\Repository\CommentRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -152,12 +153,16 @@ class ProfilController extends AbstractController
 
 
     #[Route('/profil/{id}', name: 'app_profil_show')]
-    public function show($id, Request $request): Response
+    public function show($id, Request $request, CommentRepository $commentRepository): Response
     {
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
+        // on ne trouve pas la mission là !?
         $mission = $this->entityManager->getRepository(Mission::class)->find(['id'=>$freelance]);
         $commentaire = $this->entityManager->getRepository(Comment::class)->find(['id'=>$freelance]);
         $social = $this->entityManager->getRepository(Social::class)->find(['id'=>$freelance]);
+        
+        $firstCommentaires = $commentRepository->findLatest(3, $freelance);
+        $restCommentaires = $commentRepository->findRest(3, $freelance);
 
         $user = $this->getUser() ?? null;
 
@@ -184,6 +189,8 @@ class ProfilController extends AbstractController
             'social'=>$social,
             'user'=>$user,
             'commentForm' => $commentForm->createView(),
+            'firstCommentaires' => $firstCommentaires,
+            'restCommentaires' => $restCommentaires,
         ]);
     }
 
