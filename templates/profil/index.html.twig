@@ -159,7 +159,7 @@
             <br>
             <h3 class="text-center">Base de donnée </h3>
             {% for db in freelance.dbs %}
-                {{ db.nameDb }} <a href="{{ path('profil_delete_framework', {'id': db.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+                {{ db.nameDb }} <a href="{{ path('profil_delete_database', {'id': db.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.dbs is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>

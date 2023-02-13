@@ -37,8 +37,7 @@ class SubscriptionController extends AbstractController
     #[Route('/subscription/success', name: 'subscription_success')]
     public function success()
     {
-        // if redirect succes setSuscribe Freelance(); look webhook
-
+        // ICI PROCHAINEMENT WEBHOOK STRIPE POUR FONCTIONNALITE ENCHERE VIP
         return $this->render('subscription/success.html.twig');
     }
 
