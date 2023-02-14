@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bravo, vous êtes VIP !{% endblock %}
+{% block title %}Erreur, veuillez recommencez :({% endblock %}
 
 {% block body %}
 
-    <p class="text-center">Oh non il y à quelque chose qui cloche, veuillez réessayer</p>
+    <h3 class="text-center mb-3">Oh non il y à quelque chose qui cloche, <strong>veuillez réessayer</strong></h3>
+
+    <p class="text-center"><img class="img-vip"src="{{ asset('img/error_payment.png') }}" height="350px" alt="error"><br><br>
+    <a href="{{ path('subscription_create') }}"> Réesayer ici </a>
 
 {% endblock %}
