@@ -4,7 +4,32 @@
 
 {% block body %}
 
-    <p class="text-center">FELICITATION ! VOUS ETES MAINTENANT UN VIP DE DEVNODES !!</p>
+    <h3 class="text-center mb-3"><strong>FELICITATION</strong> ! VOUS ETES MAINTENANT UN <em>VIP</em> DE <strong>DEVNODES</strong> !!</h3>
 
-   <a href="https://billing.stripe.com/p/login/test_aEU17H1Cv0eN4BW6oo"> Acceder à votre portail client </a>
+    <p class="text-center"><img class="img-vip"src="{{ asset('img/VIP.png') }}" alt="vip"><br><br>
+        <a href="#"> Acceder à votre portail client </a>
+    </p>
+
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-6">
+        <p class="mr-2">Voici vos avantages <strong>VIP</strong> :</p>
+        <ul>
+            <li>
+                Position privilégié sur les pages de recherche
+            </li>
+            <li>
+                Réponse du support en 48h
+            </li>
+            <li>
+                Autres avantages
+            </li>
+        </ul>
+    </div>
+    <div class="col-4"></div>
+</div>
+
+
+
 {% endblock %}

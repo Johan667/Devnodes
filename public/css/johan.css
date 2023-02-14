@@ -125,3 +125,12 @@
     background-color: red;
 }
 
+.list-vip{
+    margin:auto;
+}
+
+@media (max-width: 410px) {
+    .img-vip{
+        display:none;
+    }
+}
