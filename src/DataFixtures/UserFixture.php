@@ -22,9 +22,9 @@ class UserFixture extends Fixture
     {
         $user = new User();
         $user
-            ->setEmail('kebsibadr@gmail.com')
-            ->setFirstname('Badr')
-            ->setLastname('Kebsi')
+            ->setEmail('client@devodes.com')
+            ->setFirstname('Saloui')
+            ->setLastname('Martin')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->encoder->hashPassword($user, 'admint'))
         ;

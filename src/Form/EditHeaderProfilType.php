@@ -27,8 +27,8 @@ class EditHeaderProfilType extends AbstractType
                         'mimeTypes' => [
                             'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Erreur, veuillez télécharger une image',
-                        'maxSizeMessage' => 'Erreur, veuillez choisir une image moins lourde.',
+                        'mimeTypesMessage' => 'Erreur, veuillez réessayez.',
+                        'maxSizeMessage' => 'Erreur, veuillez réessayez.',
                     ])
                 ],
             ])
