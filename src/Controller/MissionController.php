@@ -96,11 +96,9 @@ class MissionController extends AbstractController
     public function bulle(): Response
     {
             $missionCount = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission' => $this->getUser()]);
-            $missionCount2 = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission' => $this->getUser()]);
 
         return $this->render('mission/bulle.html.twig', [
             'missionCount' => count($missionCount),
-            'missionCount2' => count($missionCount2),
         ]);
     }
 
