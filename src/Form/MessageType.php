@@ -16,8 +16,11 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextType::class, [
-                'label' => '',
+                'label' => false,
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Enter you message here'
+                ]
             ]);
     }
 

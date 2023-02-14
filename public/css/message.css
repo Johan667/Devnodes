@@ -1,5 +1,5 @@
 .message-container {
-  padding: 30px;
+  padding: 0 auto;
   margin: 0 auto;
 }
 
@@ -43,9 +43,9 @@
 
 .input-container {
   align-items: center;
-  padding: 1rem;
-  background-color: #f2f2f2;
+  background-color: #dadada;
   border-radius: 10px;
+  padding: 2em;
 }
 
 input[type="text"] {
@@ -75,4 +75,26 @@ input[type="text"] {
 .fas.fa-paper-plane {
   font-size: 1.2rem;
   margin-right: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .message-container {
+    max-width: 90%;
+  }
+
+  .message-received, .message-send {
+    max-width: 100%;
+  }
+
+  .message-content {
+    font-size: 14px;
+  }
+
+  .message-datetime {
+    font-size: 12px;
+  }
+
+  .message-sender, .message-recipient {
+    font-size: 14px;
+  }
 }

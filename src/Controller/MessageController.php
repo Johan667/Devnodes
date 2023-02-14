@@ -16,16 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-    //TODO: take the reciever ID from the Missions and compare it to the currentUser, if it's not the same, that will be the reciever.
-        
-        
-        // si le formulaire est envoyé
-            // création d'un nouveau message
-            // liaison de la mission au message
-            // liaison du sender et du recepient au message
-    
-        // afficher les messages et le formulaire sous les messages
 class MessageController extends AbstractController
 {
     private $entityManager;
@@ -60,8 +50,6 @@ class MessageController extends AbstractController
             $messageRepository->save($message, true);
 
             return $this->redirectToRoute('missions', [], Response::HTTP_SEE_OTHER);
-        
-
         }
 
         return $this->render('message/index.html.twig', [

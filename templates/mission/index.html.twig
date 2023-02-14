@@ -70,7 +70,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
                             <button type="button" class="btn btn-danger">Refuser</button>
-                            <button type="button" class="btn btn-secondary">Contacter</button>
+                            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class="btn btn-secondary">Contacter</button></a>
                         </div>
                     </div>
                 </div>
