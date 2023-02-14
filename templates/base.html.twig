@@ -36,7 +36,7 @@
                     <a class="btn3" href="{{ path('admin') }}">Dashboard</a>
                 </li>
                 {% endif %}
-                {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP') %}
+                {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP') or is_granted('ROLE_ADMIN') %}
                     <li>
                         <a class="btn1" href="{{ path('app_profil') }}">Profil</a>
                     </li>
