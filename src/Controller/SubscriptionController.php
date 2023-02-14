@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Service\CheckoutStripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -43,7 +44,7 @@ class SubscriptionController extends AbstractController
     }
 
     #[Route('/subscription/success', name: 'subscription_success')]
-    public function success()
+    public function success(SessionInterface $session)
     {
         // Récupérer l'utilisateur actuellement connecté
         $user = $this->getUser();
@@ -57,6 +58,11 @@ class SubscriptionController extends AbstractController
             // Enregistrer les modifications en base de données
             $this->entityManager->persist($freelance);
             $this->entityManager->flush();
+            // Ajouter un message flash
+            $this->addFlash('message', 'Vous êtes maintenant VIP. Veuillez vous reconnecter pour accéder à vos avantages.');
+
+            // Rediriger vers la page de connexion
+            return $this->redirectToRoute('app_login');
         }
         return $this->render('subscription/success.html.twig');
     }

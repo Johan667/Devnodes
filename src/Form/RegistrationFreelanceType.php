@@ -100,6 +100,7 @@ class RegistrationFreelanceType extends AbstractType
                 'label' => 'Entrez votre tarif journalier',
             ])
             ->add('xpYears', NumberType::class, [
+                'label' => 'Depuis combien de temps êtes vous dans le domaine',
                 'attr' => [
                     'placeholder' => 'Veuillez entrer un chiffre',
                 ],
