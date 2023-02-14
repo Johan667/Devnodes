@@ -160,7 +160,12 @@ class ProfilController extends AbstractController
     public function show($id, Request $request, CommentRepository $commentRepository): Response
     {
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
-        // on ne trouve pas la mission là !?
+
+        if (!$freelance) {
+            return $this->render('errors/error500.html.twig', [
+                'message' => 'La page demandée n\'a pas été trouvée.'
+            ]);
+        }
         $mission = $this->entityManager->getRepository(Mission::class)->find(['id'=>$freelance]);
         $commentaire = $this->entityManager->getRepository(Comment::class)->find(['id'=>$freelance]);
         $social = $this->entityManager->getRepository(Social::class)->find(['id'=>$freelance]);
