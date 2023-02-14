@@ -10,17 +10,38 @@
     <div class="group-btn">
         <div class="select-edit">
             {% if is_granted('ROLE_FREELANCE') %}
-            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission reçu </button>
+            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé </button>
             {% endif %}
-            <button class="step-button" data-step="2" onclick="nextStep(2)">Mission envoyé</button>
+            <button class="step-button" data-step="2" onclick="nextStep(2)">Mission reçu</button>
         </div>
     </div>
 
 <div id="step1" class="active">
 
+    {% for mission in missionSend %}
+        <div class="card col-9 ms-5 mb-2">
+            <div class="card-header text-end">
+                {{ mission.startDate|date("d/m/Y") }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ mission.title }}</h5>
+                Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
+                <b>Description de la mission :</b><br>
+                <p>{{ mission.description }}</p>
+                <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
+                <a href="{{path('delete_mission', {'id': mission.id } )}}"type="button" class="btn btn-danger text-end"><i class="fa-solid fa-trash"></i> Supprimer</a>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+
+<div id="step2">
+
     {% if is_granted('ROLE_FREELANCE') %}
 
-    {% for mission in missionsReceive %}
+        {% for mission in missionsReceive %}
 
 
     <div class="card col-9 ms-5 mb-2">
@@ -54,7 +75,7 @@
                             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
                             Email : <b>{{ mission.sendMission.email }}</b><br>
 
-                        <hr>
+                            <hr>
 
                             <b>Objet de la mission :</b> <p>{{ mission.object }}</p>
                             <hr>
@@ -62,10 +83,13 @@
                             <p>{{ mission.description }}</p>
                             <hr>
                             <b>Fichier :</b><br>
-
-                            <a target="_blank" href="{{ asset('uploads/fichiermission/' ~ mission.addFile) }}">
-                                <img style="width:80px;" src="../img/pdf.png" alt="Image description">
-                            </a>
+                            {% if mission.addFile %}
+                                <a target="_blank" href="{{ asset('uploads/fichiermission/' ~ mission.addFile) }}">
+                                    <img style="width:80px;" src="../img/pdf.png" alt="Image description">
+                                </a>
+                            {% else %}
+                                <p>Aucun fichier transmis</p>
+                            {% endif %}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
@@ -79,26 +103,6 @@
         {% endfor %}
     {% endif %}
 </div>
-
-<div id="step2">
-
-
-    {% for mission in missionSend %}
-        <div class="card col-9 ms-5 mb-2">
-            <div class="card-header text-end">
-                {{ mission.startDate|date("d/m/Y") }}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ mission.title }}</h5>
-                Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
-                <b>Description de la mission :</b><br>
-                <p>{{ mission.description }}</p>
-                <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
-                <a href="{{path('delete_mission', {'id': mission.id } )}}"type="button" class="btn btn-danger text-end"><i class="fa-solid fa-trash"></i> Supprimer</a>
-            </div>
-        </div>
-
-    {% endfor %}
 
 </div>
 

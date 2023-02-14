@@ -125,3 +125,21 @@
     background-color: red;
 }
 
+.list-vip{
+    margin:auto;
+}
+
+.badge {
+    background-color: gold;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+@media (max-width: 410px) {
+    .img-vip{
+        display:none;
+    }
+}

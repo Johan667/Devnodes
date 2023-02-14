@@ -4,4 +4,3 @@ google.maps.event.addListener(autocomplete, 'place_changed', function(){
     const place = autocomplete.getPlace();
     input.value = place.name
 });
-

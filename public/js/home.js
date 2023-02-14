@@ -19,9 +19,8 @@ function closeNav() {
 
 /* CAPTCHA */
 
-    function onSubmit(token) {
+function onSubmit(token) {
     document.getElementById("demo-form").submit();
 }
 
 /* FIN CAPTCHA */
-

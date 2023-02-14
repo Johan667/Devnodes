@@ -1,4 +1,10 @@
 <div class="card" style="width: 18rem;">
+
+    {% if freelance.isVip  %}
+    <div class="position-absolute top-0 end-0">
+        <span class="badge bg-warning text-dark">VIP</span>
+    </div>
+    {% endif %}
     {% if freelance.picture %}
         <img style="height: 200px; object-fit: cover" src="{{ asset('uploads/photoprofil/' ~ freelance.picture) }}" alt="Photo de profil">
     {% else %}

@@ -23,9 +23,9 @@ class FreelanceFixtures extends Fixture
     {
         $freelancer = new Freelance();
         $freelancer
-            ->setEmail('kebsibadr123@gmail.com')
-            ->setFirstname('FreelanceBadr')
-            ->setLastname('al-Kebsi')
+            ->setEmail('freelance@devnodes.com')
+            ->setFirstname('Freelance')
+            ->setLastname('Devnodes')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->encoder->hashPassword($freelancer, 'admint'))
             ->setPrice(500)
@@ -43,6 +43,7 @@ class FreelanceFixtures extends Fixture
                 ->setPicture($faker->randomElement(['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.png', 'img7.png']))
                 ->setBiographie($faker->sentences(3, true))
                 ->setPassword($password)
+                ->setRoles(['ROLE_FREELANCE'])
                 ->setPrice(($faker->randomDigitNotNull)*100)
                 ->setTitle("Best freelancer world")
                 ->setCountry($faker->country)

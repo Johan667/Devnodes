@@ -20,9 +20,10 @@
             <div class="column">
                 <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
+                {% if freelance.remoteWork is not empty %}
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
+                {% endif %}
                 {% if mission is not empty %}
-
                     {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
                 {% else %}
                     {{ freelance.firstname }} n'a réalisé aucune mission pour le moment
@@ -173,21 +174,23 @@
                                 {% endif %}
                             <hr>
                         {% endfor %}
-                        <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseExample">
-                            Afficher plus
-                        </button>
-                        </p>
-                        <div class="collapse" id="collapseComments" style="">
-                            <div class="card card-body">
-                                {% for comment in restCommentaires %}
-                           <p>" {{ comment.content }} "<br>
-                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
-                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
-                                {% if app.user is same as(comment.comments) %}
-                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
-                                {% endif %}
-                            <hr>
-                        {% endfor %}
+                        {% if restCommentaires %}
+                            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseExample">
+                                Afficher plus
+                            </button>
+                            </p>
+                            <div class="collapse" id="collapseComments" style="">
+                                <div class="card card-body">
+                                    {% for comment in restCommentaires %}
+                               <p>" {{ comment.content }} "<br>
+                                   <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
+                                       écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
+                                    {% if app.user is same as(comment.comments) %}
+                                        <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
+                                    {% endif %}
+                                <hr>
+                            {% endfor %}
+                        {% endif %}
                             </div>
                             
                         </div>

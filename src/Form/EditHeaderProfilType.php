@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EditHeaderProfilType extends AbstractType
 {
@@ -20,6 +21,16 @@ class EditHeaderProfilType extends AbstractType
             ->add('picture',FileType::class, [
                 'mapped' => false,
                 'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Erreur, veuillez réessayez.',
+                        'maxSizeMessage' => 'Erreur, veuillez réessayez.',
+                    ])
+                ],
             ])
             ->add('title',TextType::class)
             ->add('price',NumberType::class)

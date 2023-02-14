@@ -83,6 +83,9 @@ class Freelance extends User
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteFreelance')]
     private Collection $users;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isVip = null;
+
 
     public function __construct()
     {
@@ -547,6 +550,18 @@ class Freelance extends User
         if ($this->users->removeElement($user)) {
             $user->removeFavoriteFreelance($this);
         }
+
+        return $this;
+    }
+
+    public function isIsVip(): ?bool
+    {
+        return $this->isVip;
+    }
+
+    public function setIsVip(?bool $isVip): self
+    {
+        $this->isVip = $isVip;
 
         return $this;
     }
