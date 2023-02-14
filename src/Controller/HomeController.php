@@ -17,6 +17,7 @@ class HomeController extends AbstractController
      */
     public function bdr(FreelanceRepository $repository, Request $request): Response
     {
+
         $searchFreelance = $this->createForm(SearchForm::class, null);
         // crée le formulaire configuré dans le dossier FORM
         $searchFreelance->handleRequest($request);

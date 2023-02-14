@@ -51,6 +51,9 @@ class FreelanceRepository extends ServiceEntityRepository
                 ->setParameter('city', $parameters['city']);
         }
 
+        $qb->addOrderBy('f.isVip', 'DESC')
+            ->addOrderBy('f.id', 'ASC');
+
         $qb->leftJoin('f.codingLanguages', 'c');
         $qb->leftJoin('f.frameworks', 'fw');
         //dd($qb->getDQL());
