@@ -31,24 +31,3 @@ function toggleFavorite(freelancerId) {
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-/**
- $(document).on('click', '.fa-heart', function () {
-    var id = $(this).attr('id').replace('favorite-icon-', '');
-    var $icon = $(this);
-    $.post('/favorite/' + id + '/toggle', function (data) {
-        if (data.status === 'success') {
-            $icon.toggleClass('favorited');
-        }
-    });
-});
- */

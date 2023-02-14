@@ -17,7 +17,6 @@ class CommentType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Veuillez ecrire un commentaire'
             ])
-            ->add('envoyer', SubmitType::class)
         ;
     }
 

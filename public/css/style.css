@@ -298,12 +298,7 @@ nav .navbar ul {
   border-radius: 8px;
   color: white;
 }
-.btnFav{
-  background-color: #479f9f;
-  padding: 10px;
-  border-radius: 8px;
-  color: white;
-}
+
 .btnFav:hover{
   cursor: pointer;
   color: red;
