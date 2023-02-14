@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class MissionType extends AbstractType
 {
@@ -32,7 +33,20 @@ class MissionType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('addFile', FileType::class, array(
                 'label' => 'Vous pouvez ajouter un fichier -optionnel',
-                'required' => false
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Erreur, veuillez réessayez.',
+                        'maxSizeMessage' => 'Erreur, veuillez réessayez.',
+                    ])
+                ],
             ))
 
         ;

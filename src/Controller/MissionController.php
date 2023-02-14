@@ -6,7 +6,6 @@ use App\Entity\Freelance;
 use App\Entity\Mission;
 use App\Form\MissionType;
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
