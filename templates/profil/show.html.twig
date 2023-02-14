@@ -20,9 +20,10 @@
             <div class="column">
                 <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
+                {% if freelance.remoteWork is not empty %}
                 <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
+                {% endif %}
                 {% if mission is not empty %}
-
                     {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
                 {% else %}
                     {{ freelance.firstname }} n'a réalisé aucune mission pour le moment

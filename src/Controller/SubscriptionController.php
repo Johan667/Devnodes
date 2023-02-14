@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Freelance;
 use App\Entity\User;
 use App\Service\CheckoutStripeService;
@@ -62,12 +61,9 @@ class SubscriptionController extends AbstractController
         return $this->render('subscription/success.html.twig');
     }
 
-
     #[Route('/subscription/error', name: 'subscription_error')]
     public function error()
     {
         return $this->render('subscription/error.html.twig');
     }
-
-
 }
