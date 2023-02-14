@@ -33,7 +33,8 @@
             Email : <b>{{ mission.sendMission.email }}</b><br>
             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
             <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
-            <button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button>
+            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
+
             <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
         </div>
     </div>

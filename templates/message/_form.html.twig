@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="input-container">
+        <button class="submit-message" type="submit"><i class="fas fa-paper-plane"></i>{{ button_label|default('Envoyer') }}</button>
+    </div>
 {{ form_end(form) }}
