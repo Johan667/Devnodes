@@ -26,7 +26,7 @@
                 {% if mission is not empty %}
                     {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
                 {% else %}
-                    {{ freelance.firstname }} n'a réalisé aucune mission pour le moment
+
                 {% endif %}
                 <div class="squares">
                     <div class="price">
@@ -84,26 +84,29 @@
     <div id="skills">
         <div id="galerie">
             <h4 class="blueh2">Language de Programmation</h4><br>
-        {% for codingLanguages in freelance.codingLanguages %}
-
-           <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
-
-        {% endfor %}
-
+        {% if freelance.codingLanguages is not empty %}
+            {% for codingLanguages in freelance.codingLanguages %}
+               <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
+            {% endfor %}
+        {% endif %}
         </div>
         <div id="galerie2">
 
             <h4 class="blueh2">Base de donnée</h4><br>
-                {% for dbs in freelance.dbs %}
-                    <div class="text-center">{{ dbs.nameDb }}</div><br>
-                {% endfor %}
+                {% if freelance.dbs is not empty %}
+                    {% for dbs in freelance.dbs %}
+                        <div class="text-center">{{ dbs.nameDb }}</div><br>
+                    {% endfor %}
+                {% endif %}
         </div>
         <div id="galerie3">
 
             <h4 class="blueh2">Framework</h4><br>
-            {% for frameworks in freelance.frameworks %}
-                <div class="text-center">{{ frameworks.nameFramework }}</div><br>
-            {% endfor %}
+            {% if freelance.frameworks is not empty %}
+                {% for frameworks in freelance.frameworks %}
+                    <div class="text-center">{{ frameworks.nameFramework }}</div><br>
+                {% endfor %}
+            {% endif %}
         </div>
         <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <h4 class="blueh2">Voir les autres</h4>
@@ -113,14 +116,18 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
                 Methodology<br>
+            {% if freelance.methodologies is not empty %}
                 {% for methodologies in freelance.methodologies %}
                     <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
                 {% endfor %}
+            {% endif %}
 
             <em>Version Control</em><br>
-            {% for versionControls in freelance.versionControls %}
-                <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
-            {% endfor %}
+            {% if freelance.versionControls is not empty %}
+                {% for versionControls in freelance.versionControls %}
+                    <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
+                {% endfor %}
+            {% endif %}
 
         </div>
     </div>
