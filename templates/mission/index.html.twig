@@ -70,20 +70,21 @@
         {% for mission in missionsReceive %}
 
 
-            <div class="card col-9 ms-5 mb-2">
-                <div class="card-header text-end">
-                    {{ mission.startDate|date("d/m/Y") }}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ mission.title }}</h5>
-                    Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
-                    Email : <b>{{ mission.sendMission.email }}</b><br>
-                    Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
-                    <div class="mb-3 mt-3">Statut de la mission :  nothing</div>
-                    <button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button>
-                    <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
-                </div>
-            </div>
+    <div class="card col-9 ms-5 mb-2">
+        <div class="card-header text-end">
+            {{ mission.startDate|date("d/m/Y") }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ mission.title }}</h5>
+            Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
+            Email : <b>{{ mission.sendMission.email }}</b><br>
+            Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
+            <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
+            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
+
+            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
+        </div>
+    </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal{{ mission.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,7 +120,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
                             <button type="button" class="btn btn-danger">Refuser</button>
-                            <button type="button" class="btn btn-secondary">Contacter</button>
+                            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class="btn btn-secondary">Contacter</button></a>
                         </div>
                     </div>
                 </div>
