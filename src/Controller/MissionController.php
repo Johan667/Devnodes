@@ -6,20 +6,24 @@ use App\Entity\Freelance;
 use App\Entity\Mission;
 use App\Form\MissionType;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 class MissionController extends AbstractController
 {
     private $entityManager;
+    private $missionWorkflow;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, WorkflowInterface $missionWorkflow)
     {
         $this->entityManager = $entityManager;
+        $this->missionWorkflow = $missionWorkflow;
     }
 
     #[Route('/missions', name: 'missions')]
@@ -63,6 +67,13 @@ class MissionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //workflow / state Machine
+            try {
+                $this->missionWorkflow->apply($mission, 'to_pending');
+            } catch (LogicException $exception) {
+                //
+            }
+
 
             $mission->setSendMission($this->getUser());
             $freelance = $this->entityManager->getRepository(Freelance::class)->find(['id'=>$request->get('id')]);
@@ -72,7 +83,7 @@ class MissionController extends AbstractController
             $this->entityManager->flush();
 
             $this->addFlash("message", "Mission envoyé avec succès.");
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("missions");
         }
 
         return $this->render("mission/create.html.twig", [
@@ -99,6 +110,26 @@ class MissionController extends AbstractController
         return $this->render('mission/bulle.html.twig', [
             'missionCount' => count($missionCount),
         ]);
+    }
+
+    /**
+     * changing the mission state / status 
+     */
+    #[Route('/mission/{id}/{to}', name: 'mission_status_change')]
+    public function change(Mission $mission, String $to, EntityManagerInterface $entityManager)
+    {
+        try {
+            $this->missionWorkflow->apply($mission, $to);
+        } catch (LogicException $exception) {
+            //
+        }
+
+        $entityManager->persist($mission);
+        $entityManager->flush();
+
+        $this->addFlash('message', 'Action enregistrée !');
+
+        return $this->redirectToRoute('missions');
     }
 
 

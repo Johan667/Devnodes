@@ -1,0 +1,43 @@
+framework:
+    workflows:
+        mission:
+            type: 'workflow' # or 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'status'
+            supports:
+                - App\Entity\Mission
+            initial_marking: redaction
+            places:
+                - redaction
+                - freelance_validation_pending
+                - freelance_accepted
+                - client_validation_pending
+                - client_accepted
+                - in_progress
+                - rejected
+                - completed
+            transitions:
+                to_pending:
+                    from: redaction
+                    to:   [freelance_validation_pending, client_validation_pending]
+                to_freelance_accepted:
+                    from: freelance_validation_pending
+                    to:   freelance_accepted
+                to_client_accepted:
+                    from: client_validation_pending
+                    to:   client_accepted
+                to_in_progress:
+                    from: [freelance_accepted, client_accepted]
+                    to:   in_progress
+                to_completed:
+                    from: in_progress
+                    to:   completed
+                freelance_rejected:
+                    from: freelance_validation_pending
+                    to:   rejected
+                client_rejected:
+                    from: client_validation_pending
+                    to:   rejected

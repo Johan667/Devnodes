@@ -41,9 +41,6 @@ class Mission
     private ?string $addFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $state = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $frenquency = null;
 
     #[ORM\ManyToOne(inversedBy: 'missions')]
@@ -54,6 +51,9 @@ class Mission
 
     #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Message::class)]
     private Collection $messages;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $status = [];
 
     public function getId(): ?int
     {
@@ -138,18 +138,6 @@ class Mission
         return $this;
     }
 
-    public function getState(): ?string
-    {
-        return $this->state;
-    }
-
-    public function setState(?string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
     public function getFrenquency(): ?string
     {
         return $this->frenquency;
@@ -213,6 +201,18 @@ class Mission
                 $message->setMission(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): array
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?array $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
