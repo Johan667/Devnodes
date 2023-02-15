@@ -43,7 +43,13 @@
                 {% if app.user %}
                     <button class="proposeMission"><a href="{{ path('create_mission', { id : freelance.id })}}">Proposer une mission</a></button>
                     {% if not is_granted('ROLE_FREELANCE') %}
-                        <h5 class="mt-2">Mettre en favoris <i id="favorite-icon-{{ freelance.id }}" class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid text-danger' : 'fa-regular text-danger' }} fa-heart" onclick="toggleFavorite({{ freelance.id }})"></i></h5>
+                        <h5 class="mt-2">
+                            {{ user.getFavoriteFreelance().contains(freelance) ? 'Supprimer de favoris' : 'Mettre en favoris' }}
+                            <i id="favorite-icon-{{ freelance.id }}"
+                               class="{{ user.getFavoriteFreelance().contains(freelance) ? 'fa-solid text-danger' : 'fa-regular text-danger' }} fa-heart btnFav"
+                               onclick="toggleFavorite({{ freelance.id }})">
+                            </i>
+                        </h5>
                     {% endif %}
                 {% else %}
                     <button class="proposeMission"><a href="{{ path('app_register') }}">Proposer une mission</a></button>
@@ -170,14 +176,27 @@
                                <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
                                    écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
                                 {% if app.user is same as(comment.comments) %}
-                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
+                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn3" id="commentDel"><i class="fa fa-trash"></i></a>
                                 {% endif %}
                             <hr>
                         {% endfor %}
                         {% if restCommentaires %}
-                            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseExample">
-                                Afficher plus
-                            </button>
+                            <div class="container justify-content-center">
+                                <button
+                                        class="btn6 collapsed"
+                                        id="voirPlusBtn"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseComments"
+                                        aria-expanded="false"
+                                        aria-controls="collapseExample"
+                                        onclick="togglePlus()"
+                                >
+                                    Voir
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+
                             </p>
                             <div class="collapse" id="collapseComments" style="">
                                 <div class="card card-body">
@@ -186,16 +205,23 @@
                                    <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
                                        écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
                                     {% if app.user is same as(comment.comments) %}
-                                        <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-danger">Supprimer ce commentaire</a>
+                                        <div>
+                                            <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn3">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
                                     {% endif %}
                                 <hr>
                             {% endfor %}
                         {% endif %}
                             </div>
-                            
+
                         </div>
+                            <br>
                         {% if app.user %}
                                 {{ form_start(commentForm) }}
+                                    {{ form_widget(commentForm.content) }}
+                                    <button class="mt-3" type="submit"> Envoyer </button>
                                 {{ form_end(commentForm) }}
                             {% endif %}
                     </div>

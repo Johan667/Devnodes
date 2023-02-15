@@ -28,7 +28,33 @@
                 Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
                 <b>Description de la mission :</b><br>
                 <p>{{ mission.description }}</p>
-                <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
+                <div class="mb-3 mt-3">Statut de la mission :  nothing</div>
+
+                {% if workflow_can(mission, 'to_freelance_accepted') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_freelance_accepted'}) }}">Freelance Valide</a>
+                {% endif %}
+
+                {% if workflow_can(mission, 'to_client_accepted') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_client_accepted'}) }}">Client Valide</a>
+                {% endif %}
+
+                {% if workflow_can(mission, 'to_in_progress') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_in_progress'}) }}">In Progress</a>
+                {% endif %}
+
+                {% if workflow_can(mission, 'to_completed') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_completed'}) }}">Mission Done</a>
+                {% endif %}
+
+                {% if workflow_can(mission, 'freelance_rejected') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'freelance_rejected'}) }}">Reject Mission - Freelance</a>
+                {% endif %}
+
+                {% if workflow_can(mission, 'client_rejected') %}
+                    <a type="button" class="btn btn-primary btn-lg" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'client_rejected'}) }}">Reject Mission - Client</a>
+                {% endif %}
+
+
                 <a href="{{path('delete_mission', {'id': mission.id } )}}"type="button" class="btn btn-danger text-end"><i class="fa-solid fa-trash"></i> Supprimer</a>
             </div>
         </div>

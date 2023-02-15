@@ -47,6 +47,7 @@ class MissionFixtures extends Fixture
                 ->setStartDate(new \DateTimeImmutable())
                 ->setDescription($faker->sentences(4, true))
                 ->setFrenquency("whatever you want it to be LOL")
+                ->setStatus([])
                 ;
             $manager->persist($mission);
         }
