@@ -26,14 +26,14 @@ class EditAccountType extends AbstractType
             ])
             ->add('firstname', TextType::class, [
                 'required' => false,
-                'label' => 'Votre nom',
+                'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Entrez votre nom ici',
                 ],
             ])
             ->add('lastname', TextType::class, [
                 'required' => false,
-                'label' => 'Votre prénom',
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Entrez votre prénom ici',
                 ],

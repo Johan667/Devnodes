@@ -138,6 +138,10 @@
     border-radius: 10px;
 }
 
+.fa-trash{
+    color:red;
+}
+
 @media (max-width: 410px) {
     .img-vip{
         display:none;
