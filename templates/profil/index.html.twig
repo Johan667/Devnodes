@@ -18,7 +18,6 @@
                 <h1 class="bolder">{{ app.user.firstname }} {{ app.user.lastname }}</h1>
                 <h2 class="bold">{{ app.user.title }}</h2>
                 <i class="fa-solid fa-briefcase"></i> {{ app.user.remoteWork }}<br>
-                <i class="fa-solid fa-star"></i>Avis
                 <div class="squares">
                     <div class="price">
                         Prix<br>
@@ -140,7 +139,7 @@
             <h2 class="text-center mb-3">Supprimer une compétence</h2>
             <h3 class="text-center">Language de programmation</h3>
             {% for codingLanguage in freelance.codingLanguages %}
-                {{ codingLanguage.nameCodingLanguage }} <a href="{{ path('profil_delete_coding', {'id': codingLanguage.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+                {{ codingLanguage.nameCodingLanguage }} <a href="{{ path('profil_delete_coding', {'id': codingLanguage.id } ) }}"> <i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.codingLanguages is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>
@@ -150,7 +149,7 @@
             <br>
             <h3 class="text-center">Framework</h3>
             {% for framework in freelance.frameworks %}
-                {{ framework.nameFramework }} <a href="{{ path('profil_delete_framework', {'id': framework.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+                {{ framework.nameFramework }} <a href="{{ path('profil_delete_framework', {'id': framework.id } ) }}"> <i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.frameworks is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>
@@ -160,7 +159,7 @@
             <br>
             <h3 class="text-center">Base de donnée </h3>
             {% for db in freelance.dbs %}
-                {{ db.nameDb }} <a href="{{ path('profil_delete_database', {'id': db.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+                {{ db.nameDb }} <a href="{{ path('profil_delete_database', {'id': db.id } ) }}"> <i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.dbs is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>
@@ -170,7 +169,7 @@
             <br>
             <h3 class="text-center">Methodologie </h3>
             {% for methodology in freelance.methodologies %}
-            {{ methodology.nameMethodology }} <a href="{{ path('profil_delete_methodology', {'id': methodology.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+            {{ methodology.nameMethodology }} <a href="{{ path('profil_delete_methodology', {'id': methodology.id } ) }}"> <i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.methodologies is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>
@@ -180,7 +179,7 @@
             <br>
             <h3 class="text-center">Versionning</h3>
             {% for version in freelance.versionControls %}
-                {{ version.nameVersionControl }} <a href="{{ path('profil_delete_version', {'id': version.id } ) }}"><i class="fa-solid fa-trash"></i></a><br>
+                {{ version.nameVersionControl }} <a href="{{ path('profil_delete_version', {'id': version.id } ) }}"> <i class="fa-solid fa-trash"></i></a><br>
             {% endfor %}
             {% if freelance.versionControls is empty %}
                 <p class="text-center">Aucune sélection pour cette compétence</p>

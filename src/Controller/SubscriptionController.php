@@ -23,6 +23,7 @@ class SubscriptionController extends AbstractController
     #[Route('/subscription', name: 'app_subscription')]
     public function index()
     {
+
         // ici afficher l'abonnement et les avantage + rediriger vers le checkout
         return $this->render('subscription/index.html.twig');
     }
@@ -31,9 +32,6 @@ class SubscriptionController extends AbstractController
     public function create(CheckoutStripeService $checkoutStripeService)
     {
         $user = $this->getUser();
-        if ($this->getUser() === null) {
-            return $this->redirectToRoute('subscription_error');
-        }
 
         $successUrl = $this->generateUrl('subscription_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $cancelUrl = $this->generateUrl('subscription_error', [], UrlGeneratorInterface::ABSOLUTE_URL);

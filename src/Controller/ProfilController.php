@@ -45,6 +45,10 @@ class ProfilController extends AbstractController
         $user = $this->getUser();
         /** @var Freelance $freelance */
 
+        if ($this->getUser() === null) {
+            return $this->redirectToRoute('error401');
+        }
+
         $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
 
         $code = $freelance->getCodingLanguages();
