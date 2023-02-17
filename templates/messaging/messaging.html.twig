@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ messages[0].mission.title }}{% endblock %}
+
+{% block body %}
+
+    <style>
+        .wrapper-conversation {
+            max-width: 80%;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .chat-message.received {
+            align-items: flex-start;
+        }
+
+        .chat-message.sent {
+            align-items: flex-end;
+        }
+
+        .chat-message .message-content {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-message.sent .message-content {
+            background-color: #0084ff;
+            color: #fff;
+        }
+
+        .chat-message .message-content .message-body {
+            margin-bottom: 5px;
+            white-space: pre-wrap;
+        }
+
+        .chat-message .message-content .message-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .new-message-form {
+            margin-top: 20px;
+        }
+
+        .new-message-form form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .new-message-form form input {
+            flex-grow: 1;
+            margin-right: 10px;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .new-message-form form button {
+            background-color: #0084ff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .new-message-form form button:hover {
+            background-color: #0066cc;
+        }
+
+    </style>
+    <h3 class="text-center mb-3">Projet "{{ messages[0].mission.title }}"</h3>
+
+    <div class="wrapper-conversation">
+        {% for message in messages %}
+            <div class="chat-message {% if message.sender == app.user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    <div class="message-body">
+                        {{ message.content }}
+                    </div>
+                    <div class="message-footer">
+                        <span class="message-date">{{ message.datetime|date('d-m-Y H:i') }}</span>
+                        {% if message.sender == app.user %}
+                            <span class="message-sender">Moi</span>
+                        {% else %}
+                            <span class="message-sender">{{ message.sender.lastName }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="new-message-form">
+            {{ form_start(newMessageForm) }}
+            {{ form_widget(newMessageForm.content, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre message...'}}) }}
+            <button type="submit">Envoyer</button>
+            {{ form_end(newMessageForm) }}
+        </div>
+    </div>
+
+{% endblock %}

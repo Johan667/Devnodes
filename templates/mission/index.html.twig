@@ -9,7 +9,7 @@
 
     <div class="group-btn">
         <div class="select-edit">
-            {% if is_granted('ROLE_FREELANCE') %}
+            {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP') %}
             <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé </button>
             {% endif %}
             <button class="step-button" data-step="2" onclick="nextStep(2)">Mission reçu</button>
@@ -79,7 +79,7 @@
 
 <div id="step2">
 
-    {% if is_granted('ROLE_FREELANCE') %}
+    {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')%}
 
         {% for mission in missionsReceive %}
 
@@ -93,10 +93,19 @@
             Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
             Email : <b>{{ mission.sendMission.email }}</b><br>
             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
-            <div class="mb-3 mt-3">Statut de la mission :  {{ mission.state }}</div>
-            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
+{#            <div class="mb-3 mt-3">Statut de la mission :  {{ mission.status }}</div>#}
+            <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa-sharp fa-solid fa-message"></i>
+            </a>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {{ form_start(form) }}
+                    <button type="submit">Envoyer</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
-            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
+            <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
         </div>
     </div>
 
@@ -134,7 +143,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
                             <button type="button" class="btn btn-danger">Refuser</button>
-                            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class="btn btn-secondary">Contacter</button></a>
                         </div>
                     </div>
                 </div>

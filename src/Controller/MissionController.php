@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Freelance;
+use App\Entity\Message;
 use App\Entity\Mission;
+use App\Form\MessageType;
 use App\Form\MissionType;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -27,20 +29,43 @@ class MissionController extends AbstractController
     }
 
     #[Route('/missions', name: 'missions')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         // Si ce n'est pas le bon utilisateur on renvoi sur home
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
-        $missionsReceive = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
-        $missionsSend = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission'=>$this->getUser()]);
+
+        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
+        $missionSend = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission'=>$this->getUser()]);
+
+        $message = new Message();
+        $date = new \DateTimeImmutable();
+
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message->setDatetime($date);
+            $message->setSender($this->getUser());
+
+            foreach ($missionsReceived as $mission) {
+
+                $sender = $mission->getSendMission();
+                $message->setRecipient($sender);
+                $message->setMission($mission);
+                $this->entityManager->persist($message);
+                $this->entityManager->flush();
+            }
+        }
 
         return $this->render('mission/index.html.twig', [
-            'missionsReceive'=>$missionsReceive,
-            'missionSend' => $missionsSend
+            'missionsReceive' => $missionsReceived,
+            'missionSend' => $missionSend,
+            'form' => $form->createView(),
         ]);
-    }
+
+}
 
     #[Route('/create/mission', name: 'create_mission')]
     public function create(Request $request, SluggerInterface $slugger): Response

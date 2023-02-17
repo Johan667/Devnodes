@@ -55,7 +55,7 @@
                 {% if is_granted('ROLE_USER') %}
 
                 <li>
-                    <a class="btn1" href="{{ path('app_message_index') }}">Messagerie</a>
+                    <a class="btn1" href="{{ path('app_messaging') }}">Messagerie</a>
                 </li>
                 <li>
                    <a class="btn1" href="{{ path('missions') }}" id="mission-link">Missions</a>
@@ -92,7 +92,7 @@
             <a id="closeBtn" href="#" class="close">×</a>
             <ul>
                 <li><a href="{{ path('app_favorite') }}">Favoris</a></li>
-                <li><a href="{{ path('app_message_index') }}">Messagerie</a></li>
+                <li><a href="#">Messagerie</a></li>
                 <li><a href="{{ path('app_profil') }}">Profil</a></li>
                 <li><a href="{{ path('app_account') }}">Compte</a></li>
             </ul>
