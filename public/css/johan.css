@@ -147,3 +147,13 @@
         display:none;
     }
 }
+.px1200{
+    margin: auto;
+    max-width: 1300px;
+}
+
+.card-message{
+    border: black 1px solid;
+    border-radius: 9px;
+    padding: 1rem;
+}
