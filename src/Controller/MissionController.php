@@ -50,7 +50,7 @@ class MissionController extends AbstractController
             $message->setSender($this->getUser());
 
             foreach ($missionsReceived as $mission) {
-
+            // JOHAN ATTENTION ICI A BIEN SET LA MISSION AU BONNE ID BECAUSE PETIT BUG
                 $sender = $mission->getSendMission();
                 $message->setRecipient($sender);
                 $message->setMission($mission);
