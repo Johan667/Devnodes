@@ -123,6 +123,15 @@ class MissionController extends AbstractController
         } catch (LogicException $exception) {
             //
         }
+        
+        if ($this->missionWorkflow->can($mission, "to_in_progress")) {
+            try {
+                $this->missionWorkflow->apply($mission, "to_in_progress");
+            } catch (LogicException $exception) {
+                //
+            }
+            
+        }
 
         $entityManager->persist($mission);
         $entityManager->flush();

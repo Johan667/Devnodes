@@ -26,7 +26,7 @@ class FreelanceFixtures extends Fixture
             ->setEmail('freelance@devnodes.com')
             ->setFirstname('Freelance')
             ->setLastname('Devnodes')
-            ->setRoles(['ROLE_ADMIN'])
+            ->setRoles(['ROLE_ADMIN', 'ROLE_FREELANCE'])
             ->setPassword($this->encoder->hashPassword($freelancer, 'admint'))
             ->setPrice(500)
         ;
