@@ -77,7 +77,7 @@ class MessagingController extends AbstractController
         }
 
         return $this->render('messaging/messaging.html.twig', [
-            'title' => $mission->getTitle(), // Ajoutez cette ligne
+            'title' => $mission->getTitle(),
             'messages' => $messages,
             'newMessageForm' => $newMessageForm->createView(),
         ]);
