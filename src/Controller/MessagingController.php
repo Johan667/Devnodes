@@ -27,10 +27,8 @@ class MessagingController extends AbstractController
         $user = $this->getUser();
 
         $messages = $this->entityManager->getRepository(Message::class)->findAll();
-
         $messageReceive = $this->entityManager->getRepository(Message::class)->findBy(['recipient' => $user]);
         $messageSend = $this->entityManager->getRepository(Message::class)->findBy(['sender' => $user], ['datetime' => 'DESC']);
-
 
         return $this->render('messaging/index.html.twig', [
             'messageReceive' => $messageReceive,
@@ -43,8 +41,8 @@ class MessagingController extends AbstractController
     public function messaging(Request $request, $missionId): Response
     {
         $user = $this->getUser();
-
-        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
+        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission' => $user]);
+        $missionsSent = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission' => $user]);
 
         $messages = $this->entityManager->getRepository(Message::class)->findBy(
             ['mission' => $missionId],
@@ -53,31 +51,38 @@ class MessagingController extends AbstractController
 
         $message = new Message();
         $date = new \DateTimeImmutable();
+        $newMessageForm = $this->createForm(MessageType::class, $message);
+        $newMessageForm->handleRequest($request);
 
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($newMessageForm->isSubmitted() && $newMessageForm->isValid()) {
             $message->setDatetime($date);
-            $message->setSender($this->getUser());
+            $message->setSender($user);
 
-            foreach ($missionsReceived as $mission) {
-
-                $sender = $mission->getSendMission();
-                $message->setRecipient($sender);
-                $message->setMission($mission);
-                $this->entityManager->persist($message);
-                $this->entityManager->flush();
-                return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
+            if ($user->getRoles('ROLE_FREELANCE') || $user->getRoles('ROLE_VIP')) {
+                foreach ($missionsReceived as $mission) {
+                    $sender = $mission->getSendMission();
+                    $message->setRecipient($sender);
+                    $message->setMission($mission);
+                    $this->entityManager->persist($message);
+                    $this->entityManager->flush();
+                    return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
+                }
             }
+//            elseif ($user->getRoles('ROLE_USER')) {
+//                foreach ($missionsSent as $mission) {
+//                    $recipient = $mission->getReceiveMission();
+//                    $message->setRecipient($recipient);
+//                    $message->setMission($mission);
+//                    $this->entityManager->persist($message);
+//                    $this->entityManager->flush();
+//                    return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
+//                }
+//            }
+            // JOHAN A FINIR DIMANCHE OU LUNDI
         }
-
-
         return $this->render('messaging/messaging.html.twig', [
             'messages' => $messages,
-            'newMessageForm' => $form->createView()
+            'newMessageForm' => $newMessageForm->createView(),
         ]);
-
-}
-
+    }
 }
