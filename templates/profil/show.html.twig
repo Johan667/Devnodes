@@ -173,68 +173,7 @@
 
         </section>
         <section id="blok-right">
-                <div>
-                    <div id="comment">
-                        <h2 class="blueh2 mb-3">Commentaires</h2>
-
-                        <div class="comment">
-                        {% for comment in firstCommentaires %}
-                           <p>" {{ comment.content }} "<br>
-                               <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
-                                   écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
-                                {% if app.user is same as(comment.comments) %}
-                                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn3" id="commentDel"><i class="fa fa-trash"></i></a>
-                                {% endif %}
-                            <hr>
-                        {% endfor %}
-                        {% if restCommentaires %}
-                            <div class="container justify-content-center">
-                                <button
-                                        class="btn6 collapsed"
-                                        id="voirPlusBtn"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#collapseComments"
-                                        aria-expanded="false"
-                                        aria-controls="collapseExample"
-                                        onclick="togglePlus()"
-                                >
-                                    Voir
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-
-                            </p>
-                            <div class="collapse" id="collapseComments" style="">
-                                <div class="card card-body">
-                                    {% for comment in restCommentaires %}
-                               <p>" {{ comment.content }} "<br>
-                                   <strong>{{ comment.comments.firstname }}</strong><span class="textInfo">, {{ comment.comments.denominationCompany }} <br>
-                                       écrit le {{ comment.createdAt | date('d-m-Y') }}</span></p>
-                                    {% if app.user is same as(comment.comments) %}
-                                        <div>
-                                            <a href="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn3">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                <hr>
-                            {% endfor %}
-                        {% endif %}
-                            </div>
-
-                        </div>
-                            <br>
-                        {% if app.user %}
-                                {{ form_start(commentForm) }}
-                                    {{ form_widget(commentForm.content) }}
-                                    <button class="mt-3" type="submit"> Envoyer </button>
-                                {{ form_end(commentForm) }}
-                            {% endif %}
-                    </div>
-
-                </div>
-                </div>
+                {% include 'profil/comment.html.twig' %}
         </section>
     </article>
     <article id="social">
