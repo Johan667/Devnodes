@@ -179,6 +179,10 @@ class ProfilController extends AbstractController
 
         $user = $this->getUser() ?? null;
 
+        /**
+         * La partie commentaires
+         */
+
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
         $commentForm->handleRequest($request);
@@ -188,10 +192,19 @@ class ProfilController extends AbstractController
                 ->setComments($user)
                 ->setReceived($freelance)
                 ;
+            
+            // La    partie pour le parent (reponse a un commentaire)
+            $parentid = $commentForm->get("parentid")->getData();
+            if ($parentid != null) {
+                $parent = $this->entityManager->getRepository(Comment::class)->find($parentid);
+                $comment->setParent($parent);
+            }
 
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
-            
+
+            $this->addFlash('message', 'Votre commentaire a bien été envoyé');
+
             return $this->redirectToRoute('app_profil_show', ['id' => $freelance->getId()]);
         }
         

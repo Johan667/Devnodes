@@ -1,0 +1,120 @@
+<section class="gradient-custom">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4 pb-2 blueh2 mb-3">Commentaires</h2>
+
+                        <div class="row">
+                            <div class="col">
+                                {# first 3 comments #}
+                                {% for comment in firstCommentaires %}
+                                    <div class="d-flex flex-start mt-4">
+                                        <i class="fa-solid fa-user rounded-circle shadow-1-strong me-3" style="width: 65px; height:65px; font-size: 2em; color: #479F9F;"></i>
+                                        <div class="flex-grow-1 flex-shrink-1">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="mb-1">
+                                                        {{ comment.comments.firstname }} {{ comment.comments.lastname }} <span class="small">- {{ comment.createdAt | date('Y-m-d h:i') }}</span>
+                                                    </p>
+                                                    <a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" style="text-decoration: none;"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+                                                </div>
+                                                <p class="small mb-0">
+                                                    {{ comment.content }}
+                                                </p>
+                                            </div>
+                                            {# replies #}
+                                            {% for reply in comment.replies %}
+                                                <div class="d-flex flex-start mt-4">
+                                                    <i class="fa-solid fa-comments rounded-circle shadow-1-strong me-3" style="width: 65px; height:65px; font-size: 2em; color: #479F9F;"></i>
+                                                    <div class="flex-grow-1 flex-shrink-1">
+                                                        <div>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-1">
+                                                            {{ reply.comments.firstname }} {{ comment.comments.lastname }} <span class="small">- {{ reply.createdAt | date('Y-m-d h:i') }}</span>
+                                                            </p>
+                                                        </div>
+                                                        <p class="small mb-0">
+                                                            {{ reply.content }}
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                {# rest of the comments #}
+                                {% if restCommentaires %}
+                                    <div class="container justify-content-center">
+                                        <button
+                                            class="btn6 collapsed"
+                                            id="voirPlusBtn"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseComments"
+                                            aria-expanded="false"
+                                            aria-controls="collapseExample"
+                                            onclick="togglePlus()"
+                                        >
+                                            Voir
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="collapse" id="collapseComments" style="">
+                                        {% for comment in restCommentaires %}
+                                            <div class="d-flex flex-start mt-4">
+                                                <i class="fa-solid fa-user rounded-circle shadow-1-strong me-3" style="width: 65px; height:65px; font-size: 2em; color: #479F9F;"></i>
+                                                <div class="flex-grow-1 flex-shrink-1">
+                                                    <div>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-1">
+                                                                {{ comment.comments.firstname }} {{ comment.comments.lastname }} <span class="small">- {{ comment.createdAt | date('Y-m-d h:i') }}</span>
+                                                            </p>
+                                                            <a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" style="text-decoration: none;"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+                                                        </div>
+                                                        <p class="small mb-0">
+                                                            {{ comment.content }}
+                                                        </p>
+                                                    </div>
+                                                    {# replies #}
+                                                    {% for reply in comment.replies %}
+                                                        <div class="d-flex flex-start mt-4">
+                                                            <i class="fa-solid fa-comments rounded-circle shadow-1-strong me-3" style="width: 65px; height:65px; font-size: 2em; color: #479F9F;"></i>
+                                                            <div class="flex-grow-1 flex-shrink-1">
+                                                                <div>
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <p class="mb-1">
+                                                                            {{ reply.comments.firstname }} {{ comment.comments.lastname }} <span class="small">- {{ reply.createdAt | date('Y-m-d h:i') }}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <p class="small mb-0">
+                                                                        {{ reply.content }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                {% if app.user %}
+                                    <div id="ajout-commentaire">
+                                        {{ form_start(commentForm) }}
+                                            {{ form_widget(commentForm.content) }}
+                                            <button class="mt-3" type="submit"> Envoyer </button>
+                                        {{ form_end(commentForm) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
