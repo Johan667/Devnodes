@@ -24,7 +24,7 @@ framework:
                     from: redaction
                     to:   [freelance_validation_pending, client_validation_pending]
                 to_freelance_accepted:
-                    guard: "is_granted('ROLE_FREELANCE')"
+                    guard: "is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')"
                     from: freelance_validation_pending
                     to:   freelance_accepted
                 to_client_accepted:
@@ -35,11 +35,11 @@ framework:
                     from: [freelance_accepted, client_accepted]
                     to:   in_progress
                 to_completed:
-                    guard: "is_granted('ROLE_FREELANCE')"
+                    guard: "is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')"
                     from: in_progress
                     to:   completed
                 freelance_rejected:
-                    guard: "is_granted('ROLE_FREELANCE')"
+                    guard: "is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')"
                     from: freelance_validation_pending
                     to:   rejected
                 client_rejected:
