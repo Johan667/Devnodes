@@ -10,16 +10,19 @@
     <div class="group-btn">
         <div class="select-edit">
 
-            {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP') %}
-            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé </button>
-
+            {% if missionSend %}
+                <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé</button>
             {% endif %}
+            {% if is_granted('ROLE_FREELANCE') %}
             <button class="step-button" data-step="2" onclick="nextStep(2)">Mission reçu</button>
+            {% endif %}
             <button class="step-button" data-step="2" onclick="nextStep(3)">Mission archivé</button>
         </div>
     </div>
 
-<div id="step1" class="active">
+    
+
+<div id="step1" {% if not is_granted('ROLE_FREELANCE') %} class="active"  style="display: block;"{% endif %}>
 
     {% for mission in missionSend %}
         {% if not (workflow_has_marked_place(mission, 'rejected') or workflow_has_marked_place(mission, 'completed')) %}
@@ -55,7 +58,7 @@
 </div>
 
 
-<div id="step2">
+<div id="step2" {% if is_granted('ROLE_FREELANCE') %} class="active" style="display: block;"{% endif %}>
 
     {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')%}
 
