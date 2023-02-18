@@ -38,11 +38,16 @@ class MessagingController extends AbstractController
     }
 
     #[Route('/messaging/{missionId}', name: 'app_messaging_mission')]
-    public function messaging(Request $request, $missionId): Response
+    public function messaging(Request $request, int $missionId): Response
     {
         $user = $this->getUser();
-        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission' => $user]);
-        $missionsSent = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission' => $user]);
+        $missionRepository = $this->entityManager->getRepository(Mission::class);
+        $mission = $missionRepository->find($missionId);
+
+        // Vérifie si l'utilisateur a accès à cette mission
+        if (!$mission || ($mission->getSendMission() !== $user && $mission->getReceiveMission() !== $user)) {
+            throw $this->createNotFoundException('La mission n\'existe pas ou vous n\'avez pas le droit d\'y accéder.');
+        }
 
         $messages = $this->entityManager->getRepository(Message::class)->findBy(
             ['mission' => $missionId],
@@ -58,29 +63,21 @@ class MessagingController extends AbstractController
             $message->setDatetime($date);
             $message->setSender($user);
 
-            if ($user->getRoles('ROLE_FREELANCE') || $user->getRoles('ROLE_VIP')) {
-                foreach ($missionsReceived as $mission) {
-                    $sender = $mission->getSendMission();
-                    $message->setRecipient($sender);
-                    $message->setMission($mission);
-                    $this->entityManager->persist($message);
-                    $this->entityManager->flush();
-                    return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
-                }
+            if ($mission->getSendMission() === $user) {
+                $recipient = $mission->getReceiveMission();
+            } else {
+                $recipient = $mission->getSendMission();
             }
-//            elseif ($user->getRoles('ROLE_USER')) {
-//                foreach ($missionsSent as $mission) {
-//                    $recipient = $mission->getReceiveMission();
-//                    $message->setRecipient($recipient);
-//                    $message->setMission($mission);
-//                    $this->entityManager->persist($message);
-//                    $this->entityManager->flush();
-//                    return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
-//                }
-//            }
-            // JOHAN A FINIR DIMANCHE OU LUNDI
+
+            $message->setRecipient($recipient);
+            $message->setMission($mission);
+            $this->entityManager->persist($message);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_messaging_mission', ['missionId' => $missionId]);
         }
+
         return $this->render('messaging/messaging.html.twig', [
+            'title' => $mission->getTitle(), // Ajoutez cette ligne
             'messages' => $messages,
             'newMessageForm' => $newMessageForm->createView(),
         ]);
