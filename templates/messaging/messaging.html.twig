@@ -3,150 +3,35 @@
 {% block title %} Devnodes | Projet {{ title }}{% endblock %}
 
 {% block body %}
-
-    <style>
-        /* Style pour le conteneur principal du chat */
-        .wrapper-conversation {
-            max-width: 80%;
-            margin: auto;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            color: #333;
-        }
-
-        /* Style pour chaque message du chat */
-        .chat-message {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
-
-        /* Style pour les messages reçus */
-        .chat-message.received {
-            align-items: flex-start;
-        }
-
-        /* Style pour les messages envoyés */
-        .chat-message.sent {
-            align-items: flex-end;
-        }
-
-        /* Style pour le contenu de chaque message */
-        .chat-message .message-content {
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Style pour le contenu des messages envoyés */
-        .chat-message.sent .message-content {
-            background-color: #479F9F;
-            color: #fff;
-        }
-
-        /* Style pour le corps du message */
-        .chat-message .message-content .message-body {
-            margin-bottom: 2px;
-            color: black;
-            white-space: pre-wrap;
-        }
-
-        /* Style pour le pied de page du message */
-        .chat-message .message-content .message-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        /* Style pour le formulaire pour envoyer de nouveaux messages */
-        .new-message-form {
-            margin-top: 20px;
-        }
-
-        /* Style pour le formulaire de nouveau message */
-        .new-message-form form {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Style pour l'input du formulaire de nouveau message */
-        .new-message-form form input {
-            flex-grow: 1;
-            margin-right: 10px;
-            border: none;
-            border-radius: 20px;
-            padding: 10px;
-        }
-
-        /* Style pour le bouton du formulaire de nouveau message */
-        .new-message-form form button {
-            background-color: #479F9F;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Style pour le survol du bouton du formulaire de nouveau message */
-        .new-message-form form button:hover {
-            background-color: #0066cc;
-        }
-
-        /* Style pour le formulaire d'envoi de message */
-        #chat2 .form-control {
-            border-color: transparent;
-        }
-
-        /* Style pour le focus sur l'input du formulaire d'envoi de message */
-        #chat2 .form-control:focus {
-            border-color: transparent;
-            box-shadow: inset 0px 0px 0px 1px transparent;
-        }
-
-        /* Style pour la ligne de séparation */
-        .divider:after,
-        .divider:before {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background:#eee;
-        }
-    </style>
-    <h3 class="text-center mb-3">Projet "{{ title }}"</h3>
+    <h3 class="text-center mb-3 mt-3">Projet "<strong>{{ title }}</strong>"</h3>
     <hr>
-    <div class="wrapper-conversation">
+    <div class="wrapper-conversation conversation-container">
     <!-- Afficher chaque message existant dans la conversation -->
-    {% for message in messages %}
-        <div class="chat-message {% if message.sender == app.user %}sent{% else %}received{% endif %}">
-            <div class="message-content">
-                <div class="message-body">
-                    {{ message.content }}
-                </div>
-                <div class="message-footer">
-                    <span class="message-date">{{ message.datetime|date('d-m-Y H:i') }}</span>
-                    {% if message.sender == app.user %}
-                        <span class="message-sender">Moi</span>
-                    {% else %}
-                        <span class="message-sender">{{ message.sender.lastName }}</span>
-                    {% endif %}
+        {% for message in messages %}
+            <div class="chat-message {% if message.sender == app.user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    <div class="message-body">
+                        {{ message.content }}
+                    </div>
+                    <div class="message-footer">
+                        <span class="message-date">{{ message.datetime|date('d-m-Y H:i') }}</span>
+                        {% if message.sender == app.user %}
+                            <span class="message-sender">Moi</span>
+                        {% else %}
+                            <span class="message-sender">{{ message.sender.lastName }}</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+
     <!-- Formulaire pour envoyer de nouveaux messages -->
+
+    </div>
     <div class="new-message-form">
         {{ form_start(newMessageForm) }}
         {{ form_widget(newMessageForm.content, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre message...'}}) }}
         <button class="btn1" type="submit" >Envoyer</button>
         {{ form_end(newMessageForm) }}
     </div>
-
-
-
 {% endblock %}
