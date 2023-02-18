@@ -84,7 +84,7 @@
                                 <p>En cours de réalisation, Veuillez cliquer sur le button "Mission terminer" quand c'est fait</p>
                             {% endif %}
                         </div>
-                        <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
+                        <a href="{{ path('app_messaging_mission', {id: mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
 
                         <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
                     </div>
@@ -159,7 +159,7 @@
                             {% if workflow_can(mission, 'to_completed') %}
                                 <a type="button" class="btn btn-primary btn-sm" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_completed'}) }}">Mission Done</a><br>
                             {% endif %}
-                            <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class="btn btn6">Contacter</button></a>
+                            <a href="{{ path('app_messaging_mission', {id: mission.id}) }}"><button type="button" class="btn btn6">Contacter</button></a>
 
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
                             <button type="button" class="btn btn-danger">Refuser</button>
