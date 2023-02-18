@@ -27,7 +27,7 @@ class MessagingController extends AbstractController
         $user = $this->getUser();
 
         $messages = $this->entityManager->getRepository(Message::class)->findAll();
-        $messageReceive = $this->entityManager->getRepository(Message::class)->findBy(['recipient' => $user]);
+        $messageReceive = $this->entityManager->getRepository(Message::class)->findBy(['recipient' => $user], ['datetime' => 'DESC']);
         $messageSend = $this->entityManager->getRepository(Message::class)->findBy(['sender' => $user], ['datetime' => 'DESC']);
 
         return $this->render('messaging/index.html.twig', [
