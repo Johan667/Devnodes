@@ -91,10 +91,17 @@
         <div id="mySidenav" class="sidenav">
             <a id="closeBtn" href="#" class="close">×</a>
             <ul>
+                {% if app.user %}
+                {% if not is_granted('ROLE_FREELANCE') %}
                 <li><a href="{{ path('app_favorite') }}">Favoris</a></li>
-                <li><a href="#">Messagerie</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_messaging') }}">Messagerie</a></li>
                 <li><a href="{{ path('app_profil') }}">Profil</a></li>
                 <li><a href="{{ path('app_account') }}">Compte</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_favorite') }}">Se connecter</a></li>
+                        <li><a href="{{ path('app_favorite') }}">S'inscrire</a></li>
+                {% endif %}
             </ul>
         </div>
 

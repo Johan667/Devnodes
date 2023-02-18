@@ -157,3 +157,117 @@
     border-radius: 9px;
     padding: 1rem;
 }
+
+
+/** PAGE MESSAGING /*
+
+   /* Style pour le conteneur principal du chat */
+.wrapper-conversation {
+    max-width: 80%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Style pour chaque message du chat */
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+/* Style pour les messages reçus */
+.chat-message.received {
+    align-items: flex-start;
+}
+
+/* Style pour les messages envoyés */
+.chat-message.sent {
+    align-items: flex-end;
+}
+
+/* Style pour le contenu de chaque message */
+.chat-message .message-content {
+    background-color: #D6E4E5;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Style pour le contenu des messages envoyés */
+.chat-message.sent .message-content {
+    background-color: #479F9F;
+    color: #fff;
+}
+
+/* Style pour le corps du message */
+.chat-message .message-content .message-body {
+    margin-bottom: 2px;
+    color: black;
+    white-space: pre-wrap;
+}
+
+/* Style pour le pied de page du message */
+.chat-message .message-content .message-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Style pour le formulaire pour envoyer de nouveaux messages */
+.new-message-form {
+    margin:auto;
+    max-width:66%;
+}
+
+/* Style pour le formulaire de nouveau message */
+.new-message-form form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style pour l'input du formulaire de nouveau message */
+.new-message-form form input {
+    flex-grow: 1;
+    border: solid 1px #479F9F;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 1rem;
+}
+
+/* Style pour le bouton du formulaire de nouveau message */
+.new-message-form form button {
+    background-color: #479F9F;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Style pour le survol du bouton du formulaire de nouveau message */
+.new-message-form form button:hover {
+    background-color: #EB6440;
+}
+
+/* Style pour le formulaire d'envoi de message */
+#chat2 .form-control {
+    border-color: transparent;
+}
+
+/* Style pour le focus sur l'input du formulaire d'envoi de message */
+#chat2 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+}
+.conversation-container {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
