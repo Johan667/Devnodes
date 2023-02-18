@@ -9,8 +9,10 @@
 
     <div class="group-btn">
         <div class="select-edit">
-            {% if is_granted('ROLE_FREELANCE') %}
-            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé</button>
+
+            {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP') %}
+            <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé </button>
+
             {% endif %}
             <button class="step-button" data-step="2" onclick="nextStep(2)">Mission reçu</button>
             <button class="step-button" data-step="2" onclick="nextStep(3)">Mission archivé</button>
@@ -55,7 +57,7 @@
 
 <div id="step2">
 
-    {% if is_granted('ROLE_FREELANCE') %}
+    {% if is_granted('ROLE_FREELANCE') or is_granted('ROLE_VIP')%}
 
         {% for mission in missionsReceive %}
             {% if not (workflow_has_marked_place(mission, 'rejected') or workflow_has_marked_place(mission, 'completed')) %}
@@ -87,7 +89,30 @@
             {% endif %}
 
 
-    
+    <div class="card col-9 ms-5 mb-2">
+        <div class="card-header text-end">
+            {{ mission.startDate|date("d/m/Y") }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ mission.title }}</h5>
+            Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
+            Email : <b>{{ mission.sendMission.email }}</b><br>
+            Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
+{#            <div class="mb-3 mt-3">Statut de la mission :  {{ mission.status }}</div>#}
+            <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa-sharp fa-solid fa-message"></i>
+            </a>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {{ form_start(form) }}
+                    <button type="submit">Envoyer</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal{{ mission.id }}"><i class="fa-solid fa-eye text-light"></i></button>
+        </div>
+    </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal{{ mission.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,6 +146,7 @@
                             {% endif %}
                         </div>
                         <div class="modal-footer">
+
                             {% if workflow_can(mission, 'to_freelance_accepted') %}
                                 <a type="button" class="btn btn-success" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_freelance_accepted'}) }}" >Accepter</a><br>
                             {% endif %}
@@ -131,6 +157,10 @@
                                 <a type="button" class="btn btn-primary btn-sm" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_completed'}) }}">Mission Done</a><br>
                             {% endif %}
                             <a href="{{ path('app_messages_mission', {id: mission.id}) }}"><button type="button" class="btn btn6">Contacter</button></a>
+
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Accepter</button>
+                            <button type="button" class="btn btn-danger">Refuser</button>
+
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessagingController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        /* Style général de la messagerie */
+        .wrapper-messagerie{
+            max-width: 90%;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Style des messages reçus */
+        .chat-message {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .chat-message .message-content {
+            width: 80%;
+            margin-right: 10px;
+        }
+
+        .chat-message .message-content .message-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .chat-message .message-content .message-body {
+            margin-bottom: 5px;
+        }
+
+        .chat-message .message-content .message-footer {
+            color: #888;
+        }
+
+        .chat-message .message-content .message-footer .message-date {
+            margin-right: 10px;
+        }
+
+        .chat-message .message-content .message-footer .message-sender {
+            font-style: italic;
+        }
+
+        /* Style des actions sur les messages */
+        .message-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .message-actions .btn1 {
+            padding: 5px 10px;
+            border-radius: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .message-actions .btn1:hover {
+            background-color: #3e8e41;
+        }
+
+        .message-actions .fa-solid {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .message-actions .fa-solid:hover {
+            color: #4CAF50;
+        }
+    </style>
+<h1 class="text-center"> Messagerie</h1>
+
+<div class="wrapper-messagerie">
+    <div class="row">
+        <p class="text-center">Ici retrouvez les derniers messages</p>
+        <hr>
+
+                {% for message in messageReceive %}
+            <div class="chat-message id="{{ message.mission.id }}"">
+                <div class="message-content">
+                    <div class="message-header">
+                        <u>Mission:</u> {{ message.mission.title }}
+                    </div>
+                    <div class="message-body">
+                        {{ message.content }}
+                    </div>
+                    <div class="message-footer">
+                        <span class="message-date">{{ message.datetime|date('d-m-Y H:i') }}</span>
+                        <span class="message-sender">{{ message.sender.lastName }}</span>
+                    </div>
+                </div>
+                <div class="message-actions">
+                    <a href="{{ path('app_messaging_mission', { 'missionId': message.mission.id }) }}" class="btn1">
+                        <i class="fa-solid fa-reply"></i> Voir
+                    </a>
+                        <i class="fa-solid fa-trash"></i> Supprimer
+                </div>
+            </div>
+    <hr>
+            {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
