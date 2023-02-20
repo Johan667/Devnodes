@@ -221,7 +221,6 @@ article{
     display:flex;
     flex-wrap: wrap;
     gap: 20px;
-    align-items: center;
 }
 
 .description{
@@ -247,7 +246,7 @@ ul {
 
 .colonneProfil{
     display:flex;
-    justify-content: right;
+    justify-content: center;
 }
 
 .btnSkill{
@@ -260,4 +259,10 @@ ul {
     font-size: larger;
     font-weight: bold;
     color: rgba(71, 159, 159, 0.8);
+}
+
+.parent3{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }

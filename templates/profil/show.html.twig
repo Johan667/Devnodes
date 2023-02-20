@@ -93,73 +93,16 @@
             </div>
             <hr>
             <div class="description">
-                <h2 class="text-center">Description</h2>
+                <h2 class="competence">Description</h2>
                 {{ freelance.biographie  }}
             </div>
         </div>
 
 
-            <div class="skillProfil mt-3">
-                <div class="colonneProfil">
-                <div id="step1" class="active">
-                    {% if freelance.codingLanguages is not empty %}
-                        {% for codingLanguages in freelance.codingLanguages %}
-                            <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
 
-                <div id="step2">
-                    {% if freelance.dbs is not empty %}
-                        {% for dbs in freelance.dbs %}
-                            <div class="text-center">{{ dbs.nameDb }}</div><br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div id="step3">
-                    {% if freelance.frameworks is not empty %}
-                        {% for frameworks in freelance.frameworks %}
-                            <div class="text-center">{{ frameworks.nameFramework }}</div><br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div id="step4">
-                    {% if freelance.methodologies is not empty %}
-                        {% for methodologies in freelance.methodologies %}
-                            <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div id="step5">
-                    {% if freelance.versionControls is not empty %}
-                        {% for versionControls in freelance.versionControls %}
-                            <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div class="btnSkills">
-                <ul>
-                    <div class="competence">Compétences</div>
-                <li><button class="btnSkill" data-step="1" onclick="nextStep(1)">Language de programmations</button></li>
-                    <li><button class="btnSkill" data-step="2" onclick="nextStep(2)">Base de données</button></li>
-                    <li><button class="btnSkill" data-step="2" onclick="nextStep(3)">Frameworks</button></li>
-                    <li><button class="btnSkill" data-step="2" onclick="nextStep(4)">Methodologies</button></li>
-                    <li><button class="btnSkill" data-step="2" onclick="nextStep(5)">Versionning</button></li>
-                </ul>
-                </div>
-            </div>
-            </div>
-        </div>
-
-
-    <article id="experience">
-        <h2 class="blueh2 text-center">Expériences</h2>
-
-        <div class="experience-block">
+      <div class="parent3 mt-3">
+        <div class="description mb-1">
+            <h2 class="competence">Expériences</h2>
             {% for path in freelance.belong %}
                 {% set startDate = path.startDate %}
                 {% set endDate = path.endDate %}
@@ -170,13 +113,69 @@
                 <hr>
             {% endfor %}
         </div>
-    </article>
-    <article id="com" class="justify-content-center">
 
-        <div class="justify-content-center">
+        <div class="description justify-content-center">
+            <h2 class="competence">Commentaires</h2>
                 {% include 'profil/comment.html.twig' %}
         </div>
-    </article>
+
+        </div>
+
+    <div class="skillProfil mt-3">
+        <div class="colonneProfil">
+            <div id="step1" class="active">
+                {% if freelance.codingLanguages is not empty %}
+                    {% for codingLanguages in freelance.codingLanguages %}
+                        <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="step2">
+                {% if freelance.dbs is not empty %}
+                    {% for dbs in freelance.dbs %}
+                        <div class="text-center">{{ dbs.nameDb }}</div><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="step3">
+                {% if freelance.frameworks is not empty %}
+                    {% for frameworks in freelance.frameworks %}
+                        <div class="text-center">{{ frameworks.nameFramework }}</div><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="step4">
+                {% if freelance.methodologies is not empty %}
+                    {% for methodologies in freelance.methodologies %}
+                        <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="step5">
+                {% if freelance.versionControls is not empty %}
+                    {% for versionControls in freelance.versionControls %}
+                        <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="btnSkills">
+                <ul>
+                    <div class="competence">Compétences</div>
+                    <li><button class="btnSkill" data-step="1" onclick="nextStep(1)">Language de programmations</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(2)">Base de données</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(3)">Frameworks</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(4)">Methodologies</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(5)">Versionning</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 
