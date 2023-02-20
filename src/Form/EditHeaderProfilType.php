@@ -23,9 +23,10 @@ class EditHeaderProfilType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '1024K',
                         'mimeTypes' => [
                             'image/jpeg',
+                            'image/png',
                         ],
                         'mimeTypesMessage' => 'Erreur, veuillez réessayez.',
                         'maxSizeMessage' => 'Erreur, veuillez réessayez.',

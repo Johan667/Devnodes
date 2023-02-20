@@ -24,10 +24,12 @@ class MissionType extends AbstractType
                     ]
                 )
             ->add('frenquency', ChoiceType::class, array(
-                'label' => 'Votre projet est urgent ?',
+                'label' => 'A quelle fréquence avez vous besoin du Freelance ?',
                 'choices'  => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
+                    'Demi-Journée' => 'Demi-Journée',
+                    'Journée' => 'Journée',
+                    'Semaine' => 'Semaine',
+                    'Mois' => 'Mois',
                 ),
             ))
             ->add('description', TextareaType::class)
