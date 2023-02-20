@@ -50,8 +50,11 @@ class SubscriptionController extends AbstractController
 
         $freelance = $this->entityManager->getRepository(User::class)->find(['id' => $user]);
         if ($freelance === $this->getUser()) {
+            $roles = $freelance->getRoles();
+            $roles[] = 'ROLE_VIP';
+
             // Modifier le rôle de l'utilisateur en "ROLE_VIP"
-            $freelance->setRoles(["ROLE_VIP"]);
+            $freelance->setRoles($roles);
             $freelance->setIsVip(1);
             // Enregistrer les modifications en base de données
             $this->entityManager->persist($freelance);

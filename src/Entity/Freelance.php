@@ -566,4 +566,14 @@ class Freelance extends User
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = parent::getRoles();
+        $roles[] = 'ROLE_FREELANCE';
+
+        return array_unique($roles);
+    }
 }
