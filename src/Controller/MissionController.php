@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Freelance;
 use App\Entity\Message;
 use App\Entity\Mission;
+use App\Entity\User;
 use App\Form\MessageType;
 use App\Form\MissionType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,8 +15,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
+
 
 class MissionController extends AbstractController
 {
@@ -31,17 +35,13 @@ class MissionController extends AbstractController
     #[Route('/missions', name: 'missions')]
     public function index(Request $request): Response
     {
-        // Si ce n'est pas le bon utilisateur on renvoi sur home
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
 
         $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(
             ['receiveMission' => $this->getUser()],
             ['startDate' => 'DESC']
         );
         $missionSend = $this->entityManager->getRepository(Mission::class)->findBy(
-            ['receiveMission' => $this->getUser()],
+            ['sendMission' => $this->getUser()],
             ['startDate' => 'DESC']
         );
 
@@ -142,34 +142,25 @@ class MissionController extends AbstractController
         ]);
     }
 
-    /**
-     * changing the mission state / status 
-     */
-    #[Route('/mission/{id}/{to}', name: 'mission_status_change')]
-    public function change(Mission $mission, String $to, EntityManagerInterface $entityManager)
+
+    #[Route('/mission/{id}/{to}', name: 'mission_status_change', methods: ['POST'])]
+    public function changeStatus(Mission $mission, string $to, EntityManagerInterface $entityManager): Response
     {
         try {
             $this->missionWorkflow->apply($mission, $to);
         } catch (LogicException $exception) {
-            //
-        }
-        
-        if ($this->missionWorkflow->can($mission, "to_in_progress")) {
-            try {
-                $this->missionWorkflow->apply($mission, "to_in_progress");
-            } catch (LogicException $exception) {
-                //
-            }
-            
+            $this->addFlash('error', 'Impossible de changer le statut de la mission : '.$exception->getMessage());
         }
 
         $entityManager->persist($mission);
         $entityManager->flush();
 
-        $this->addFlash('message', 'Action enregistrée !');
+        $this->addFlash('message', 'Le statut de la mission a été mis à jour avec succès !');
 
         return $this->redirectToRoute('missions');
     }
+
+
 
 
 }

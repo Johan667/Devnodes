@@ -238,6 +238,7 @@
     border-radius: 20px;
     padding: 10px;
     margin-top: 1rem;
+    margin-left:1rem;
 }
 
 /* Style pour le bouton du formulaire de nouveau message */
@@ -269,5 +270,9 @@
 .conversation-container {
     max-height: 400px;
     overflow-y: scroll;
+}
+
+.lien-nul{
+    text-decoration: none;
 }
 

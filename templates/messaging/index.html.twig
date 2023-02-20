@@ -48,13 +48,6 @@
             margin-top: 10px;
         }
 
-        .btn-reply {
-            margin-right: 10px;
-        }
-
-        .btn-delete {
-            margin-left: 10px;
-        }
     </style>
     <h1 class="text-center"> Messagerie</h1>
     <p class="text-center">Ici retrouvez tous vos derniers messages</p>
@@ -85,10 +78,10 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="text-right">
-                            <a href="{{ path('app_messaging_mission', { 'missionId': message.mission.id }) }}">
+                            <a class="lien-nul" href="{{ path('app_messaging_mission', { 'missionId': message.mission.id }) }}">
                                 <i class="fa-solid fa-reply"></i> Voir
                             </a><br>
-                            <a href="#">
+                            <a class="lien-nul" href="#">
                                 <i class="fa-solid fa-trash"></i> Supprimer
                             </a>
                         </div>

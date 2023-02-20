@@ -46,7 +46,7 @@ class Mission
     #[ORM\ManyToOne(inversedBy: 'missions')]
     private ?User $sendMission = null;
 
-    #[ORM\ManyToOne(inversedBy: 'missions')]
+    #[ORM\ManyToOne(targetEntity: Freelance::class, inversedBy: 'receiveMissions')]
     private ?Freelance $receiveMission = null;
 
     #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Message::class)]

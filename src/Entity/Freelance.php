@@ -69,7 +69,7 @@ class Freelance extends User
     private Collection $codingLanguages;
 
     #[ORM\OneToMany(mappedBy: 'receiveMission', targetEntity: Mission::class)]
-    private Collection $missions;
+    private Collection $receiveMissions;
 
     #[ORM\ManyToMany(targetEntity: Db::class, mappedBy: 'freelanceDb')]
     private Collection $dbs;
@@ -99,7 +99,7 @@ class Freelance extends User
         $this->frameworks = new ArrayCollection();
         $this->methodologies = new ArrayCollection();
         $this->codingLanguages = new ArrayCollection();
-        $this->missions = new ArrayCollection();
+        $this->receiveMissions = new ArrayCollection();
         $this->dbs = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
@@ -449,15 +449,15 @@ class Freelance extends User
     /**
      * @return Collection<int, Mission>
      */
-    public function getMissions(): Collection
+    public function getReceiveMissions(): Collection
     {
-        return $this->missions;
+        return $this->receiveMissions;
     }
 
     public function addMission(Mission $mission): self
     {
-        if (!$this->missions->contains($mission)) {
-            $this->missions->add($mission);
+        if (!$this->receiveMissions->contains($mission)) {
+            $this->receiveMissions->add($mission);
             $mission->setReceiveMission($this);
         }
 
@@ -466,7 +466,7 @@ class Freelance extends User
 
     public function removeMission(Mission $mission): self
     {
-        if ($this->missions->removeElement($mission)) {
+        if ($this->receiveMissions->removeElement($mission)) {
             // set the owning side to null (unless already changed)
             if ($mission->getReceiveMission() === $this) {
                 $mission->setReceiveMission(null);
