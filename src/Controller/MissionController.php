@@ -36,8 +36,14 @@ class MissionController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(['receiveMission'=>$this->getUser()]);
-        $missionSend = $this->entityManager->getRepository(Mission::class)->findBy(['sendMission'=>$this->getUser()]);
+        $missionsReceived = $this->entityManager->getRepository(Mission::class)->findBy(
+            ['receiveMission' => $this->getUser()],
+            ['startDate' => 'DESC']
+        );
+        $missionSend = $this->entityManager->getRepository(Mission::class)->findBy(
+            ['receiveMission' => $this->getUser()],
+            ['startDate' => 'DESC']
+        );
 
         $message = new Message();
         $date = new \DateTimeImmutable();
