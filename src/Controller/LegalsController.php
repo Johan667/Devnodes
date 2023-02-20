@@ -14,11 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LegalsController extends AbstractController
 {
-    #[Route('/legals', name: 'app_legals')]
-    public function index(): Response
+    #[Route('/cookies', name: 'app_cookies')]
+    public function cookies(): Response
     {
-        return $this->render('legals/index.html.twig', [
-            'controller_name' => 'LegalsController',
+        return $this->render('legals/cookies.html.twig', [
         ]);
     }
 
@@ -29,10 +28,17 @@ class LegalsController extends AbstractController
         ]);
     }
 
-    #[Route('/charts', name: 'app_cgu')]
+    #[Route('/cgu', name: 'app_cgu')]
     public function cgu(): Response
     {
         return $this->render('legals/cgu.html.twig', [
+        ]);
+    }
+
+    #[Route('/privacy', name: 'app_privacy')]
+    public function privacy(): Response
+    {
+        return $this->render('legals/privacy.html.twig', [
         ]);
     }
 

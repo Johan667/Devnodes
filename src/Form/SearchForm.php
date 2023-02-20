@@ -25,8 +25,8 @@ class SearchForm extends AbstractType
                 'multiple' => false,
                 'choice_label' => 'name_coding_language',
                 'choice_value' => 'id',
+                'placeholder' => 'Choisir une compétence',
             ])
-
             ->add('city', TextType::class, [
                 'required'=>false,
                 'label' => false,

@@ -147,8 +147,7 @@
 </div>
 
 </div>
-
-<div id="step3">
+    <div id="step3" {% if not is_granted('ROLE_FREELANCE') %} class="active"  style="display: block;"{% endif %}>
     {% for mission in missionSend %}
         {% if workflow_has_marked_place(mission, 'rejected') or workflow_has_marked_place(mission, 'completed') %}
             <div class="card col-9 ms-5 mb-2">

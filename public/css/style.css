@@ -16,9 +16,22 @@ Typo2 : font-family: 'Raleway', sans-serif;
 
  */
 
+/* --- SCROLL BARRE --- */
+
+::-webkit-scrollbar{
+  width: 20px
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #1c1c1c;
+}
+
+/* --- FIN SCROLL BARRE --- */
+
+
 /* --- NAVBAR --- */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 945px) {
   #navbar {
     display: none;
   }
@@ -91,7 +104,7 @@ nav .navbar ul {
 
 /* --- MENU BURGER --- */
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 945px) {
   #openBtn {
     display: none;
   }
@@ -351,3 +364,4 @@ nav .navbar ul {
   visibility: visible;
 
 }
+

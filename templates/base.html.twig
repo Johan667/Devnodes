@@ -146,8 +146,9 @@
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="{{ path('app_home') }}" class="nav-link p-0 text-muted">Accueil</a></li>
                 <li class="nav-item mb-2"><a href="{{ path('app_home') }}" class="nav-link p-0 text-muted">Rechercher un freelance</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Cookies</a></li>
-
+                <li class="nav-item mb-2"><a href="{{ path('app_privacy')}}" class="nav-link p-0 text-muted">Politique de Confidentialité</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_cookies')}}" class="nav-link p-0 text-muted">Cookies</a></li>
+    
             </ul>
         </div>
 
@@ -175,7 +176,7 @@
 
         <script type="text/javascript">
             tarteaucitron.init({
-                "privacyUrl": "legals", /* Privacy policy url */
+                "privacyUrl": "privacy", /* Privacy policy url */
                 "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
                 "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
                 "cookieName": "tarteaucitron", /* Cookie name */
