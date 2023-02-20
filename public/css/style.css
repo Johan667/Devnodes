@@ -320,3 +320,48 @@ nav .navbar ul {
 
 
 /* --- FIN RESULTAT BDR --- */
+
+/* --- SCROLL BARRE --- */
+
+::-webkit-scrollbar{
+  width: 20px
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #1c1c1c;
+}
+
+/* --- FIN SCROLL BARRE --- */
+
+.buttonsPlacement {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.reply-button{
+  width: 36px;
+  height: 36px;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+.reply-button .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: #000;
+  text-align: center;
+  border-radius: 1px;
+  padding: 5px 0;
+  z-index: 1;
+  position: absolute;
+  bottom: -20px;
+  font-size: 10px;
+  border: 0.2px solid gray;
+}
+
+.reply-button:hover .tooltiptext {
+  visibility: visible;
+
+}
+
