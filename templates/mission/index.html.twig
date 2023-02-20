@@ -9,7 +9,6 @@
 
     <div class="group-btn">
         <div class="select-edit">
-
             {% if missionSend %}
                 <button class="step-button" data-step="1" onclick="nextStep(1)">Mission envoyé</button>
             {% endif %}
@@ -20,7 +19,7 @@
         </div>
     </div>
 
-    
+
 
 <div id="step1" {% if not is_granted('ROLE_FREELANCE') %} class="active"  style="display: block;"{% endif %}>
 
@@ -35,19 +34,19 @@
                     Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
                     <b>Description de la mission :</b><br>
                     <p>{{ mission.description }}</p>
-                <div class="mb-3 mt-3">Statut de la mission :  
+                <div class="mb-3 mt-3">Statut de la mission :
                         {% if workflow_has_marked_place(mission, 'freelance_validation_pending') and workflow_can(mission, 'to_client_accepted') %}
-                            <p>La mission a été envoyée, en attendant que le freelance l'accepte</p>
-                            
+                            <p class="text-success">La mission a été envoyée, <strong>en attendant que le freelance l'accepte</strong></p>
+
                         {% elseif workflow_has_marked_place(mission, 'freelance_accepted') and workflow_can(mission, 'to_client_accepted') %}
-                            <p>Le freelance a accepté la mission, veuillez soit l'accepter soit la refuser</p>
-                            
-                                <a type="button" class="btn6" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_client_accepted'}) }}">Accepter</a>
+                            <p class="text-success">Le <strong>freelance a accepté la mission</strong>, veuillez soit l'accepter soit la refuser</p>
+
+                                <a type="button" class="btn6 lien-nul" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_client_accepted'}) }}">Accepter</a>
                                 <a type="button" class="btn btn-danger" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'client_rejected'}) }}">Refuser</a>
-                            
-                        
+
+
                         {% elseif workflow_has_marked_place(mission, 'in_progress') %}
-                            <p>En cours de réalisation</p>
+                            <p class="text-warning">En cours de réalisation</p>
                         {% endif %}
                     {% if workflow_has_marked_place(mission, 'freelance_accepted') %}
                         <a href="{{ path('app_messaging_mission', {'missionId': mission.id}) }}"><button class="btn btn-secondary"><i class="fa-sharp fa-solid fa-message"></i> Contacter le freelance</button></a>
@@ -77,15 +76,15 @@
                         Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
                         Email : <b>{{ mission.sendMission.email }}</b><br>
                         Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
-                        <div class="mb-3 mt-3">Statut de la mission :  
+                        <div class="mb-3 mt-3">Statut de la mission :
                             {% if workflow_can(mission, 'to_freelance_accepted') %}
-                                <p>Veuillez soit accepter la mission soit la refuser</p>
-                                
+                                <p class="text-info">Veuillez soit accepter la mission soit la refuser</p>
+
                             {% elseif workflow_has_marked_place(mission, 'freelance_accepted') and workflow_has_marked_place(mission, 'client_validation_pending') %}
-                                <p>La mission a été acceptée, en attendant que le client la vérifie</p>
-                                
+                                <p class="text-success">La mission a été acceptée, <strong>en attendant que le client la vérifie</strong></p>
+
                             {% elseif workflow_has_marked_place(mission, 'in_progress') %}
-                                <p>En cours de réalisation, Veuillez cliquer sur le button "Mission terminer" quand c'est fait</p>
+                                <p class="text-warning">En cours de réalisation, Veuillez cliquer sur le button "<strong>Mission terminer</strong>" quand c'est fait</p>
                             {% endif %}
                         </div>
                         <a href="{{ path('app_messaging_mission', {'missionId': mission.id}) }}"><button type="button" class=""><i class="fa-sharp fa-solid fa-message"></i></button></a>
@@ -107,7 +106,9 @@
                             <b>Date : {{ mission.startDate|date("d/m/Y")}}</b><br><br>
 
                             Nom du client : <b>{{ mission.sendMission.lastname }} {{ mission.sendMission.firstname }}</b><br>
+                            {% if  mission.sendMission.denominationCompany is not empty %}
                             Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
+                            {% endif %}
                             Email : <b>{{ mission.sendMission.email }}</b><br>
 
                             <hr>
@@ -129,13 +130,20 @@
                         <div class="modal-footer">
 
                             {% if workflow_can(mission, 'to_freelance_accepted') %}
-                                <a type="button" class="btn btn-success" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_freelance_accepted'}) }}" >Accepter</a><br>
+                                <form method="POST" action="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_freelance_accepted'}) }}">
+                                    <button type="submit" class="btn btn-success lien-nul">Accepter</button>
+                                </form>
                             {% endif %}
                             {% if workflow_can(mission, 'freelance_rejected') %}
-                                <a type="button" class="btn btn-danger" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'freelance_rejected'}) }}" >Refuser</a><br>
+                                <form method="POST" action="{{ path('mission_status_change', {'id': mission.id, 'to': 'freelance_rejected'}) }}">
+                                    <button type="submit" class="btn btn-danger">Refuser</button>
+                                </form>
                             {% endif %}
+
                             {% if workflow_can(mission, 'to_completed') %}
-                                <a type="button" class="btn btn-primary btn-sm" href="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_completed'}) }}">Mission Done</a><br>
+                                <form method="POST" action="{{ path('mission_status_change', {'id': mission.id, 'to': 'to_completed'}) }}">
+                                    <button type="submit" class="btn btn-primary btn-sm">Mission Terminée</button>
+                                </form>
                             {% endif %}
                             <a class="btn btn-secondary" href="{{ path('app_messaging_mission', {'missionId': mission.id}) }}"><i class="fa-sharp fa-solid fa-message"></i></a>
                         </div>
@@ -159,12 +167,12 @@
                     Mission envoyée à <b><a  class="text-dark" href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}} ">{{ mission.receiveMission.lastname }} {{ mission.receiveMission.firstname }}</a></b><br><br>
                     <b>Description de la mission :</b><br>
                     <p>{{ mission.description }}</p>
-                <div class="mb-3 mt-3">Statut de la mission :  
+                <div class="mb-3 mt-3">Statut de la mission :
                         {% if workflow_has_marked_place(mission, 'rejected') %}
-                            <p>La mission a été <strong>refusée</strong></p>
-                            
+                            <p class="text-danger">La mission a été <strong>refusée</strong></p>
+
                         {% elseif workflow_has_marked_place(mission, 'completed') %}
-                            <p>La mission est marquée <strong>terminée</strong></p> 
+                            <p class="text-success">La mission est marquée <strong>terminée</strong></p>
                         {% endif %}
                 <a href="{{ path('app_profil_show', {'id': mission.receiveMission.id })}}"><button class="btn-secondary"><i class="fa-sharp fa-solid fa-message"></i> Commenter la mission</button></a>
                 </div>
@@ -186,12 +194,12 @@
                         Entreprise : <b>{{ mission.sendMission.denominationCompany }}</b><br>
                         Email : <b>{{ mission.sendMission.email }}</b><br><b>Description de la mission :</b><br>
                         <p>{{ mission.description }}</p>
-                    <div class="mb-3 mt-3">Statut de la mission :  
+                    <div class="mb-3 mt-3">Statut de la mission :
                             {% if workflow_has_marked_place(mission, 'rejected') %}
-                                <p>La mission a été <strong>refusée</strong></p>
-                                
+                                <p class="text-danger">La mission a été <strong>refusée</strong></p>
+
                             {% elseif workflow_has_marked_place(mission, 'completed') %}
-                                <p>La mission est marquée <strong>terminée</strong></p> 
+                                <p class="text-success">La mission est marquée <strong>terminée</strong></p>
                             {% endif %}
                     </div>
                     </div>

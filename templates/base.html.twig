@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta description="Site de mise en relation entre un freelance dans les metiers du numérique et un client a travers un mission">
+    <meta name="description" content="Site de mise en relation entre un freelance dans les metiers du numérique et un client a travers un mission">
     <title>{% block title %}Devnodes{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,8 +96,12 @@
                 <li><a href="{{ path('app_favorite') }}">Favoris</a></li>
                 {% endif %}
                 <li><a href="{{ path('app_messaging') }}">Messagerie</a></li>
+                <li><a href="{{ path('missions') }}" id="mission-link">Missions</a></li>
+                {% if  is_granted('ROLE_FREELANCE') %}
                 <li><a href="{{ path('app_profil') }}">Profil</a></li>
+                {% endif %}
                 <li><a href="{{ path('app_account') }}">Compte</a></li>
+                <li><a href="{{ path('app_logout') }}">Deconnexion</a>
                     {% else %}
                         <li><a href="{{ path('app_favorite') }}">Se connecter</a></li>
                         <li><a href="{{ path('app_favorite') }}">S'inscrire</a></li>
@@ -131,10 +135,10 @@
                 <img src="../img/logo.png" alt="logo devnodes">
             </a>
             <p class="text-muted logoSocial">
-                <i class="fa-brands fa-instagram"></i>&nbsp;
-                <i class="fa-brands fa-linkedin"></i>&nbsp;
-                <i class="fa-brands fa-facebook"></i>&nbsp;
-            <i class="fa-brands fa-snapchat"></i></p>
+                <i class="fa-brands fa-instagram"><a href="https://www.instagram.com"></a></i>&nbsp;
+                <i class="fa-brands fa-linkedin"><a href="https://www.linkedin.com"></a></i>&nbsp;
+                <i class="fa-brands fa-facebook"><a href="https://www.facebook.com"></a></i>&nbsp;
+            <i class="fa-brands fa-snapchat"><a href="https://www.snapchat.com"></a></i></p>
         </div>
 
         <div class="col mb-3">
@@ -229,6 +233,4 @@
                 crossorigin="anonymous"></script>
     {% endblock %}
 </body>
-
-
 </html>
