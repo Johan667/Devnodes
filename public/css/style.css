@@ -31,7 +31,7 @@ Typo2 : font-family: 'Raleway', sans-serif;
 
 /* --- NAVBAR --- */
 
-@media screen and (max-width: 945px) {
+@media screen and (max-width: 990px) {
   #navbar {
     display: none;
   }
@@ -104,7 +104,7 @@ nav .navbar ul {
 
 /* --- MENU BURGER --- */
 
-@media screen and (min-width: 945px) {
+@media screen and (min-width: 990px) {
   #openBtn {
     display: none;
   }
@@ -169,7 +169,7 @@ nav .navbar ul {
 
 /* --- HEADER HOME --- */
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 990px) {
   .imagehome {
     display: none;
   }

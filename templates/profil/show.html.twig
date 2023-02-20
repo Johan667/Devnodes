@@ -11,7 +11,7 @@
             <div class="column">
 
                 {% if freelance.picture %}
-                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ freelance.picture) }}" alt="Photo de profil">
+                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ freelance.picture) }}" alt="Freelance">
                 {% else %}
                     <i class="fa-solid fa-camera"></i>
                 {% endif %}
@@ -20,14 +20,8 @@
             <div class="column">
                 <h1 class="bolder">{{ freelance.firstname }} {{ freelance.lastname }}</h1>
                 <h2 class="bold">{{ freelance.title }}</h2>
-                {% if freelance.remoteWork is not empty %}
-                <i class="fa-solid fa-person-walking"></i> {{ freelance.remoteWork }}<br>
-                {% endif %}
-                {% if mission is not empty %}
-                    {{ mission.id | length }} Mission(s), <i class="fa-solid fa-star"></i>  Avis)
-                {% else %}
+                <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
 
-                {% endif %}
                 <div class="squares">
                     <div class="price">
                         Prix<br>
@@ -62,75 +56,106 @@
     <!-- fin header -->
 
     <div class="shadowline"></div>
-<main>
-    <article>
-        <section id="blok-left">
-            <h2 class="blueh2">Localisation et Déplacement</h2>
-            <p><i class="fa-solid fa-location-dot"></i> {{ freelance.city }}, {{ freelance.country }}</p>
 
-            <p class="textInfo"><i class="fa-solid fa-person-walking"></i><span> {{ freelance.remoteWork }}.</span></p>
-        </section>
-        <section id="blok-right">
-            <div class="touche">
-                <div>
-                    <h2 class="blueh2">Description</h2>
-                    <p class="textInfo">{{ freelance.biographie  }}</p>
+
+<main>
+        <div class="wrapperProfil">
+        <div class="parent2 justify-content-center">
+            <div class="langue">
+                <h4>Langues parlé(s)</h4>
+                {% for spokenLanguages in freelance.spokenLanguages %}
+                    {{ spokenLanguages.nameLanguage }},
+                {% endfor %}
+                <hr>
+                <h4>Verifications</h4>
+                {% if freelance.isVerified %}
+
+                    <div class="verified-back">
+                        <i class="fas fa-check"></i> Email vérifié
+                    </div>
+                {% else %}
+                    <div class="verified-back">
+                        <i class="fas fa-times"></i> Email non vérifié
+                    </div>
+                {% endif %}
+                <div class="verified-grey mt-3">
+                    <i class="fa-solid fa-scale-balanced"></i> Code de conduite signé<br>
+                    <a href="{{ path('app_charts') }}">Lire le code de conduite</a>
+                </div>
+                <hr>
+                <h4>Partager le profil</h4>
+                <p class="text-center">
+                    <a href="#" target="_blank"><i class="fa-brands fa-facebook text-dark"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-twitter text-dark"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in text-dark"></i></a>
+                    <a href="#" target="_blank"><i class="fa-regular fa-envelope text-dark"></i></a>
+                </p>
+            </div>
+            <hr>
+            <div class="description">
+                <h2 class="text-center">Description</h2>
+                {{ freelance.biographie  }}
+            </div>
+        </div>
+
+
+            <div class="skillProfil mt-3">
+                <div class="colonneProfil">
+                <div id="step1" class="active">
+                    {% if freelance.codingLanguages is not empty %}
+                        {% for codingLanguages in freelance.codingLanguages %}
+                            <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="step2">
+                    {% if freelance.dbs is not empty %}
+                        {% for dbs in freelance.dbs %}
+                            <div class="text-center">{{ dbs.nameDb }}</div><br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="step3">
+                    {% if freelance.frameworks is not empty %}
+                        {% for frameworks in freelance.frameworks %}
+                            <div class="text-center">{{ frameworks.nameFramework }}</div><br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="step4">
+                    {% if freelance.methodologies is not empty %}
+                        {% for methodologies in freelance.methodologies %}
+                            <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="step5">
+                    {% if freelance.versionControls is not empty %}
+                        {% for versionControls in freelance.versionControls %}
+                            <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="btnSkills">
+                <ul>
+                    <div class="competence">Compétences</div>
+                <li><button class="btnSkill" data-step="1" onclick="nextStep(1)">Language de programmations</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(2)">Base de données</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(3)">Frameworks</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(4)">Methodologies</button></li>
+                    <li><button class="btnSkill" data-step="2" onclick="nextStep(5)">Versionning</button></li>
+                </ul>
                 </div>
             </div>
-
-        </section>
-    </article>
-
-    <div id="skills">
-        <div id="galerie">
-            <h4 class="blueh2">Language de Programmation</h4><br>
-        {% if freelance.codingLanguages is not empty %}
-            {% for codingLanguages in freelance.codingLanguages %}
-               <div class="text-center"> {{ codingLanguages.nameCodingLanguage }} </div><br>
-            {% endfor %}
-        {% endif %}
+            </div>
         </div>
-        <div id="galerie2">
 
-            <h4 class="blueh2">Base de donnée</h4><br>
-                {% if freelance.dbs is not empty %}
-                    {% for dbs in freelance.dbs %}
-                        <div class="text-center">{{ dbs.nameDb }}</div><br>
-                    {% endfor %}
-                {% endif %}
-        </div>
-        <div id="galerie3">
 
-            <h4 class="blueh2">Framework</h4><br>
-            {% if freelance.frameworks is not empty %}
-                {% for frameworks in freelance.frameworks %}
-                    <div class="text-center">{{ frameworks.nameFramework }}</div><br>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <h4 class="blueh2">Voir les autres</h4>
-        </button>
-
-    </div>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-                Methodology<br>
-            {% if freelance.methodologies is not empty %}
-                {% for methodologies in freelance.methodologies %}
-                    <div class="text-center">{{ methodologies.nameMethodology }}</div><br>
-                {% endfor %}
-            {% endif %}
-
-            <em>Version Control</em><br>
-            {% if freelance.versionControls is not empty %}
-                {% for versionControls in freelance.versionControls %}
-                    <div class="text-center"> {{ versionControls.nameVersionControl }}</div><br>
-                {% endfor %}
-            {% endif %}
-
-        </div>
-    </div>
     <article id="experience">
         <h2 class="blueh2 text-center">Expériences</h2>
 
@@ -146,60 +171,14 @@
             {% endfor %}
         </div>
     </article>
-    <article id="com">
-        <section id="blok-left">
-            <h2 class="blueh2 mb-2">Langues</h2>
-            Je parle :
-            {% for spokenLanguages in freelance.spokenLanguages %}
-                {{ spokenLanguages.nameLanguage }},
-            {% endfor %}
+    <article id="com" class="justify-content-center">
 
-            <h2 class="blueh2 mb-2 mt-2">Verifications</h2>
-            {% if freelance.isVerified %}
-
-                <div class="verified-back">
-                    <i class="fas fa-check"></i> Email vérifié
-                </div>
-            {% else %}
-                <div class="verified-back">
-                    <i class="fas fa-times"></i> Email non vérifié
-                </div>
-            {% endif %}
-            <div class="verified-grey mt-3">
-                <i class="fa-solid fa-scale-balanced"></i> Code de conduite signé<br>
-                <a href="{{ path('app_charts') }}">Lire le code de conduite</a>
-            </div>
-
-
-        </section>
-        <section id="blok-right">
+        <div class="justify-content-center">
                 {% include 'profil/comment.html.twig' %}
-        </section>
-    </article>
-    <article id="social">
-        <section id="blok-left">
-            <h2 class="blueh2 mb-2 text-center">Partagez mon profil</h2>
-            <p class="text-center">
-                <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" target="_blank"><i class="fa-regular fa-envelope"></i></a>
-            </p>
-
-        </section>
-        <section id="blok-right">
-                    <h2 class="blueh2 mb-3 text-center">Influence</h2>
-
-            {% if social is null %}
-              <div class="text-center">  {{ freelance.firstname }}, n'a pas encore entré ses divers réalisations </div>
-            {% else %}
-            {% for soc in social %}
-            {{ soc }}
-            {% endfor %}
-            {% endif %}
-
-        </section>
+        </div>
     </article>
 </main>
+
+
 
 {% endblock %}

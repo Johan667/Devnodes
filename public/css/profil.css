@@ -26,7 +26,7 @@
     flex-wrap: wrap;
     margin: auto;
     margin-top: 1rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    gap: 3px;
 }
 
 .price {
@@ -38,10 +38,10 @@
 }
 
 .xpYears {
-    flex:1;
     text-align: center;
     width: 300px;
     padding: 1%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .proposeMission {
@@ -108,8 +108,9 @@ main {
 
 article{
     display:flex;
+    flex-wrap: wrap;
+    gap: 2rem;
     align-items: baseline;
-    gap:5%;
     margin-bottom: 3%;
 }
 .btnFavProfile:hover{
@@ -135,7 +136,6 @@ article{
 
 #blok-left{
     padding:2%;
-    width: 33%;
     border: 1px solid #D6E4E5;
     border-radius: 9px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -183,15 +183,15 @@ article{
 }
 
 .verified-back{
-    background-color: #EB6440;
-    padding: 2%;
-    width:70%
+    background-color: rgba(235, 100, 64, 0.88);
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .verified-grey{
     background-color: #D6E4E5;
-    padding: 2%;
-    width:70%
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .comment{
@@ -210,4 +210,54 @@ article{
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+
+.wrapperProfil{
+    margin:30px;
+}
+
+.parent2{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.description{
+    width: 35rem;
+}
+
+.langue{
+    background-color: rgba(71, 159, 159, 0.78);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.description{
+    border: 1px solid rgba(71, 159, 159, 0.8);
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+.colonneProfil{
+    display:flex;
+    justify-content: right;
+}
+
+.btnSkill{
+    width: 200px;
+}
+
+.competence{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: rgba(71, 159, 159, 0.8);
 }
