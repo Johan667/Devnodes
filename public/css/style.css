@@ -307,3 +307,15 @@ nav .navbar ul {
 
 
 /* --- FIN RESULTAT BDR --- */
+
+/* --- SCROLL BARRE --- */
+
+::-webkit-scrollbar{
+  width: 20px
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #1c1c1c;
+}
+
+/* --- FIN SCROLL BARRE --- */
