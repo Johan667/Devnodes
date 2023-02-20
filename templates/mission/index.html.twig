@@ -49,7 +49,9 @@
                         {% elseif workflow_has_marked_place(mission, 'in_progress') %}
                             <p>En cours de réalisation</p>
                         {% endif %}
-                    <a href="{{ path('app_messaging_mission', {'missionId': mission.id}) }}"><button class="btn btn-secondary"><i class="fa-sharp fa-solid fa-message"></i> Contacter le freelance</button></a>
+                    {% if workflow_has_marked_place(mission, 'freelance_accepted') %}
+                        <a href="{{ path('app_messaging_mission', {'missionId': mission.id}) }}"><button class="btn btn-secondary"><i class="fa-sharp fa-solid fa-message"></i> Contacter le freelance</button></a>
+                    {% endif %}
                 </div>
                 </div>
             </div>
