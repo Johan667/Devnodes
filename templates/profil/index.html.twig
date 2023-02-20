@@ -9,7 +9,7 @@
         <div class="container">
             <div class="column">
                 {% if app.user.picture %}
-                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ app.user.picture) }}" alt="Photo de profil">
+                    <img class="photo" src="{{ asset('uploads/photoprofil/' ~ app.user.picture) }}" alt="Freelance">
                 {% else %}
                     <i class="fa-solid fa-camera"></i>
                 {% endif %}
@@ -49,7 +49,7 @@
                 </button>
                 <button class="step-button" data-step="2" onclick="nextStep(2)"><i class="fa-solid fa-location-dot"></i> Localisation</button>
                 <button class="step-button" data-step="3" onclick="nextStep(3)"><i class="fa-solid fa-plus"></i> Compétences</button>
-                <button class="step-button" data-step="4" onclick="nextStep(5)"><i class="fa-solid fa-trash"></i> Compétences</button>
+                <button class="step-button" data-step="4" onclick="nextStep(5)"><i class="fa-solid fa-trash text-light"></i> Compétences</button>
                 <button class="step-button" data-step="4" onclick="nextStep(4)"><i class="fa-sharp fa-solid fa-comment"></i> Description</button>
             </div>
         </div>
@@ -62,7 +62,6 @@
             <p>Photo de profil</p>
 
             {{ form_widget(freelanceBase.picture) }}
-            {{ form_errors(freelanceBase.picture) }}
 
             <a class="text-danger" href="{{ path('delete_photo_profil', {'id': app.user.id } ) }}">Supprimer la photo</a>
             <br> <br>

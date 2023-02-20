@@ -84,6 +84,8 @@ class ProfilController extends AbstractController
             } catch (FileException $error) {
             }
             $freelance->setPicture($newFilename);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_profil');
         }
         /** fin parti supprimer une compétence */
 
@@ -142,9 +144,6 @@ class ProfilController extends AbstractController
 
         $this->entityManager->flush();
 
-
-//            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
-//            return $this->redirectToRoute('app_profil');
 
 
         return $this->render('profil/index.html.twig', [
