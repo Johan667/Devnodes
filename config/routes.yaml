@@ -1,3 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+error_404:
+    path: /{_locale}/404
+    controller: App\Controller\ErrorController::error404

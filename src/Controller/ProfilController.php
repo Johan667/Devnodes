@@ -34,6 +34,7 @@ class ProfilController extends AbstractController
 {
     private $entityManager;
 
+    // définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir un service en paramètre
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -53,6 +54,8 @@ class ProfilController extends AbstractController
 
         $code = $freelance->getCodingLanguages();
 
+        // Crée plusieurs formulaires pour permettre à un utilisateur connecté de modifier différentes parties de son profil Freelance.
+        // Les formulaires sont créés à partir de différentes classes de formulaire
         $forms = [
             'base' => $this->createForm(EditHeaderProfilType::class, $freelance),
             'tech' => $this->createForm(TechnologyType::class, null, [
@@ -71,6 +74,9 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
         $picture = $form->get('picture')->getData();
 
+        // Traite un fichier image soumis avec un formulaire de modification de profil Freelance en générant un nom de fichier unique
+        // et en le déplaçant vers un répertoire spécifié.
+        // Enfin, le nom de fichier de l'image est enregistré dans l'entité Freelance correspondante, qui est elle-même enregistrée dans la base de données.
         if ($picture) {
             $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
@@ -87,12 +93,21 @@ class ProfilController extends AbstractController
             $this->entityManager->flush();
             return $this->redirectToRoute('app_profil');
         }
+
         /** fin parti supprimer une compétence */
 
+        // Pour chaques formulaire on envoie sa requete HTTP.
         foreach ($forms as $form) {
             $form->handleRequest($request);
         }
+
+        // Crée un tableau qui défini le noms des formulaires pour les passé à la vue plus tard
         $formNames = ['base','tech', 'loc', 'dur', 'desc', 'lang'];
+
+        // Crée plusieurs formulaires pour permettre à un utilisateur connecté de modifier différentes parties de son profil Freelance,
+        // puis traite les données soumises par les formulaires
+        // pour mettre à jour le profil Freelance de l'utilisateur en ajoutant les données extraites aux entités Freelance correspondantes.
+        // Enfin, l'entité Freelance est enregistrée dans la base de données.
 
         foreach ($formNames as $formName) {
             if (!isset($forms[$formName])) {
@@ -112,6 +127,7 @@ class ProfilController extends AbstractController
                         $freelance->addCodingLanguage($code);
                     }
                 }
+
                 if($framework =! null) {
                     $framework = $form->getData()['framework'];
                     foreach ($framework as $frame) {
@@ -140,11 +156,7 @@ class ProfilController extends AbstractController
                 }
             }
         }
-
-
         $this->entityManager->flush();
-
-
 
         return $this->render('profil/index.html.twig', [
             'freelanceBase' => $forms['base']->createView(),
@@ -255,7 +267,10 @@ class ProfilController extends AbstractController
     #[Route('/profil/delete/coding/language/{id}', name: 'profil_delete_coding')]
     public function deleteCoding($id): Response
     {
-        // Prend en parametre de la fonction , l'id du skills, la classe et la méthode via la classe
+        // Appelle une méthode générique deleteSkill() pour supprimer une compétence de programmation de l'entité Freelance
+        // correspondante en utilisant la classe CodingLanguage et la méthode removeCodingLanguage.
+        // La méthode deleteCoding() renvoie une réponse HTTP.
+
         return $this->deleteSkill($id, CodingLanguage::class, 'removeCodingLanguage');
     }
 
