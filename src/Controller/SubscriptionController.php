@@ -23,14 +23,20 @@ class SubscriptionController extends AbstractController
     #[Route('/subscription', name: 'app_subscription')]
     public function index()
     {
+        // Affiche l'abonnement et les avantage + rediriger vers le checkout
 
-        // ici afficher l'abonnement et les avantage + rediriger vers le checkout
         return $this->render('subscription/index.html.twig');
     }
 
     #[Route('/subscription/create', name: 'subscription_create')]
     public function create(CheckoutStripeService $checkoutStripeService)
     {
+        // Permet de rediriger un utilisateur vers une page de paiement en ligne pour souscrire à un abonnement.
+        // Il récupère l'utilisateur connecté avec la méthode getUser() fournie par Symfony,
+        // génère une URL de succès et une URL d'annulation pour la souscription, crée une session de paiement
+        // à l'aide d'un service appelé $checkoutStripeService,
+        // et redirige l'utilisateur vers la page de paiement en ligne à l'aide de l'URL de la session de paiement retournée
+
         $user = $this->getUser();
 
         $successUrl = $this->generateUrl('subscription_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -71,6 +77,8 @@ class SubscriptionController extends AbstractController
     #[Route('/subscription/error', name: 'subscription_error')]
     public function error()
     {
+        // Renvoie sur une page d'erreur en cas d'echec
+
         return $this->render('subscription/error.html.twig');
     }
 }

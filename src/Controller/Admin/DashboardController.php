@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Freelance;
+use App\Entity\Message;
 use App\Entity\Mission;
+use App\Entity\SpokenLanguage;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -30,8 +33,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Freelance', 'fas fa-list', Freelance::class);
-        yield MenuItem::linkToCrud('Mission', 'fas fa-list', Mission::class);
+        yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Freelance', 'fa-solid fa-user-tie', Freelance::class);
+        yield MenuItem::linkToCrud('Mission', 'fa-solid fa-briefcase', Mission::class);
+        yield MenuItem::linkToCrud('Message', 'fa-sharp fa-solid fa-message', Message::class);
+        yield MenuItem::linkToCrud('Commentaire', 'fa-solid fa-comment', Comment::class);
+        yield MenuItem::linkToCrud('Langue', 'fa-solid fa-language', SpokenLanguage::class);
     }
 }
