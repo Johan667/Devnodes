@@ -22,7 +22,7 @@ class UserFixture extends Fixture
     {
         $user = new User();
         $user
-            ->setEmail('client@devodes.com')
+            ->setEmail('client@devnodes.com')
             ->setFirstname('Saloui')
             ->setLastname('Martin')
             ->setRoles(['ROLE_ADMIN'])

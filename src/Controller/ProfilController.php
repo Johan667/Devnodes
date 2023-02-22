@@ -177,7 +177,7 @@ class ProfilController extends AbstractController
         $freelance = $this->entityManager->getRepository(Freelance::class)->find($id);
 
         if (!$freelance) {
-            return $this->render('errors/error500.html.twig', [
+            return $this->render('errors/error404.html.twig', [
                 'message' => 'La page demandée n\'a pas été trouvée.'
             ]);
         }
@@ -204,7 +204,7 @@ class ProfilController extends AbstractController
                 ->setReceived($freelance)
                 ;
             
-            // La    partie pour le parent (reponse a un commentaire)
+            // La partie pour le parent (reponse a un commentaire)
             $parentid = $commentForm->get("parentid")->getData();
             if ($parentid != null) {
                 $parent = $this->entityManager->getRepository(Comment::class)->find($parentid);
