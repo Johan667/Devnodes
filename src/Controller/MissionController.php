@@ -185,6 +185,13 @@ class MissionController extends AbstractController
             $this->addFlash('error', 'Impossible de changer le statut de la mission : '.$exception->getMessage());
         }
 
+        if ($this->missionWorkflow->can($mission, "to_in_progress")) {
+            try {
+                $this->missionWorkflow->apply($mission, "to_in_progress");
+            } catch (LogicException $exception) {
+                //
+            }
+        }
         $entityManager->persist($mission);
         $entityManager->flush();
 
@@ -192,8 +199,4 @@ class MissionController extends AbstractController
 
         return $this->redirectToRoute('missions');
     }
-
-
-
-
 }
