@@ -171,18 +171,28 @@ class MissionController extends AbstractController
         ]);
     }
 
-
+        /**
+         * Applique une transition à une entité Mission en utilisant un workflow,
+        puis enregistre l'entité mise à jour dans la base de données à l'aide de l'objet EntityManager de Doctrine.
+        Enfin, il ajoute un message flash pour informer l'utilisateur de la mise à jour de la mission et redirige vers une autre page.
+         */
     #[Route('/mission/{id}/{to}', name: 'mission_status_change', methods: ['POST'])]
     public function changeStatus(Mission $mission, string $to, EntityManagerInterface $entityManager): Response
     {
-        // Applique une transition à une entité Mission en utilisant un workflow,
-        // puis enregistre l'entité mise à jour dans la base de données à l'aide de l'objet EntityManager de Doctrine.
-        // Enfin, il ajoute un message flash pour informer l'utilisateur de la mise à jour de la mission et redirige vers une autre page.
+
 
         try {
             $this->missionWorkflow->apply($mission, $to);
         } catch (LogicException $exception) {
             $this->addFlash('error', 'Impossible de changer le statut de la mission : '.$exception->getMessage());
+        }
+        if ($this->missionWorkflow->can($mission, "to_in_progress")) {
+            try {
+                $this->missionWorkflow->apply($mission, "to_in_progress");
+            } catch (LogicException $exception) {
+                //
+            }
+
         }
 
         $entityManager->persist($mission);
