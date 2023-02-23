@@ -37,7 +37,7 @@ class SecurityController extends AbstractController
 
         $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
             'body' => [
-                'secret' => '6Ld0FiIkAAAAAJXSVDiY_ZMnXjkURtb2ZWIcFA67',
+                'secret' => '6LeeB6okAAAAALc_ckKosKnHyRywK8-3UHVhgQhl',
                 'response' => $token
             ]
         ]);

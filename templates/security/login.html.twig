@@ -32,7 +32,7 @@
 
             <button class="g-recaptcha"
                     type="submit"
-                    data-sitekey="6Ld0FiIkAAAAABNn3uVj7xBf5SQQ4xmh_ZOocfo3"
+                    data-sitekey="6LeeB6okAAAAAOCVmOwZS-Dparz0EJQ9l_7f4TCg"
                     data-callback='onSubmit'
                     data-action='submit'>Se Connecter</button>
 
@@ -57,7 +57,7 @@
         console.log('test')
         e.preventDefault();
         grecaptcha.ready(function() {
-            grecaptcha.execute('6Ld0FiIkAAAAABNn3uVj7xBf5SQQ4xmh_ZOocfo3', {action: 'submit'}).then(function(token) {
+            grecaptcha.execute('6LeeB6okAAAAAOCVmOwZS-Dparz0EJQ9l_7f4TCg', {action: 'submit'}).then(function(token) {
                 fetch(route, {
                     method: 'POST',
                     body: token
