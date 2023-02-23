@@ -30,19 +30,4 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/verify-captcha', methods: ['POST'])]
-    public function verifyCaptcha(Request $request, HttpClientInterface $client) : JsonResponse
-    {
-        $token = $request->getContent();
-
-        $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
-            'body' => [
-                'secret' => '6LeeB6okAAAAALc_ckKosKnHyRywK8-3UHVhgQhl',
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getContent(), true);
-
-        return new JsonResponse($result);
-    }
 }

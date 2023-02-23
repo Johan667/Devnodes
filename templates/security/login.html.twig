@@ -30,11 +30,8 @@
                 <input type="password" placeholder="Entrer votre mot de passe" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
             </div>
 
-            <button class="g-recaptcha"
-                    type="submit"
-                    data-sitekey="6LeeB6okAAAAAOCVmOwZS-Dparz0EJQ9l_7f4TCg"
-                    data-callback='onSubmit'
-                    data-action='submit'>Se Connecter</button>
+            <button class="btnSearch"
+                    type="submit">Se Connecter</button>
 
 
             <div>
@@ -50,27 +47,5 @@
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 </form>
-<script>
-    const route = "{{ url('app_security_verifycaptcha') }}"
-
-    document.querySelector('[type=submit]').addEventListener('click', e => {
-        console.log('test')
-        e.preventDefault();
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LeeB6okAAAAAOCVmOwZS-Dparz0EJQ9l_7f4TCg', {action: 'submit'}).then(function(token) {
-                fetch(route, {
-                    method: 'POST',
-                    body: token
-                }).then(r => r.json())
-                .then(response => {
-                    if (response.success) {
-                        document.getElementById('loginForm').submit()
-                    }
-                })
-            });
-        });
-    })
-</script>
-
 
 {% endblock %}
