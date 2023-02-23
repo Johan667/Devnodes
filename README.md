@@ -1,49 +1,129 @@
-DEVNODES
+# Devnodes
 
-Installation du projet en local
+Devnodes is an open-source web application built using the Symfony framework. It is designed to help users find the best freelance to realize their project.
 
-1. Suivez les instructions pour cloner le dépôt sur votre système. Vous pouvez le faire en utilisant la commande git clone dans votre terminal. Le dépôt est disponible à l'adresse https://github.com/Johan667/Devnodes.git, vous pouvez cloner le dépôt en exécutant la commande suivante :
+The application allows users to search for freelancers based on cities, categories and skills. The search results will all the freelancers that fit the search parameters.
+
+Devnodes also provides a platform for users to share their opinions about freelancers with the community. Registered users can propose missions to freelancers, contact and comment the freelancers.
+
+## Requirements
+
+- PHP 7.4 or higher
+- MySQL 5.7 or higher
+- Composer
+- Node.js and npm
+
+## Installation (locale)
+
+To install the application, follow these steps:
+
+1. Clone the repository to your local machine:
+
+```bash
 git clone https://github.com/Johan667/Devnodes.git
+```
 
-2. Exécutez la commande composer install pour installer les dépendances de l'application
+​	2. Install the dependencies using Composer:
+
+```bash
+cd Devnodes
 composer install
+```
 
-3. Une fois que vous avez suivi toutes les étapes d'installation, vous pouvez lancer l'application Symfony en exécutant la commande symfony server:start
-Ouvrez votre navigateur web et accédez à l'URL indiquée dans les instructions d'installation pour voir l'application en action.
+3. Configuring the .env.local file:
 
-4. Pour avoir la base donnée, exécutez la commande symfony d:d:c, cela vous créera la base de donnée configuré dans le .env
-symfony d:d:c
+```bash
+# .env
+DATABASE_URL=mysql://user:password@localhost/devnodes
 
-5. Vous avez plus qu'à faire un symfony d:m:m pour migrer la version du site.
-symfony d:m:m
+# Before using the application, you must configure the .env.local file. This file contains sensitive information such as API keys and database identifiers, so it should not be shared publicly.
 
-C'est tout ! Si vous avez suivi toutes ces étapes correctement, vous devriez maintenant avoir une application Symfony installée et en cours d'exécution sur votre système. 
+# Rename the .env.local.example file to .env.local.
 
+# Open the .env.local file in your favorite text editor.
 
+# Replace the values of the following variables with your own information:
 
-Installation du projet en production
+STRIPE_API_KEY: Your Stripe API key.
+# follow the link https://dashboard.stripe.com/test/apikeys
 
-1.    Clonez votre dépôt GitHub sur votre serveur de production à l'aide de la commande git clone. Assurez-vous que vous avez installé Git sur votre serveur de production.
-      Voici le lien du dépôt : https://github.com/Johan667/Devnodes.git
+PRICE_ID_STRIPE: The Stripe price ID.
 
-2.    Une fois que vous avez cloné votre dépôt sur votre serveur de production,
+APP_SECRET: The secret key of your application.
 
-3.    Installez les dépendances de l'application Symfony en utilisant la commande Composer install.
+MAILER_DSN: The DSN URL for sending emails.
+# Save the .env.local file and exit your text editor.
+# Once you have correctly configured the .env.local file, you can safely use the application. Remember to keep your .env.local file private and never share it with unauthorized parties
 
-4.    Si Composer n'est pas encore installé sur votre serveur, suivez les instructions pour l'installer.
+```
 
-5.    Configurez votre environnement de production en modifiant le fichier app/config/parameters.yml. Vous devrez mettre à jour les paramètres de base de données, d'authentification, etc. pour refléter votre environnement de production.
+4. Run the database migrations:
 
-6.    Configurez votre serveur web pour pointer vers le répertoire web de votre application Symfony. Vous pouvez utiliser un serveur web tel que Apache ou Nginx pour cela.
+```bash
+php bin/console doctrine:migrations:migrate
+```
 
-7. Enfin, utilisez mRemote pour vous connecter à votre serveur de production et exécuter les commandes nécessaires pour démarrer votre application Symfony.
-La première étape consiste à installer les dépendances du projet en exécutant la commande suivante : composer install --no-dev --optimize-autoloader
-Cette commande installe les dépendances de l'application Symfony sans les dépendances de développement et optimise le chargement automatique des classes.
+5. Install the front-end dependencies using npm:
 
-Ensuite, vous devez configurer votre environnement en exécutant la commande suivante :
-php bin/console cache:clear --env=prod
-Cette commande nettoie le cache de l'application et configure l'environnement de production.
-Enfin, vous pouvez lancer votre application en utilisant un serveur web. Pour cela, vous pouvez utiliser le serveur web intégré de Symfony en exécutant la commande suivante :
+```bash
+npm install
+```
 
-php bin/console server:start --env=prod
-Cette commande démarre le serveur web de développement de Symfony en mode production.
+6. Start the Symfony server:
+
+```bash
+symfony server:start
+```
+
+The application should now be accessible at `http://localhost:8000`.
+
+## Usage
+
+To use the application, go ahead and search for freelancers and if you like one of them. Create a new account or log in with an existing one. Once you are logged in, you can propose a mission, save your favorites, and write comments.
+
+## License
+
+Devnodes is released under the MIT License. See the [LICENSE](https://chat.openai.com/LICENSE) file for details.
+
+# Prerequisites for production
+
+Before starting the deployment process, make sure that the following requirements are met:
+
+- Git is installed on the production server
+- Composer is installed on the production server
+- Node.js and npm are installed on the production server
+- The necessary environment variables and configurations are set up for the production environment
+- The application is fully functional on a local machine
+
+# Deployment Steps
+
+1. Clone the GitHub repository to your production server using the git clone command. Make sure that Git is installed on your production server. The repository link is: https://github.com/Johan667/Devnodes.git
+2. Install the dependencies of the Symfony application using the Composer install command.
+3. If Composer is not installed on your server, follow the instructions to install it.
+4. Configure your production environment by modifying the .env.local file. Update the database, API keys, and other variables to reflect your production environment.
+5. Install the front-end dependencies using npm:
+
+```
+npm install
+```
+
+1. Run the database migrations:
+
+```
+php bin/console doctrine:migrations:migrate
+```
+
+1. Configure your web server to point to the public directory of your Symfony application. You can use a web server such as Apache or Nginx for this.
+2. Finally, use mRemote to connect to your production server and run the necessary commands to start your Symfony application. The first step is to start the Symfony server by running the following command:
+
+```
+symfony server:start --env=prod
+```
+
+This command starts the Symfony web server in production mode.
+
+The application should now be accessible at `http://your-domain.com`.
+
+## License
+
+Devnodes is released under the MIT License. See the [LICENSE](https://chat.openai.com/LICENSE) file for details.
