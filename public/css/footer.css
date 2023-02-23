@@ -1,14 +1,1 @@
-footer{
-    max-height:200px;
-    max-width:100%;
-}
-
-footer .fa-brands{
-    font-size: 1.5rem;
-    color:black;
-    text-align: center;
-}
-
-.logoSocial{
-    text-align: center;
-}
+footer{max-height:200px;max-width:100%}footer .fa-brands{font-size:1.5rem;color:#000;text-align:center}.logoSocial{text-align:center}
