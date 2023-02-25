@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Site de mise en relation entre un freelance dans les metiers du numérique et un client a travers un mission">
+    <link rel="canonical" href="https://kjo.cda-ccicampus.dev/">
+    <meta name="description" content="Site web qui vise à connecter les clients à la recherche de professionnels indépendants dans les métiers du numérique avec des freelances qualifiés pour des missions spécifiques. Cette plateforme permet aux clients de publier leurs projets et aux freelances de postuler en proposant leurs compétences. Les missions peuvent varier de la création de sites web et d'applications mobiles à l'optimisation du référencement et à la gestion de projet. Cette solution offre une manière simple et efficace de trouver un freelance qualifié pour répondre aux besoins numériques des clients.">
     <title>{% block title %}Devnodes{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +17,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EST5B0W6CJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EST5B0W6CJ');
+    </script>
 </head>
 <header>
     <nav>
