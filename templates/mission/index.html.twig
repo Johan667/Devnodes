@@ -117,7 +117,7 @@
                             <b>Fichier :</b><br>
                             {% if mission.addFile %}
                                 <a target="_blank" href="{{ asset('uploads/fichiermission/' ~ mission.addFile) }}">
-                                    <img style="width:80px;" src="../img/pdf.png" alt="Image description">
+                                    <img style="width:80px;" src="{{ asset('img/pdf.webp') }}" alt="Image description">
                                 </a>
                             {% else %}
                                 <p>Aucun fichier transmis</p>
