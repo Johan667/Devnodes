@@ -47,7 +47,7 @@ class RegistrationFreelanceController extends AbstractController
                 $authenticator,
                 $request
             );
-            return $this->redirectToRoute('app_profil', [], 302, [
+            return $this->redirectToRoute('app_home', [], 302, [
                 'onload' => 'alert("Bravo, il suffit maintenant de remplir vos compétences et autres informations")'
             ]);
         }
