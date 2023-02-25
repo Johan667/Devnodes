@@ -24,3 +24,27 @@ function onSubmit(token) {
 }
 
 /* FIN CAPTCHA */
+
+
+
+/* CHARGEMENT */
+
+// JavaScript pour afficher le GIF de chargement pendant le chargement de la page
+window.addEventListener('beforeunload', function() {
+    // Récupération de l'élément où afficher le GIF de chargement
+    const loaderContainer = document.querySelector('#loader-container');
+
+    // Affichage du GIF de chargement dans l'élément récupéré
+    loaderContainer.style.display = 'block';
+});
+
+// JavaScript pour masquer le GIF de chargement lorsque la page est complètement chargée
+window.addEventListener('load', function() {
+    // Récupération de l'élément où afficher le GIF de chargement
+    const loaderContainer = document.querySelector('#loader-container');
+
+    // Masquage du GIF de chargement dans l'élément récupéré
+    loaderContainer.style.display = 'none';
+});
+
+/* FIN CHARGEMENT */
