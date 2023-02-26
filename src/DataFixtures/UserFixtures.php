@@ -9,6 +9,9 @@ use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * génère de fausses données pour l'entité message
+ */
 class UserFixture extends Fixture
 {
     private $encoder;

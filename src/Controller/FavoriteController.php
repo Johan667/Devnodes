@@ -11,8 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Knp\Component\Pager\PaginatorInterface;
 
+/**
+ * Cette classe FavoriteController est utilisée pour gérer les favoris des utilisateurs.
+ */
 class FavoriteController extends AbstractController
 {
+    /**
+    * Cette méthode est utilisée pour afficher la liste des freelances ajoutés en favoris par l'utilisateur.
+    * Elle utilise la pagination pour afficher 12 freelances par page.
+    */
     #[Route('/favorite', name: 'app_favorite')]
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -32,6 +39,9 @@ class FavoriteController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette méthode est utilisée pour ajouter un freelance aux favoris de l'utilisateur.
+     */
     #[Route('/favorite/{id}', name: 'app_favorite_toggle', methods: ['POST'])]
     public function addFavorite(ManagerRegistry $doctrine, $id, Freelance $freelance): Response
     {
@@ -43,6 +53,9 @@ class FavoriteController extends AbstractController
         ], Response::HTTP_ACCEPTED);
     }
 
+    /**
+     * Cette méthode est utilisée pour supprimer un freelance des favoris de l'utilisateur.
+     */
     #[Route('/favorite/{id}', name: 'app_favorite_delete', methods: ['DELETE'])]
     public function deleteFavorite(ManagerRegistry $doctrine, $id, Freelance $freelance): Response
     {

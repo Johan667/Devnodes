@@ -18,6 +18,9 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+/**
+ * Cette classe est utilisée pour gérer l'inscription pour les clients
+ */
 class RegistrationFreelanceController extends AbstractController
 {
     #[Route('/register/freelance', name: 'app_register_freelance')]

@@ -21,6 +21,12 @@ class MessagingController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Affiche la page d'accueil de la messagerie.
+     *
+     * @param Request $request Requête envoyée pour accéder à la page
+     * @return Response Réponse HTTP contenant le contenu de la page
+     */
     #[Route('/messaging', name: 'app_messaging')]
     public function index(Request $request): Response
     {
@@ -37,6 +43,13 @@ class MessagingController extends AbstractController
         ]);
     }
 
+    /**
+     * Affiche la page de messagerie pour une mission donnée.
+     *
+     * @param Request $request Requête envoyée pour accéder à la page
+     * @param int $missionId Identifiant de la mission
+     * @return Response Réponse HTTP contenant le contenu de la page
+     */
     #[Route('/messaging/{missionId}', name: 'app_messaging_mission')]
     public function messaging(Request $request, int $missionId): Response
     {

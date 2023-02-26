@@ -34,12 +34,17 @@ class ProfilController extends AbstractController
 {
     private $entityManager;
 
-    // définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir un service en paramètre
+    /**
+     * définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir un service en paramètre
+    */ 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * affiche la page accieul de profil pour le freelance connecté
+     */
     #[Route('/profil', name: 'app_profil')]
     public function index(Request $request, SluggerInterface $slugger): Response
     {
@@ -171,6 +176,10 @@ class ProfilController extends AbstractController
     }
 
 
+    /**
+     * affiche la page de profil pour un freelance
+     * @param id l'id du freelance cherché
+     */
     #[Route('/profil/{id}', name: 'app_profil_show')]
     public function show($id, Request $request, CommentRepository $commentRepository): Response
     {
@@ -245,6 +254,9 @@ class ProfilController extends AbstractController
 
         return $this->redirectToRoute('app_profil');
     }
+    /**
+     * supprimer la cométence
+     */
     private function deleteSkill(int $id, string $repositoryClass, string $removeMethod): Response
     {
         $user = $this->getUser();
@@ -264,34 +276,45 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('app_profil');
     }
 
+    /**
+     * supprimer la cométence
+     */
     #[Route('/profil/delete/coding/language/{id}', name: 'profil_delete_coding')]
     public function deleteCoding($id): Response
     {
-        // Appelle une méthode générique deleteSkill() pour supprimer une compétence de programmation de l'entité Freelance
-        // correspondante en utilisant la classe CodingLanguage et la méthode removeCodingLanguage.
-        // La méthode deleteCoding() renvoie une réponse HTTP.
-
         return $this->deleteSkill($id, CodingLanguage::class, 'removeCodingLanguage');
     }
 
+    /**
+     * supprimer la cométence
+     */
     #[Route('/profil/delete/framework/{id}', name: 'profil_delete_framework')]
     public function deleteFramework($id): Response
     {
         return $this->deleteSkill($id, Framework::class, 'removeFramework');
     }
 
+    /**
+     * supprimer la cométence
+     */
     #[Route('/profil/delete/database/{id}', name: 'profil_delete_database')]
     public function deleteDb($id): Response
     {
         return $this->deleteSkill($id, Db::class, 'removeDb');
     }
 
+    /**
+     * supprimer la cométence
+     */
     #[Route('/profil/delete/version/{id}', name: 'profil_delete_version')]
     public function deleteVersion($id): Response
     {
         return $this->deleteSkill($id, VersionControl::class, 'removeVersionControl');
     }
 
+    /**
+     * supprimer la cométence
+     */
     #[Route('/profil/delete/methodology/{id}', name: 'profil_delete_methodology')]
     public function deleteMethodology($id): Response
     {

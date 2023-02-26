@@ -10,6 +10,9 @@ use Faker\Factory as Faker;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * génère de fausses données pour l'entité freelance
+ */
 class FreelanceFixtures extends Fixture
 {
     private $encoder;

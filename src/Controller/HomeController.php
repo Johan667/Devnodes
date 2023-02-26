@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * barre de recherche multi filtre
+     * Affiche la page d'accueil avec la barre de recherche multi-filtre
      * @Route("/", name="app_home")
      */
     public function bdr(FreelanceRepository $repository, Request $request): Response

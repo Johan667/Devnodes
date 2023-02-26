@@ -17,6 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    /**
+    * une fonction qui redirige vers la page d'administration
+    */
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -24,12 +27,18 @@ class DashboardController extends AbstractDashboardController
          return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
     }
 
+    /**
+    * Crée le dashboard admin
+    */
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Devnodes');
     }
 
+    /**
+    * Configurer les items du menu
+    */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');

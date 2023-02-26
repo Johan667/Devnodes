@@ -9,7 +9,9 @@ use App\Repository\UserRepository;
 use App\Repository\FreelanceRepository;
 use Faker\Factory as Faker;
 
-
+/**
+ * génère de fausses données pour l'entité message
+ */
 class MissionFixtures extends Fixture
 {
 

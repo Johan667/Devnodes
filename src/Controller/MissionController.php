@@ -23,13 +23,21 @@ class MissionController extends AbstractController
     private $entityManager;
     private $missionWorkflow;
 
-    // définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir deux services en paramètres
+    /**
+     * définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir deux services en paramètres
+     */
     public function __construct(EntityManagerInterface $entityManager, WorkflowInterface $missionWorkflow)
     {
         $this->entityManager = $entityManager;
         $this->missionWorkflow = $missionWorkflow;
     }
 
+    /**
+     * Affiche la page d'accueil des mission.
+     *
+     * @param Request $request Requête envoyée pour accéder à la page
+     * @return Response Réponse HTTP contenant le contenu de la page
+     */
     #[Route('/missions', name: 'missions')]
     public function index(Request $request): Response
     {
@@ -82,8 +90,11 @@ class MissionController extends AbstractController
             'form' => $form->createView(),
         ]);
 
-}
+    }
 
+    /**
+     * créer un mission parmi cette fonction
+     */
     #[Route('/create/mission', name: 'create_mission')]
     public function create(Request $request, SluggerInterface $slugger): Response
     {
@@ -171,11 +182,11 @@ class MissionController extends AbstractController
         ]);
     }
 
-        /**
-         * Applique une transition à une entité Mission en utilisant un workflow,
-        puis enregistre l'entité mise à jour dans la base de données à l'aide de l'objet EntityManager de Doctrine.
-        Enfin, il ajoute un message flash pour informer l'utilisateur de la mise à jour de la mission et redirige vers une autre page.
-         */
+    /**
+     * Applique une transition à une entité Mission en utilisant un workflow,
+     * puis enregistre l'entité mise à jour dans la base de données à l'aide de l'objet EntityManager de Doctrine.
+     * Enfin, il ajoute un message flash pour informer l'utilisateur de la mise à jour de la mission et redirige vers une autre page.
+     */
     #[Route('/mission/{id}/{to}', name: 'mission_status_change', methods: ['POST'])]
     public function changeStatus(Mission $mission, string $to, EntityManagerInterface $entityManager): Response
     {
