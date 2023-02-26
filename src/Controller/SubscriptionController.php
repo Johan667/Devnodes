@@ -20,11 +20,12 @@ class SubscriptionController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Affiche l'abonnement et les avantage + rediriger vers le checkout
+     */
     #[Route('/subscription', name: 'app_subscription')]
     public function index()
     {
-        // Affiche l'abonnement et les avantage + rediriger vers le checkout
-
         return $this->render('subscription/index.html.twig');
     }
 
@@ -74,10 +75,12 @@ class SubscriptionController extends AbstractController
         return $this->render('subscription/success.html.twig');
     }
 
+    /**
+     * Renvoie sur une page d'erreur en cas d'echec
+     */
     #[Route('/subscription/error', name: 'subscription_error')]
     public function error()
     {
-        // Renvoie sur une page d'erreur en cas d'echec
 
         return $this->render('subscription/error.html.twig');
     }

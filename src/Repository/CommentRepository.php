@@ -40,6 +40,11 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
     
+    /**
+     * trouve les derniers commentaires d'un utilisateur spécifique
+     * @param limit pour indiquer le nombre de commentaires que nous recherchons.
+     * @param user pour l'utilisateur recherché
+     */
     public function findLatest($limit, User $user): array
     {
         return $this->createQueryBuilder('c')
@@ -52,6 +57,11 @@ class CommentRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    /**
+     * trouve les restes des commentaires d'un utilisateur spécifique
+     * @param offset nous permet de commencer à un certain endroit et de montrer tous les commentaires après cet endroit
+     * @param user pour l'utilisateur recherché
+     */
     public function findRest($offset, User $user): array
     {
         return $this->createQueryBuilder('c')

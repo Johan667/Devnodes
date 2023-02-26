@@ -12,6 +12,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as Faker;
 
+/**
+ * génère de fausses données pour l'entité message
+ */
 class MessageFixtures extends Fixture implements DependentFixtureInterface
 {
     private MissionRepository $missionRepository;

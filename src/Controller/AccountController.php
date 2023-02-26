@@ -18,29 +18,33 @@ class AccountController extends AbstractController
 
     private $entityManager;
 
-    // définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir un service en paramètre
+    /*
+    * définit le constructeur d'une classe qui utilise l'injection de dépendances pour recevoir un service en paramètre
+    */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Renvoie vers la page "compte"
+     */
     #[Route('/account', name: 'app_account')]
     public function index(): Response
     {
-        // Renvoie vers la page "compte"
-
         return $this->render('account/index.html.twig', [
             'controller_name' => 'AccountController',
         ]);
     }
 
+    /**
+    * Crée un formulaire pour modifier les informations d'un utilisateur connecté,
+    * gère la soumission de ce formulaire et met à jour les données de l'utilisateur enregistrées dans la base de données.
+    * Enfin, il renvoie une réponse HTTP sous forme d'une vue Twig.
+    */
     #[Route('/account/modify', name: 'app_account_modify')]
     public function edit(Request $request)
     {
-        // Crée un formulaire pour modifier les informations d'un utilisateur connecté,
-        // gère la soumission de ce formulaire et met à jour les données de l'utilisateur enregistrées dans la base de données.
-        // Enfin, il renvoie une réponse HTTP sous forme d'une vue Twig.
-
         $user = $this->getUser();
         $form = $this->createForm(EditAccountType::class, $user);
         $form->handleRequest($request);
@@ -56,14 +60,15 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+    * Permet de gérer la modification du mot de passe d'un utilisateur connecté.
+    * Il crée un formulaire à partir de la classe ChangePasswordType, gère la soumission de ce formulaire
+    * et met à jour le mot de passe de l'utilisateur dans la base de données si les données soumises sont valides.
+    * Enfin, il renvoie une réponse HTTP sous forme d'une redirection vers une autre page.
+    */
     #[Route('/password/change', name: 'change_password')]
     public function changePassword(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        // Permet de gérer la modification du mot de passe d'un utilisateur connecté.
-        // Il crée un formulaire à partir de la classe ChangePasswordType, gère la soumission de ce formulaire
-        // et met à jour le mot de passe de l'utilisateur dans la base de données si les données soumises sont valides.
-        // Enfin, il renvoie une réponse HTTP sous forme d'une redirection vers une autre page.
-
         $change = $this->createForm(ChangePasswordType::class);
 
         $change->handleRequest($request);
@@ -85,7 +90,10 @@ class AccountController extends AbstractController
         ]);
     }
 
-
+    /**
+    * Permet de supprimer l'utilisateur
+    * Enfin, il renvoie une réponse HTTP sous forme d'une redirection vers la page home.
+    */
     #[Route('/account/delete', name: 'delete_account')]
     public function deleteAccount()
     {

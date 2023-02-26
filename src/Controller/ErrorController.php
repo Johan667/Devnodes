@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Cette classe est utilisée pour gérer les erreurs HTTP.
+ */
 class ErrorController extends AbstractController
 {
     #[Route('/error401', name: 'error401')]

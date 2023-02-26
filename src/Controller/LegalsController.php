@@ -14,28 +14,31 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LegalsController extends AbstractController
 {
+    /**
+     * Renvoi vers la page lié à la gestion des cookie
+     */
     #[Route('/cookies', name: 'app_cookies')]
     public function cookies(): Response
     {
-        // Renvoi vers la page lié à la gestion des cookie
-
         return $this->render('legals/cookies.html.twig', [
         ]);
     }
 
+    /**
+     * Renvoi vers la page lié à la charte du développeur
+     */
     #[Route('/charts', name: 'app_charts')]
     public function charts(): Response
     {
-        // Renvoi vers la page lié à la charte du développeur
-
         return $this->render('legals/charts.html.twig', [
         ]);
     }
-
+    /**
+     * Renvoi vers la page lié aux conditions générales d'utilisation
+     */
     #[Route('/cgu', name: 'app_cgu')]
     public function cgu(): Response
     {
-        // Renvoi vers la page lié aux conditions générales d'utilisation
 
         return $this->render('legals/cgu.html.twig', [
         ]);
@@ -48,12 +51,13 @@ class LegalsController extends AbstractController
         ]);
     }
 
+    /**
+     * Crée un formulaire de contact en utilisant la classe ContactType et gère la soumission de ce formulaire en envoyant un email à une adresse spécifiée.
+     * Enfin, il renvoie une réponse HTTP sous forme d'une vue Twig.
+     */
     #[Route('/contact', name: 'app_contact')]
     public function contact(MailerInterface $mailer,Request $request): Response
     {
-        // Crée un formulaire de contact en utilisant la classe ContactType et gère la soumission de ce formulaire en envoyant un email à une adresse spécifiée.
-        // Enfin, il renvoie une réponse HTTP sous forme d'une vue Twig.
-
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
